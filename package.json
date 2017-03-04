@@ -1,0 +1,24 @@
+{
+  "name": "perfectroomie",
+  "version": "1.0.0",
+  "description": "roommate finder app",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/reza8793/Perfect-Roomie.git"
+  },
+  "keywords": [
+    "find",
+    "your",
+    "roommate"
+  ],
+  "author": "AA, DL, NN",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/reza8793/Perfect-Roomie/issues"
+  },
+  "homepage": "https://github.com/reza8793/Perfect-Roomie#readme"
+}

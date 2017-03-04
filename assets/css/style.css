@@ -1,0 +1,112 @@
+body {
+
+	background-color: black;
+}
+
+
+#maindiv {
+
+	background-color: teal;
+
+	
+}
+
+#teamdiv {
+
+	background-color: silver;
+
+	
+}
+
+#h1h2div {
+
+	background-color: rgb(203,188,145);
+	border-radius: 20px;
+
+	
+}
+
+#surveydiv {
+
+	background-color: rgb(203,188,145);
+	border-radius: 20px;
+
+	
+}
+
+#buttondiv {
+
+	text-align: left;
+
+	
+}
+
+#zipform {
+
+	text-align: center;
+
+	
+}
+
+
+h1 {
+
+	font-size:50px;
+	text-align: center;
+	color: black;
+	}
+
+h2 {
+
+	font-size:25px;
+	text-align: center;
+	color: black;
+	}
+
+
+
+#zipbutton {
+
+	background-color: orange;
+	border-radius: 12px;
+	height: 70px;
+	width: 200px;
+	font-size: 15px;
+}
+
+#zipbutton:hover {
+    background-color: #4CAF50; /* Green */
+    color: white;
+}
+
+#signbutton:hover {
+    background-color: #4CAF50; /* Green */
+    color: white;
+}
+
+#signbutton {
+
+	background-color: orange;
+	border-radius: 12px;
+	height: 70px;
+	width: 200px;
+	font-size: 18px;
+}
+
+#findroomiebutton {
+
+	background-color: orange;
+	border-radius: 12px;
+	height: 70px;
+	width: 200px;
+	font-size: 18px;
+}
+
+#findroomiebutton:hover {
+    background-color: #4CAF50; /* Green */
+    color: white;
+}
+
+#roomieButtonDiv {
+	text-align: center;
+}
