@@ -36,7 +36,30 @@ body {
 
 #buttondiv {
 
-	text-align: left;
+	text-align: center;
+	background-color: white;
+}
+
+
+#withinbuttondiv {
+
+	text-align: center;
+	/*background-color: blue;*/
+}
+
+
+#zipdiv {
+
+	text-align: center;
+	/*background-color: red;*/
+
+	
+}
+
+#findmatchdiv {
+
+	text-align: center;
+	background-color: purple;
 
 	
 }
@@ -72,6 +95,18 @@ h2 {
 	height: 70px;
 	width: 200px;
 	font-size: 15px;
+	text-align: center;
+}
+
+
+#zipinput {
+
+	background-color: white;
+	border-radius: 12px;
+	height: 70px;
+	width: 200px;
+	font-size: 15px;
+	text-align: center;
 }
 
 #zipbutton:hover {
