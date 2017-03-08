@@ -120,6 +120,7 @@
     function fbGetFriends() { 
       FB.api('/me/?fields=friends{id,name}', function(response) {
         console.log('first friend:',  + response.friends.data[0].name);
+        console.log('first friend id:',  + response.friends.data[0].id);
       });
     }
 
