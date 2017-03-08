@@ -38,6 +38,7 @@
 	    if (response.status === 'connected') {
 	      // Logged into your app and Facebook.
 	      testAPI();
+        fbGetFriends();
 	    } else if (response.status === 'not_authorized') {
 	      // The person is logged into Facebook, but not your app.
 	      document.getElementById('status').innerHTML = 'Please log ' +
@@ -107,15 +108,18 @@
 	    });
 	  }
 
-
-
-
 	  function fbLogout() {
 	    FB.logout(function (response) {
 	            //Do what ever you want here when logged out like reloading the page
 	    window.location.reload();
 	    });
 	  }
+
+    function fbGetFriends() { //demonstration of getting friend information
+      FB.api('/me/?fields=friends{id,name}', function(response) {
+        console.log('first friend:',  + response.friends.data[0].name);
+      });
+    }
 
 
 	</script>

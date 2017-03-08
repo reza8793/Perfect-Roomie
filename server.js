@@ -40,9 +40,9 @@ db.once("open", function() {
 // ======
 
 // Simple index route
-app.get("/", function(req, res) {
+/*app.get("/", function(req, res) {
   res.send("index.html");
-});
+});*/
 
 
 // Listen on port 3000
