@@ -115,7 +115,9 @@
 	    });
 	  }
 
-    function fbGetFriends() { //demonstration of getting friend information
+    //demonstration of getting friend information
+    //each friend is going to need an app token otherwise they're not going to show up in this pull.
+    function fbGetFriends() { 
       FB.api('/me/?fields=friends{id,name}', function(response) {
         console.log('first friend:',  + response.friends.data[0].name);
       });
