@@ -117,10 +117,11 @@
 
     //demonstration of getting friend information
     //each friend is going to need an app token otherwise they're not going to show up in this pull.
+    //you can replace /me/ with an actual userID instead and pull friends of people that aren't the user.
     function fbGetFriends() { 
       FB.api('/me/?fields=friends{id,name}', function(response) {
-        console.log('first friend:',  + response.friends.data[0].name);
-        console.log('first friend id:',  + response.friends.data[0].id);
+        console.log('first friend:',  response.friends.data[0].name);
+        console.log('first friend id:',  response.friends.data[0].id);
       });
     }
 
