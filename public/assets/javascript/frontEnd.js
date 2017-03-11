@@ -1,12 +1,12 @@
  
-
+var resparray =[];
 
  $(document).ready(function(){
 
- 	var locationValue;
+  var locationValue;
 
 
- 	$('#findroomiebutton').on('click', function(){
+  $('#findroomiebutton').on('click', function(){
 
                     console.log("find your roomie button clicked");
                 // This line of code will grab the input from the textbox...
@@ -23,10 +23,25 @@
                 q3Value = ans3.options[ans3.selectedIndex].text;
                 console.log( "q3 value is " + q3Value);
 
+                q4Value = ans4.options[ans4.selectedIndex].text;
+                q5Value = ans5.options[ans5.selectedIndex].text;
+                q6Value = ans6.options[ans6.selectedIndex].text;
+                q7Value = ans7.options[ans7.selectedIndex].text;
+                q8Value = ans8.options[ans8.selectedIndex].text;
+                q9Value = ans9.options[ans9.selectedIndex].text;
+                q10Value = ans10.options[ans10.selectedIndex].text;
+                q11Value = ans11.options[ans11.selectedIndex].text;
+                q12Value = ans12.options[ans12.selectedIndex].text;
+                q13Value = ans13.options[ans13.selectedIndex].text;
+
+
+                resparray = [q1Value, q2Value,q3Value,q4Value,q5Value
+                ,q6Value,q7Value,q8Value,q9Value,q10Value,q11Value,q12Value,q13Value];
+
             });
 
 
- 	$('#zipbutton').on('click', function(){
+  $('#zipbutton').on('click', function(){
 
                     console.log("find matches button clicked");
 
@@ -48,7 +63,7 @@
             });
 
 
- 	 // document.getElementById("zipbutton").onclick = function () {
+   // document.getElementById("zipbutton").onclick = function () {
    //      location.href = "survey.html";
    //  };
 
