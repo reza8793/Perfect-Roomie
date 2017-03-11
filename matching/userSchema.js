@@ -4,7 +4,7 @@ var Schema = mongoose.Schema;
 var UserSchema = new Schema({
 
   FBid: {
-    type; String,
+    type: String,
   }
   FBName: {
     type: String,
