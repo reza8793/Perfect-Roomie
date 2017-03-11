@@ -1,10 +1,12 @@
 
 
+// Dependencies
 
 var express = require("express");
 var bodyParser = require("body-parser");
 var logger = require("morgan");
 var mongoose = require("mongoose");
+var Promise = require("bluebird");
 
 var Promise = require("bluebird");
 var FB = require('fb');
@@ -18,9 +20,14 @@ var PORT = process.env.PORT || 3000;
 var router = express.Router();
 
 
+
 require("./app/userRoutes")(router);
 
 app.use(router);
+
+
+require("./app/userRoutes")(router);
+
 
 // Use morgan and body parser with our app
 app.use(logger("dev"));
@@ -30,83 +37,26 @@ app.use(bodyParser.urlencoded({
 
 // Make public a static dir
 app.use(express.static("public"));
+app.use(router);
 
 
 
-var fb = new FB.Facebook({version: 'v2.8'});
+// If deployed, use the deployed database. Otherwise use the local mongoHeadlines database
+var db = process.env.MONGODB_URI || "mongodb://localhost/roomie_db";
 
-
-var appSecret = '0e0af4d3c10950538896c2e47baa6b6a';
-var appID = '256928438051566';
-var appAccessToken = '';
-
-var fooApp = FB.extend({appId: appID, appSecret: appSecret });
-
-//FB.setAccessToken(appAccessToken);
-
-var myAccessToken = FB.getAccessToken();
-
-console.log('my access token', myAccessToken);
-
-function printDerp() {
-	console.log('derp');
-}
-
-function printToken(myToken) {
-	console.log("token:", myToken);
-}
-
-function updateToken(myToken) {
-	appAccessToken = myToken;
-}
-
-
-
-
-/*
-FB.api('oauth/access_token', {
-    client_id: appID,
-    client_secret: appSecret,
-    redirect_uri: 'https://www.facebook.com/app_scoped_user_id/127970024394905/'
-
-}, function (res) {
-    if(!res || res.error) {
-        console.log(!res ? 'error occurred' : res.error);
-        return;
-    }
-
-    var accessToken = res.access_token;
-    var expires = res.expires ? res.expires : 0;
+// Connect mongoose to our database
+mongoose.connect(db, function(error) {
+  // Log any errors connecting with mongoose
+  if (error) {
+    console.log(error);
+  }
+  // Or log a success message
+  else {
+    console.log("mongoose connection is successful");
+  }
 });
 
 
-FB.getAuthResponse();*/
-
-
-
-// Routes
-// ======
-
-// Simple index route
-app.get("/derp", function(req, res) {
-  printDerp();
-});
-
-app.post("/derp/:token", function(req, res) {
-	//console.log('req.body.token');
-  	updateToken(req.body.token);
-});
-
-app.get("/friends", function(req, res) {
-  	FB.api('me/friends', { access_token: appAccessToken}, function (res) {
-    	if(!res || res.error) {
-    		console.log(!res ? 'error occurred' : res.error);
-    		return;
-  		}
-
-  		console.log(res.data);
-	});
-});
 
 var userRoutes = require("./app/userRoutes.js");
 // app.use(userRoutes);

@@ -3,7 +3,11 @@ var resparray =[];
 
  $(document).ready(function(){
 
+
   var locationValue;
+
+ 	var zipValue;
+
 
 
   $('#findroomiebutton').on('click', function(){
@@ -68,17 +72,11 @@ var resparray =[];
 
                    // location.href = "survey.html";
 
-                    var val = document.getElementById("locationdiv");
+
+                     zipValue = $('#zipinput').val().trim();
 
 
-                     locationValue = val.options[val.selectedIndex].text;
- 
-
-
-                     console.log( "location is " + locationValue);
-
-                     location.href = "survey.html";
-
+                     console.log( "zip code is " + zipValue);
                 // This line of code will grab the input from the textbox...
 
             });
