@@ -32,6 +32,7 @@ var fb = new FB.Facebook({version: 'v2.8'});
 var appSecret = '0e0af4d3c10950538896c2e47baa6b6a';
 var appID = '256928438051566';
 var appAccessToken = '';
+var userID = null;
 
 var fooApp = FB.extend({appId: appID, appSecret: appSecret });
 
@@ -49,10 +50,19 @@ function printToken(myToken) {
 	console.log("token:", myToken);
 }
 
-function updateToken(myToken) {
-	appAccessToken = myToken;
+function printUserID(myUserID) {
+  console.log("userID:", myUserID);
 }
 
+function updateToken(myToken) {
+	appAccessToken = myToken;
+  printToken(appAccessToken);
+}
+
+function updateUserID(myUserID) {
+  userID = myUserID;
+  printUserID(userID);
+}
 
 
 
@@ -86,6 +96,19 @@ app.post("/fb/:token", function(req, res) {
 	//console.log('req.body.token');
   	updateToken(req.body.token);
 });
+
+app.post("/fb/userIDToken", function(req, res) {
+  //console.log('req.body.token');
+    console.log('pew pew');
+    updateToken(req.body.token);
+    updateUserID(req.body.userID);
+});
+
+/*app.post("/fb/userToken", function(req, res) {
+  //console.log('req.body.token');
+    updateToken(req.body.token);
+    updateUser(req.body.userID);
+});*/
 
 app.get("/fb/friends", function(req, res) {
   FB.api('me/friends', { access_token: appAccessToken}, function (res) {
