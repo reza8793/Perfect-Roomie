@@ -5,9 +5,9 @@ var UserSchema = new Schema({
   FBName: {
     type: String,
   },
-  FBemail: {
+  FBEmail: {
     type: String
-  }
+  },
   age: {
     type: Number,
     required: true
@@ -16,7 +16,7 @@ var UserSchema = new Schema({
     type: String,
     required: true
   },
-  friendlist: {
+  friendList: {
     any: Object
   },
   livingStyle: {
@@ -31,13 +31,13 @@ var UserSchema = new Schema({
     type: Number,
     required: true,
     set: 2
-  }
+  },
   roommateMatches: {
     any: Object
   }
 
 });
 
-var Article = mongoose.model("user", UserSchema);
+var User = mongoose.model("user", UserSchema);
 
-module.exports = UserSchema;
+module.exports = User;
