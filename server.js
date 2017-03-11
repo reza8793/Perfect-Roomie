@@ -67,7 +67,7 @@ FB.api('oauth/access_token', {
         console.log(!res ? 'error occurred' : res.error);
         return;
     }
- 
+
     var accessToken = res.access_token;
     var expires = res.expires ? res.expires : 0;
 });
@@ -96,10 +96,13 @@ app.get("/friends", function(req, res) {
     		console.log(!res ? 'error occurred' : res.error);
     		return;
   		}
-  		
+
   		console.log(res.data);
 	});
 });
+
+var userRoutes = require("./app/userRoutes.js");
+app.use(userRoutes);
 
 // Listen on port 3000
 app.listen(PORT, function() {
