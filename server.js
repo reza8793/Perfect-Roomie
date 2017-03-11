@@ -1,10 +1,15 @@
 
+
 // Dependencies
+
 var express = require("express");
 var bodyParser = require("body-parser");
 var logger = require("morgan");
 var mongoose = require("mongoose");
 var Promise = require("bluebird");
+
+var Promise = require("bluebird");
+var FB = require('fb');
 
 mongoose.Promise = Promise;
 
@@ -21,29 +26,77 @@ app.use(bodyParser.urlencoded({
 // Make public a static dir
 app.use(express.static("public"));
 
-// Database configuration with mongoose
-mongoose.connect("mongodb://heroku_gjz9xhbx:f71j5cbophme25eg4p4aed1toh@ds151279.mlab.com:51279/heroku_gjz9xhbx");
-var db = mongoose.connection;
+var fb = new FB.Facebook({version: 'v2.8'});
 
-// Show any mongoose errors
-db.on("error", function(error) {
-  console.log("Mongoose Error: ", error);
+
+var appSecret = '0e0af4d3c10950538896c2e47baa6b6a';
+var appID = '256928438051566';
+var appAccessToken = '';
+
+var fooApp = FB.extend({appId: appID, appSecret: appSecret });
+
+//FB.setAccessToken(appAccessToken);
+
+var myAccessToken = FB.getAccessToken();
+
+console.log('my access token', myAccessToken);
+
+function printDerp() {
+	console.log('derp');
+}
+
+function printToken(myToken) {
+	console.log("token:", myToken);
+}
+
+function updateToken(myToken) {
+	appAccessToken = myToken;
+}
+
+
+
+
+/*
+FB.api('oauth/access_token', {
+    client_id: appID,
+    client_secret: appSecret,
+    redirect_uri: 'https://www.facebook.com/app_scoped_user_id/127970024394905/'
+
+}, function (res) {
+    if(!res || res.error) {
+        console.log(!res ? 'error occurred' : res.error);
+        return;
+    }
+ 
+    var accessToken = res.access_token;
+    var expires = res.expires ? res.expires : 0;
 });
 
-// Once logged in to the db through mongoose, log a success message
-db.once("open", function() {
-  console.log("Mongoose connection successful.");
+
+FB.getAuthResponse();*/
+
+
+
+
+app.get("/derp", function(req, res) {
+  printDerp();
 });
 
+app.post("/derp/:token", function(req, res) {
+	//console.log('req.body.token');
+  	updateToken(req.body.token);
+});
 
-// Routes
-// ======
-
-// Simple index route
-/*app.get("/", function(req, res) {
-  res.send("index.html");
-});*/
-
+app.get("/friends", function(req, res) {
+  	FB.api('me/friends', { access_token: appAccessToken}, function (res) {
+    	if(!res || res.error) {
+    		console.log(!res ? 'error occurred' : res.error);
+    		return;
+  		}
+  		
+  		console.log(res.data);
+	});
+});
 
 // Listen on port 3000
 app.listen(PORT, function() {
