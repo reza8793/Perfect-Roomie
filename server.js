@@ -15,6 +15,13 @@ mongoose.Promise = Promise;
 var app = express();
 var PORT = process.env.PORT || 3000;
 
+var router = express.Router();
+
+
+require("./app/userRoutes")(router);
+
+app.use(router);
+
 // Use morgan and body parser with our app
 app.use(logger("dev"));
 app.use(bodyParser.urlencoded({
@@ -102,7 +109,7 @@ app.get("/friends", function(req, res) {
 });
 
 var userRoutes = require("./app/userRoutes.js");
-app.use(userRoutes);
+// app.use(userRoutes);
 
 // Listen on port 3000
 app.listen(PORT, function() {
