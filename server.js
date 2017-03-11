@@ -17,6 +17,9 @@ mongoose.Promise = Promise;
 var app = express();
 var PORT = process.env.PORT || 3000;
 
+var router = express.Router();
+require("./app/userRoutes")(router);
+
 // Use morgan and body parser with our app
 app.use(logger("dev"));
 app.use(bodyParser.urlencoded({
@@ -25,103 +28,7 @@ app.use(bodyParser.urlencoded({
 
 // Make public a static dir
 app.use(express.static("public"));
-
-var fb = new FB.Facebook({version: 'v2.8'});
-
-
-var appSecret = '0e0af4d3c10950538896c2e47baa6b6a';
-var appID = '256928438051566';
-var appAccessToken = '';
-var userID = null;
-
-var fooApp = FB.extend({appId: appID, appSecret: appSecret });
-
-//FB.setAccessToken(appAccessToken);
-
-var myAccessToken = FB.getAccessToken();
-
-console.log('my access token', myAccessToken);
-
-function printDerp() {
-	console.log('derp');
-}
-
-function printToken(myToken) {
-	console.log("token:", myToken);
-}
-
-function printUserID(myUserID) {
-  console.log("userID:", myUserID);
-}
-
-function updateToken(myToken) {
-	appAccessToken = myToken;
-  printToken(appAccessToken);
-}
-
-function updateUserID(myUserID) {
-  userID = myUserID;
-  printUserID(userID);
-}
-
-
-
-/*
-FB.api('oauth/access_token', {
-    client_id: appID,
-    client_secret: appSecret,
-    redirect_uri: 'https://www.facebook.com/app_scoped_user_id/127970024394905/'
-
-}, function (res) {
-    if(!res || res.error) {
-        console.log(!res ? 'error occurred' : res.error);
-        return;
-    }
- 
-    var accessToken = res.access_token;
-    var expires = res.expires ? res.expires : 0;
-});
-
-
-FB.getAuthResponse();*/
-
-
-
-//test function. Don't call this unless you need to see derp
-app.get("/derp", function(req, res) {
-  printDerp();
-});
-
-app.post("/fb/:token", function(req, res) {
-	//console.log('req.body.token');
-  	updateToken(req.body.token);
-});
-
-app.post("/fb/userIDToken", function(req, res) {
-  //console.log('req.body.token');
-    console.log('pew pew');
-    updateToken(req.body.token);
-    updateUserID(req.body.userID);
-});
-
-/*app.post("/fb/userToken", function(req, res) {
-  //console.log('req.body.token');
-    updateToken(req.body.token);
-    updateUser(req.body.userID);
-});*/
-
-app.get("/fb/friends", function(req, res) {
-  FB.api('me/friends', { access_token: appAccessToken}, function (res) {
-  	if(!res || res.error) {
-  		console.log(!res ? 'error occurred' : res.error);
-  		return;
-		}
-		
-  	console.log(res.data);
-	});
-  res.send(200);
-});
-
+app.use(router);
 
 
 

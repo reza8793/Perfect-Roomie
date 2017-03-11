@@ -35,6 +35,8 @@
 		    if (response.status === 'connected') {
 		      // Logged into your app and Facebook.
 		      //postStuff(response.authResponse.accessToken);
+		      console.log('userID:', response.authResponse.userID);
+		      console.log('accessToken:', response.authResponse.accessToken);
 		      postStuffV2(response.authResponse.userID, response.authResponse.accessToken);
 
 		      testAPI();
@@ -101,43 +103,24 @@
 		    });
 		}
 
-	  	function postStuff(passedToken) {
-	    console.log('passing:', passedToken);
-
+	    function postStuffV2(passedUserID, passedToken) {
 		    $.ajax({
 			    method: "POST",
-			    url: "/fb/" + passedToken,
+			    url: "/fb/userIDToken",
 			    data: {
 			    // Value taken from title input
+			      userID: passedUserID,
 			      token: passedToken
 			    // Value taken from note textarea
 			    }
 		    })
 		    // With that done
-		    	.done(function(data) {
-		        	// Log the response
-		        	console.log(data);
-		    });
-	    }
-
-	    function postStuffV2(passedUserID, passedToken) {
-	    $.ajax({
-		    method: "POST",
-		    url: "/fb/userIDToken",
-		    data: {
-		    // Value taken from title input
-		      userID: passedUserID,
-		      token: passedToken
-		    // Value taken from note textarea
-		    }
-	    })
-	    // With that done
-	    	.done(function(data) {
-	        	// Log the response
-	        	console.log("poststuffV2", data);
-	    });
+		    .done(function(data) {
+		        // Log the response
+		        console.log("poststuffV2", data);
+	    	});
 	
-	  }
+	  	}
 	</script>
 
     
@@ -206,28 +189,6 @@
 				<br>
 
 				<div id="fbsigndiv" class="eighteen wide column">
-
-					<br>
-
-					<div id="usernameform" class="ui form">
-						<div id ="usernamediv1" class=" four wide field">
-									
-							<div class ="field"	>
-								<label for="user_name"> Username</label>
-								<input type="text" name="user_name" placeholder="Username">
-							</div>
-
-							<div class ="field">
-								<label for="password"> Password</label>
-								<input type="text" name="password" placeholder="Password">
-							</div>
-
-						</div>		
-					</div>
-
-					<br>
-					<br>
-
 
 					<div id="status"></div>
 
