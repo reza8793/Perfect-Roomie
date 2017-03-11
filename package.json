@@ -20,5 +20,12 @@
   "bugs": {
     "url": "https://github.com/reza8793/Perfect-Roomie/issues"
   },
-  "homepage": "https://github.com/reza8793/Perfect-Roomie#readme"
+  "homepage": "https://github.com/reza8793/Perfect-Roomie#readme",
+  "dependencies": {
+    "body-parser": "^1.17.1",
+    "express": "^4.15.2",
+    "fb": "^1.1.1",
+    "logger": "0.0.1",
+    "mongoose": "^4.8.6"
+  }
 }
