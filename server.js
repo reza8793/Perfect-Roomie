@@ -77,25 +77,26 @@ FB.getAuthResponse();*/
 
 
 
-
+//test function. Don't call this unless you need to see derp
 app.get("/derp", function(req, res) {
   printDerp();
 });
 
-app.post("/derp/:token", function(req, res) {
+app.post("/fb/:token", function(req, res) {
 	//console.log('req.body.token');
   	updateToken(req.body.token);
 });
 
-app.get("/friends", function(req, res) {
-  	FB.api('me/friends', { access_token: appAccessToken}, function (res) {
-    	if(!res || res.error) {
-    		console.log(!res ? 'error occurred' : res.error);
-    		return;
-  		}
-  		
-  		console.log(res.data);
+app.get("/fb/friends", function(req, res) {
+  FB.api('me/friends', { access_token: appAccessToken}, function (res) {
+  	if(!res || res.error) {
+  		console.log(!res ? 'error occurred' : res.error);
+  		return;
+		}
+		
+  	console.log(res.data);
 	});
+  res.send(200);
 });
 
 // Listen on port 3000
