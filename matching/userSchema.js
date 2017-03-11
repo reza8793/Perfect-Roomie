@@ -2,6 +2,10 @@ var mongoose = require("mongoose");
 var Schema = mongoose.Schema;
 
 var UserSchema = new Schema({
+
+  FBid: {
+    type; String,
+  }
   FBName: {
     type: String,
   },
