@@ -2,7 +2,7 @@ console.log('using userRoutes.js');
 
 module.exports = function(router) {
 
-  var user = require("../models/userSchema");
+  var User = require("../models/userSchema");
   var fblocal = require('../controllers/fblocal');
   var FB = require('fb');
   var fb = new FB.Facebook({version: 'v2.8'});
@@ -39,7 +39,7 @@ module.exports = function(router) {
         return;
       }
       
-      var newUser = new user({
+      var newUser = new User({
         FBid: res.id,
         FBName: res.name,
         photolink: res.picture.data.url
