@@ -62,26 +62,11 @@ var resparray =[];
                 ,q6Value,q7Value,q8Value,q9Value,q10Value,q11Value,q12Value,q13Value];
 
                 
-                console.log(resparray);
+                //console.log(resparray);
 
                 var age =  $('#age').val();
 
-                console.log(age);
-
-
-                // $.ajax('/responses', {
-                //     method:'POST',
-                //     data: {age: age, livingStyle:resparray}
-            
-                // });
-
-                // $.ajax({
-
-                //     type:"POST",
-                //     url:"/responses",
-                //     data: {age: age, livingStyle:resparray},
-                //     datatype: "application/json"
-                    
+               // console.log(age);
                 // });
 
                 $.post( "/responses", {age: age, livingStyle:resparray}, function( data ) {

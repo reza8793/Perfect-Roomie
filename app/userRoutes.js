@@ -3,11 +3,6 @@ var UserModel = require("../matching/userSchema.js");
 
 module.exports = function (router) {
 
-router.get('/blah', function(req,res){
-
-			res.send("hello world!");
-
-			});
 
 router.post('/responses', function(req, res) {
 
@@ -29,7 +24,7 @@ router.post('/responses', function(req, res) {
 
   });
 
-	console.dir(req.body);
+	//console.dir(req.body);
 
     
 });
