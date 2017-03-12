@@ -31,12 +31,12 @@ app.use(express.static("public"));
 app.use(router);
 
 
-require("./app/userRoutes")(router);
+require("./controllers/userRoutes")(router);
 
 app.use(router);
 
 
-require("./app/userRoutes")(router);
+//require("./app/userRoutes")(router);
 
 // If deployed, use the deployed database. Otherwise use the local mongoHeadlines database
 var db = process.env.MONGODB_URI || "mongodb://localhost/roomie_db";
@@ -55,7 +55,7 @@ mongoose.connect(db, function(error) {
 
 
 
-var userRoutes = require("./app/userRoutes.js");
+var userRoutes = require("./controllers/userRoutes.js");
 // app.use(userRoutes);
 
 // Listen on port 3000
