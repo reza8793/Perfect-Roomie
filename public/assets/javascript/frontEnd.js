@@ -103,6 +103,35 @@ var resparray =[];
             });
 
 
+
+//   $("#submit").on("click", function(){
+// var userInfo = {
+//                 name: $("#name").val(),
+//                 photo: $("#photo").val(),
+//                 scores: [$('#q1:checked').val(), $('#q2:checked').val(),
+//                 $('#q3:checked').val(),$('#q4:checked').val(),
+//                 $('#q5:checked').val(),$('#q6:checked').val(),
+//                 $('#q7:checked').val(),$('#q8:checked').val(),
+//                 $('#q9:checked').val(),$('#q10:checked').val() ] 
+                
+//             }
+//     console.log(userInfo);
+//     var currentURL = window.location.origin;
+//     $.post(currentURL +"/api/friends", userInfo)
+//     .done(function(data)
+//     {
+//         console.log("Added current friend");
+//         console.log("your friend is " + data.name);
+//         console.log("your friend's photo is " + data.photo);
+//         $("#matchName").text(data.name);
+//        $('#matchImg').attr("src", data.photo);
+//          $('#modal fade bd-example-modal-lg').modal('toggle');
+    
+        
+//     });
+// });
+
+
    // document.getElementById("zipbutton").onclick = function () {
    //      location.href = "survey.html";
    //  };
