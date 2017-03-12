@@ -1,4 +1,4 @@
- 
+
 
 
  $(document).ready(function(){
@@ -18,7 +18,7 @@
 
                     console.log("find matches button clicked");
 
-                   // location.href = "survey.html";
+                   location.href = "survey.html";
 
 
                      zipValue = $('#zipinput').val().trim();
@@ -30,11 +30,9 @@
             });
 
 
- 	 // document.getElementById("zipbutton").onclick = function () {
-   //      location.href = "survey.html";
-   //  };
+ // 	 document.getElementById("zipbutton").onclick = function () {
+  //       location.href = "survey.html";
+  //   };
 
 
  });
-
- 

@@ -18,7 +18,7 @@ var app = express();
 var PORT = process.env.PORT || 3000;
 
 var router = express.Router();
-require("./app/userRoutes")(router);
+require("./controllers/dlCRUDFunctions")(router);
 
 // Use morgan and body parser with our app
 app.use(logger("dev"));
