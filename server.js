@@ -20,26 +20,23 @@ var PORT = process.env.PORT || 3000;
 var router = express.Router();
 
 
-
-require("./app/userRoutes")(router);
-
-app.use(router);
-
-
-require("./app/userRoutes")(router);
-
-
 // Use morgan and body parser with our app
 app.use(logger("dev"));
-app.use(bodyParser.urlencoded({
-  extended: false
-}));
+app.use(bodyParser.json());
+
+app.use(bodyParser.urlencoded( {extended: false }));
 
 // Make public a static dir
 app.use(express.static("public"));
 app.use(router);
 
 
+require("./app/userRoutes")(router);
+
+app.use(router);
+
+
+require("./app/userRoutes")(router);
 
 // If deployed, use the deployed database. Otherwise use the local mongoHeadlines database
 var db = process.env.MONGODB_URI || "mongodb://localhost/roomie_db";

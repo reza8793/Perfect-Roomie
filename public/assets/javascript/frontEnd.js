@@ -61,7 +61,36 @@ var resparray =[];
                 resparray = [q1Value, q2Value,q3Value,q4Value,q5Value
                 ,q6Value,q7Value,q8Value,q9Value,q10Value,q11Value,q12Value,q13Value];
 
+                
                 console.log(resparray);
+
+                var age =  $('#age').val();
+
+                console.log(age);
+
+
+                // $.ajax('/responses', {
+                //     method:'POST',
+                //     data: {age: age, livingStyle:resparray}
+            
+                // });
+
+                // $.ajax({
+
+                //     type:"POST",
+                //     url:"/responses",
+                //     data: {age: age, livingStyle:resparray},
+                //     datatype: "application/json"
+                    
+                // });
+
+                $.post( "/responses", {age: age, livingStyle:resparray}, function( data ) {
+                  console.log( age ); // John
+                  console.log( resparray); // 2pm
+                }, "json");
+
+
+
 
             });
 
@@ -70,7 +99,7 @@ var resparray =[];
 
                     console.log("find matches button clicked");
 
-                   // location.href = "survey.html";
+                   location.href = "survey.html";
 
 
                      zipValue = $('#zipinput').val().trim();

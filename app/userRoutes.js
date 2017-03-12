@@ -1,13 +1,4 @@
-
-
-//var responseSurvey = require("./public/assets/javascript/frontEnd.js");
-
-// var express = require("express");
-// var app = express();
-
-
-
-
+var UserModel = require("../matching/userSchema.js");
 
 
 module.exports = function (router) {
@@ -20,9 +11,26 @@ router.get('/blah', function(req,res){
 
 router.post('/responses', function(req, res) {
 
-	console.log(req.body);
+  // console.log(req.body.livingStyle);
 
-	res.send(req.body);
+	var age = req.body.age;
+	var livingStyle = req.body['livingStyle[]'];
+
+	var roomie = new UserModel({ age:age,livingStyle:livingStyle});
+  
+	roomie.save(function(error, result){
+
+    if (error){
+      console.log(error);
+      return res.status(500).send({error: 'AN_ERROR_OCCURED'});
+    }
+
+         res.send(result);
+
+  });
+
+	console.dir(req.body);
+
     
 });
 
