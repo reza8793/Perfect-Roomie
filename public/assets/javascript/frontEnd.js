@@ -84,14 +84,21 @@ var resparray =[];
 
                     console.log("find matches button clicked");
 
-                   location.href = "survey.html";
+                     location.href = "survey.html";
 
 
-                     zipValue = $('#zipinput').val().trim();
+                     zipValue = $('#locationdiv').val();
 
 
-                     console.log( "zip code is " + zipValue);
+                     console.log( "location is " + zipValue);
                 // This line of code will grab the input from the textbox...
+
+                   $.post( "/responses", {regionDestination: zipValue}, function( data ) {
+                  console.log( zipValue ); // 
+                }, "json");
+
+
+
 
             });
 

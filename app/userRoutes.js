@@ -10,6 +10,7 @@ router.post('/responses', function(req, res) {
 
 	var age = req.body.age;
 	var livingStyle = req.body['livingStyle[]'];
+ 
 
 	var roomie = new UserModel({ age:age,livingStyle:livingStyle});
   
@@ -25,8 +26,29 @@ router.post('/responses', function(req, res) {
   });
 
 	//console.dir(req.body);
-
     
+});
+
+
+
+router.post('/responses', function(req, res) {
+
+  var regionDestination = req.body.zipValue;
+
+  var roomie = new UserModel({regionDestination:regionDestination});
+  
+  roomie.save(function(error, result){
+
+    if (error){
+      console.log(error);
+      return res.status(500).send({error: 'AN_ERROR_OCCURED'});
+    }
+
+         res.send(result);
+
+  });
+
+
 });
 
 

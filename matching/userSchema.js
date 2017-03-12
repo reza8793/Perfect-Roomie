@@ -14,7 +14,7 @@ var UserSchema = new Schema({
   },
   age: {
     type: Number,
-    required: true
+    required: false
   },
   photolink: {
     type: String,
@@ -25,7 +25,7 @@ var UserSchema = new Schema({
   },
   livingStyle: {
     type: Array,
-    required: true
+    required: false
   },
   regionDestination: {
     type: String,
