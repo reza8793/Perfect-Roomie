@@ -48,10 +48,6 @@ mongoose.connect(db, function(error) {
 });
 
 
-
-var userRoutes = require("./app/userRoutes.js");
-app.use(userRoutes);
-
 // Listen on port 3000
 app.listen(PORT, function() {
   console.log("App listening on PORT " + PORT);
