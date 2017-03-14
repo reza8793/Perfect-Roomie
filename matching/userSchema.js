@@ -5,7 +5,7 @@ var UserSchema = new Schema({
 
   FBid: {
     type: String,
-  }
+  },
   FBName: {
     type: String,
   },
@@ -14,27 +14,28 @@ var UserSchema = new Schema({
   },
   age: {
     type: Number,
-    required: true
+    required: false
   },
   photolink: {
     type: String,
-    required: true
+    required: false
   },
   friendList: {
     any: Object
   },
   livingStyle: {
     type: Array,
-    required: true
+    required: false
   },
   regionDestination: {
     type: String,
-    required: true
+    required: false
   },
   matchConnectionMin: {
     type: Number,
     required: true,
-    set: 2
+    // set:2
+    default:2
   },
   roommateMatches: {
     any: Object
