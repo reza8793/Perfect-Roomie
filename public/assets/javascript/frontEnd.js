@@ -1,10 +1,5 @@
-<<<<<<< HEAD
 
-
-=======
- 
 var resparray =[];
->>>>>>> 69f57aa851a0ddfd0f807c156f1f54cdf7f8b021
 
  $(document).ready(function(){
 
@@ -66,10 +61,12 @@ var resparray =[];
                 resparray = [q1Value, q2Value,q3Value,q4Value,q5Value
                 ,q6Value,q7Value,q8Value,q9Value,q10Value,q11Value,q12Value,q13Value];
 
-                
+
                 //console.log(resparray);
 
                 var age =  $('#age').val();
+
+                return resparray
 
                // console.log(age);
                 // });
@@ -89,11 +86,7 @@ var resparray =[];
 
                     console.log("find matches button clicked");
 
-<<<<<<< HEAD
                    location.href = "survey.html";
-=======
-                     location.href = "survey.html";
->>>>>>> 69f57aa851a0ddfd0f807c156f1f54cdf7f8b021
 
 
                      zipValue = $('#locationdiv').val();
@@ -102,8 +95,8 @@ var resparray =[];
                      console.log( "location is " + zipValue);
                 // This line of code will grab the input from the textbox...
 
-                   $.post( "/responses", {regionDestination: zipValue}, function( data ) {
-                  console.log( zipValue ); // 
+                   $.put( "db/user/response", {regionDestination: zipValue}, function( data ) {
+                  console.log( zipValue ); //
                 }, "json");
 
 
@@ -112,11 +105,9 @@ var resparray =[];
             });
 
 
-<<<<<<< HEAD
  // 	 document.getElementById("zipbutton").onclick = function () {
   //       location.href = "survey.html";
   //   };
-=======
 
 //   $("#submit").on("click", function(){
 // var userInfo = {
@@ -126,8 +117,8 @@ var resparray =[];
 //                 $('#q3:checked').val(),$('#q4:checked').val(),
 //                 $('#q5:checked').val(),$('#q6:checked').val(),
 //                 $('#q7:checked').val(),$('#q8:checked').val(),
-//                 $('#q9:checked').val(),$('#q10:checked').val() ] 
-                
+//                 $('#q9:checked').val(),$('#q10:checked').val() ]
+
 //             }
 //     console.log(userInfo);
 //     var currentURL = window.location.origin;
@@ -140,8 +131,8 @@ var resparray =[];
 //         $("#matchName").text(data.name);
 //        $('#matchImg').attr("src", data.photo);
 //          $('#modal fade bd-example-modal-lg').modal('toggle');
-    
-        
+
+
 //     });
 // });
 
@@ -149,7 +140,6 @@ var resparray =[];
    // document.getElementById("zipbutton").onclick = function () {
    //      location.href = "survey.html";
    //  };
->>>>>>> 69f57aa851a0ddfd0f807c156f1f54cdf7f8b021
 
 
  });
