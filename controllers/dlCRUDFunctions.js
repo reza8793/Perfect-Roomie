@@ -7,6 +7,7 @@ module.exports = function(router) {
   var FB = require('fb');
   var fb = new FB.Facebook({version: 'v2.8'});
 
+
   //test function. Don't call this unless you need to see derp
   router.get("/derp", function(req, res) {
     fblocal.printDerp();
@@ -62,27 +63,53 @@ module.exports = function(router) {
 
   });
 
-router.post("db/user/update", function(req, res) {
+  router.put('db/user/destination', function(req, res) {
+
+    var regionDestination = req.body.zipValue;
+
+    var roomie = new UserModel({regionDestination:regionDestination});
+
+    roomie.save(function(error, result){
+
+      if (error){
+        console.log(error);
+        return res.status(500).send({error: 'AN_ERROR_OCCURED'});
+      }
+
+           res.json({success:true});
+
+    });
+
+
+  });
+
+router.put("db/user/response", function(req, res) {
   FB.api('me?fields=id', { access_token: fblocal.appAccessToken}, function (res) {
     if(!res || res.error) {
       console.log(!res ? 'error occurred' : res.error);
       return res;
     }
-User.findOneAndUpdate({"FBid": res.id}), function(err, user) {
-  if (err) {
-    console.log("Something's wrong. Error data:" + err);
-    return;
-  }
-  if (!user) {
-    console.log("No User found");
-    return;
-  }
-  $push: {
-    livingStyle: req.body
-  }
-}
 
-});
+    var age = req.body.age;
+    var livingStyle = req.body['livingStyle[]'];
+    User.findOneAndUpdate({"FBid": res.id}),
+    {
+      livingStyle: livingStyle,
+      age: age
+    },
+    function(err, user) {
+      if (err) {
+        console.log("Something's wrong. Error data:" + err);
+        return;
+      }
+      if (!user) {
+        console.log("No User found");
+        return;
+      }
+
+    }
+
+  });
 
 });
 }
