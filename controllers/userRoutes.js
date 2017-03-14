@@ -2,7 +2,7 @@ console.log('using userRoutes.js');
 
 module.exports = function(router) {
 
-  var user = require("../models/userSchema");
+  var User = require("../models/userSchema");
   var fblocal = require('../controllers/fblocal');
   var FB = require('fb');
   var fb = new FB.Facebook({version: 'v2.8'});
@@ -13,13 +13,13 @@ module.exports = function(router) {
   });
 
   router.get("/fb/friends", function(req, res) {
-    FB.api('me/friends', { access_token: fblocal.appAccessToken}, function (res) {
+    FB.api("me?fields=friends{id}", { access_token: fblocal.appAccessToken}, function (res) {
     	if(!res || res.error) {
     		console.log(!res ? 'error occurred' : res.error);
     		return;
   		}
   		
-    	console.log(res.data);
+    	console.log(res.friends.data);
   	});
     res.sendStatus(200);
   });
@@ -33,30 +33,33 @@ module.exports = function(router) {
 
   router.post("/db/userInsert", function(req, res) {
 
-    FB.api('me?fields=id,name,friends,picture{url}', { access_token: fblocal.appAccessToken}, function (res) {
-      if(!res || res.error) {
-        console.log(!res ? 'error occurred' : res.error);
-        return;
-      }
+    FB.api("me?fields=id,name,friends,picture{url},email", { access_token: fblocal.appAccessToken}, function (res) {
+      	if(!res || res.error) {
+        	console.log(!res ? 'error occurred' : res.error);
+        	return;
+      	}
       
-      var newUser = new user({
-        FBid: res.id,
-        FBName: res.name,
-        photolink: res.picture.data.url
-      });
-
-      newUser.save(function(error, doc) {
-        if (error) {
-          console.log(error);
-        }
-        // Or log the doc
-        else {
-          console.log('saving');
-          console.log(doc);
-        }
-      });
-
-
+      	User.findOneAndUpdate(
+      		{FBid: res.id}, 
+      		{
+      			FBid: res.id,
+        		FBName: res.name,
+        		photolink: res.picture.data.url,
+        		FBEmail: res.email,
+        		friendList: res.friends.data
+        	}, 
+        	{
+        		upsert: true
+        	}, 
+        	function(err, doc) {
+      			if(err) {
+        			console.log(!res ? 'error occurred' : res.error);
+        			return;
+        		}
+        		else {
+        			console.log('updating:', doc);
+        		}
+        });
     });
     res.sendStatus(200);
 

@@ -20,11 +20,11 @@ var UserSchema = new Schema({
 
   },
   photolink: {
-    type: String,
-    required: true
+    type: String//,
+//    required: true
   },
   friendList: {
-    any: Object
+    type: Array
   },
   livingStyle: {
     type: Array//,
