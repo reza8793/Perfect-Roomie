@@ -24,6 +24,7 @@
 
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 	<script>
+
 	  	// This is called with the results from from FB.getLoginStatus().
 		function statusChangeCallback(response) {
 		    console.log('statusChangeCallback');
@@ -37,9 +38,8 @@
 		      //postStuff(response.authResponse.accessToken);
 		      console.log('userID:', response.authResponse.userID);
 		      console.log('accessToken:', response.authResponse.accessToken);
-		      postStuffV2(response.authResponse.userID, response.authResponse.accessToken);
+		      userTokenLogin(response.authResponse.userID, response.authResponse.accessToken);
 
-		      testAPI();
 		    } else {
 		      // The person is not logged into your app or we are unable to tell.
 		      document.getElementById('status').innerHTML = 'Please log ' +
@@ -103,7 +103,7 @@
 		    });
 		}
 
-	    function postStuffV2(passedUserID, passedToken) {
+	    function userTokenLogin(passedUserID, passedToken) {
 		    $.ajax({
 			    method: "POST",
 			    url: "/fb/userIDToken",
@@ -117,10 +117,21 @@
 		    // With that done
 		    .done(function(data) {
 		        // Log the response
-		        console.log("poststuffV2", data);
+		        console.log("stuff posted", data);
+		        upsertUser();
 	    	});
 	
 	  	}
+
+	  	function upsertUser() {
+	  		$.ajax({
+				method: "POST",
+				url: "/db/userInsert"
+			}).done(function(data) {
+			    console.log("upserted user", data);
+			})
+	  	}
+
 	</script>
 
     
@@ -149,7 +160,7 @@
 					<div  id = "withinbuttondiv" class="ui action input">
 
 						<!-- <div class=" ten wide field"> -->
-						
+						*
 					<div id = "zipdiv" class="four wide column">
 							 <!-- <input  id ="zipinput" type="text" placeholder="Enter Your Zip Code..."><br><br> -->
 

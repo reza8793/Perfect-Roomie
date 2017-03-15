@@ -10,6 +10,7 @@ module.exports = function(router) {
   //test function. Don't call this unless you need to see derp
   router.get("/derp", function(req, res) {
     fblocal.printDerp();
+    res.sendStatus(200);
   });
 
   router.get("/fb/friends", function(req, res) {
@@ -27,7 +28,8 @@ module.exports = function(router) {
   router.post("/fb/userIDToken", function(req, res) {
     fblocal.updateUserID(req.body.userID);
     fblocal.updateToken(req.body.token);
-
+   	res.sendStatus(200);
+   
   });
 
 
@@ -40,9 +42,8 @@ module.exports = function(router) {
       	}
       
       	User.findOneAndUpdate(
-      		{FBid: res.id}, 
+      		{	FBid: res.id 	}, 
       		{
-      			FBid: res.id,
         		FBName: res.name,
         		photolink: res.picture.data.url,
         		FBEmail: res.email,
