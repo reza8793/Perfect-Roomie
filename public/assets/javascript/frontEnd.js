@@ -61,24 +61,14 @@ var resparray =[];
                 resparray = [q1Value, q2Value,q3Value,q4Value,q5Value
                 ,q6Value,q7Value,q8Value,q9Value,q10Value,q11Value,q12Value,q13Value];
 
-
-                //console.log(resparray);
-
                 var age =  $('#age').val();
-
-                return resparray
-
-               // console.log(age);
-                // });
 
                 $.post( "/responses", {age: age, livingStyle:resparray}, function( data ) {
                   console.log( age ); // John
                   console.log( resparray); // 2pm
                 }, "json");
 
-
-
-
+                algorithmInitializer();
             });
 
 
