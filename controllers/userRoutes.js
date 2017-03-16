@@ -106,5 +106,4 @@ router.put("db/user/response", function(req, res) {
 
   });
 
-});
-}
+};

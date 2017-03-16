@@ -1,38 +1,19 @@
-
-
 // Dependencies
-
 var express = require("express");
 var bodyParser = require("body-parser");
 var logger = require("morgan");
 var mongoose = require("mongoose");
 var Promise = require("bluebird");
-
-var Promise = require("bluebird");
 var FB = require('fb');
+var PORT = process.env.PORT || 3000;
 
 mongoose.Promise = Promise;
 
 // Initialize Express
 var app = express();
-var PORT = process.env.PORT || 3000;
 
 var router = express.Router();
-require("./app/userRoutes")(router);
-
-// Use morgan and body parser with our app
-app.use(logger("dev"));
-app.use(bodyParser.json());
-
-app.use(bodyParser.urlencoded( {extended: false }));
-
-// Make public a static dir
-app.use(express.static("public"));
-app.use(router);
-
-
 require("./controllers/userRoutes")(router);
-
 app.use(router);
 
 
@@ -53,8 +34,16 @@ mongoose.connect(db, function(error) {
   }
 });
 
+// Use morgan and body parser with our app
+app.use(logger("dev"));
+app.use(bodyParser.json());
 
-var userRoutes = require("./controllers/userRoutes.js");
+app.use(bodyParser.urlencoded( {extended: false }));
+
+// Make public a static dir
+app.use(express.static("public"));
+app.use(router);
+
 // app.use(userRoutes);
 // Listen on port 3000
 app.listen(PORT, function() {
