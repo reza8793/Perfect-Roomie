@@ -1,4 +1,5 @@
 console.log('using userRoutes.js');
+var moment = require('moment');
 
 module.exports = function(router) {
 
@@ -14,52 +15,59 @@ module.exports = function(router) {
   });
 
   router.get("/fb/friends", function(req, res) {
-    FB.api('me/friends', { access_token: fblocal.appAccessToken}, function (res) {
-    	if(!res || res.error) {
-    		console.log(!res ? 'error occurred' : res.error);
-    		return;
-  		}
-
-    	console.log(res.data);
-  	});
-    res.sendStatus(200);
+      FB.api("me?fields=friends{id}", { access_token: fblocal.appAccessToken}, function (res) {
+        if(!res || res.error) {
+          console.log(!res ? 'error occurred' : res.error);
+          return;
+        }
+        
+        console.log(res.friends.data);
+      });
+      res.sendStatus(200);
   });
 
   router.post("/fb/userIDToken", function(req, res) {
-    fblocal.updateUserID(req.body.userID);
-    fblocal.updateToken(req.body.token);
-
+      fblocal.updateUserID(req.body.userID);
+      fblocal.updateToken(req.body.token);
+      res.sendStatus(200);
+     
   });
 
 
   router.post("/db/userInsert", function(req, res) {
 
-    FB.api('me?fields=id,name,friends,picture{url}', { access_token: fblocal.appAccessToken}, function (res) {
-      if(!res || res.error) {
-        console.log(!res ? 'error occurred' : res.error);
-        return;
-      }
+      FB.api("me?fields=id,name,friends,picture{url},email,birthday", { access_token: fblocal.appAccessToken}, function (res) {
+          if(!res || res.error) {
+            console.log(!res ? 'error occurred' : res.error);
+            return;
+          }
+          
+          var stringDOB = moment(res.birthday);
+          var age = moment().diff(stringDOB, 'years');
 
-      var newUser = new User({
-        FBid: res.id,
-        FBName: res.name,
-        photolink: res.picture.data.url
+          User.findOneAndUpdate(
+            { FBid: res.id  }, 
+            {
+              FBName: res.name,
+              photolink: res.picture.data.url,
+              FBEmail: res.email,
+              friendList: res.friends.data,
+              age: age
+            }, 
+            {
+              upsert: true
+            }, 
+            function(err, doc) {
+              if(err) {
+                console.log(!res ? 'error occurred' : res.error);
+                return;
+              }
+              else {
+                console.log('updating:', doc);
+              }
+          });
       });
-
-      newUser.save(function(error, doc) {
-        if (error) {
-          console.log(error);
-        }
-        // Or log the doc
-        else {
-          console.log('saving');
-          console.log(doc);
-        }
-      });
-
-
-    });
-    res.sendStatus(200);
+      res.sendStatus(200);
 
   });
 
@@ -106,5 +114,4 @@ router.put("db/user/response", function(req, res) {
 
   });
 
-});
 }
