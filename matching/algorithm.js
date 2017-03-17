@@ -10,16 +10,41 @@
 
 	// and provide the best match
 
-var EU1= [5,5,5,5,2,5,5,5,5,5,5,5,5];
+	var db = require('./../server.js');
 
-var EU2 = [2,2,2,2,2,2,2,2,2,2,2,2,2];
+	console.log("Db is " + db);
 
-var EU3 = [3,3,3,3,3,3,3,2,2,2,2,2,2];
+	var db_roomieList = new Array;
 
-var newUser = [3,3,3,3,3,3,3,2,3,3,3,3,3];
+	db.collection.find({}, function(error, doc ) {
+
+				if (error) 
+					{
+		     		 console.log(error);
+		    		}
+			    else {
+				    	for (var i = 0; i <users.length; i++)
+				    	{
+				    		db_roomieList[i] = users[i].livingStyle;
+				    	}
+
+			    	}
+	});
 
 
-var roomieList =[EU1,EU2,EU3];
+	console.log(db_roomieList);
+
+
+// var EU1= [5,5,5,5,2,5,5,5,5,5,5,5,5];
+
+// var EU2 = [2,2,2,2,2,2,2,2,2,2,2,2,2];
+
+// var EU3 = [3,3,3,3,3,3,3,2,2,2,2,2,2];
+
+// var newUser = [3,3,3,3,3,3,3,2,3,3,3,3,3];
+
+
+// var roomieList =[EU1,EU2,EU3];
 
 
 var matchArray= new Array;
@@ -27,7 +52,6 @@ var totalDiff = new Array;
 
 
 //var roomieList // find all the existing users in database and access their response list
-
 
 findroomies(newUser);
 
@@ -43,6 +67,8 @@ function findroomies (newUserScore)
 	}
 
 console.log("matchArray is " + matchArray);
+
+console.log("matchArray is first one " + roomieList.indexOf(0));6
 
 var sortedMatchArray = matchArray.sort(function (a, b) { return a - b;  });
 

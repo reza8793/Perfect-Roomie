@@ -41,6 +41,8 @@ app.use(router);
 // If deployed, use the deployed database. Otherwise use the local mongoHeadlines database
 var db = process.env.MONGODB_URI || "mongodb://localhost/roomie_db";
 
+
+
 // Connect mongoose to our database
 mongoose.connect(db, function(error) {
   // Log any errors connecting with mongoose
@@ -53,6 +55,23 @@ mongoose.connect(db, function(error) {
   }
 });
 
+var db_roomieList = new Array;
+
+// db.collection.find({}, function(error, doc ) {
+
+// 				if (error) 
+// 					{
+// 		     		 console.log(error);
+// 		    		}
+// 			    else {
+// 				    	for (var i = 0; i <users.length; i++)
+// 				    	{
+// 				    		db_roomieList[i] = users[i].livingStyle;
+// 				    	}
+
+// 			    	}
+// 	});
+
 
 
 var userRoutes = require("./controllers/userRoutes.js");
@@ -61,4 +80,12 @@ var userRoutes = require("./controllers/userRoutes.js");
 // Listen on port 3000
 app.listen(PORT, function() {
   console.log("App listening on PORT " + PORT);
+
+
+
 });
+
+
+module.exports = db;
+  
+ 
