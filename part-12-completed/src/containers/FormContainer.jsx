@@ -155,7 +155,7 @@ class FormContainer extends Component {
     this.setState({
       Name: '',
       AgeRangeSelection: '',
-      answerSelection1: []
+      answerSelectionall: []
     });
   }
   handleFormSubmit(e) {
@@ -164,7 +164,11 @@ class FormContainer extends Component {
     const formPayload = {
       Name: this.state.Name,
       AgeRangeSelection: this.state.AgeRangeSelection,
-      answerSelection1: this.state.answerSelection1
+      answerSelectionall: [this.state.answerSelection1,this.state.answerSelection2,
+                          this.state.answerSelection3,this.state.answerSelection4,
+                          this.state.answerSelection5,this.state.answerSelection6,
+                          this.state.answerSelection7,this.state.answerSelection8,
+                          this.state.answerSelection9,this.state.answerSelection10]
       
     };
 
@@ -191,7 +195,7 @@ class FormContainer extends Component {
     return (
 
 
-      
+
       <form className="container" onSubmit={this.handleFormSubmit}>
         
         <SingleInput
