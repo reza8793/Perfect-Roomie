@@ -37,19 +37,6 @@ mongoose.connect(db, function(error) {
 app.use(logger("dev"));
 app.use(bodyParser.json());
 
-// 				if (error) 
-// 					{
-// 		     		 console.log(error);
-// 		    		}
-// 			    else {
-// 				    	for (var i = 0; i <users.length; i++)
-// 				    	{
-// 				    		db_roomieList[i] = users[i].livingStyle;
-// 				    	}
-
-// 			    	}
-// 	});
-
 
 app.use(bodyParser.urlencoded( {extended: false }));
 
@@ -60,8 +47,6 @@ app.use(router);
 // Listen on port 3000
 app.listen(PORT, function() {
   console.log("App listening on PORT " + PORT);
-
-
 
 });
 
