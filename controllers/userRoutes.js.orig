@@ -71,31 +71,6 @@ module.exports = function(router) {
 
   });
 
-  router.post("/db/userSurveyRandom", function(req, res){
-
-    var seedArray = new Array();
-
-    for (var i = 0; i < 10; i ++) {
-      seedArray.push( Math.floor( Math.random() * 5 ) + 1 );
-    } 
-
-    User.findOneAndUpdate(
-      { FBid: fblocal.userID },
-      { livingStyle: seedArray }
-    ).exec(function(error, doc) {
-      // Send any errors to the browser
-      if (error) {
-        res.send(error);
-      }
-      // Or send the doc to the browser
-      else {
-        res.send(doc);
-      }
-    });
-
-  });
-
-
   router.put('db/user/destination', function(req, res) {
 
     var regionDestination = req.body.zipValue;
@@ -139,4 +114,8 @@ router.put("db/user/response", function(req, res) {
 
   });
 
+<<<<<<< HEAD
 };
+=======
+}
+>>>>>>> f1fbfae157de2c1c62550b0ad910e349af5ffedb
