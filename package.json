@@ -4,10 +4,9 @@
   "description": "roommate finder app",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "react-scripts test --env=jsdom",
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
   },
   "repository": {
@@ -26,6 +25,7 @@
   },
   "homepage": "https://github.com/reza8793/Perfect-Roomie#readme",
   "devDependencies": {
+    "concurrently": "^3.4.0",
     "react-scripts": "0.9.0"
   },
   "dependencies": {
