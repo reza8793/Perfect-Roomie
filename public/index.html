@@ -1,230 +1,34 @@
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html lang="en">
 <head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico">
+	<!--
+      Notice the use of %PUBLIC_URL% in the tag above.
+      It will be replaced with the URL of the `public` folder during the build.
+      Only files inside the `public` folder can be referenced from the HTML.
 
-	<title> Home Page</title>
-
-	<link rel="stylesheet" type = "text/css" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.9/semantic.min.css">
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css">
-
-
-	<!-- <link rel="stylesheet" type ="text/css" href="assets/css/reset.css"> -->
-	<link rel="stylesheet" type ="text/css" href="assets/css/style.css">
-
-	<script src="https://code.jquery.com/jquery-2.2.1.min.js"></script>
-
-	<script 
-        src="https://code.jquery.com/ui/1.12.0/jquery-ui.min.js"
-        integrity="sha256-eGE6blurk5sHj+rmkfsGYeKyZx3M4bG+ZlFyA7Kns7E="
-        crossorigin="anonymous">
-    </script>
-
- 	<script type="text/javascript" src="assets/javascript/frontEnd.js"></script>
-
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-	<script>
-
-	  	// This is called with the results from from FB.getLoginStatus().
-		function statusChangeCallback(response) {
-		    console.log('statusChangeCallback');
-		    console.log(response);
-		    // The response object is returned with a status field that lets the
-		    // app know the current login status of the person.
-		    // Full docs on the response object can be found in the documentation
-		    // for FB.getLoginStatus().
-		    if (response.status === 'connected') {
-		      // Logged into your app and Facebook.
-		      //postStuff(response.authResponse.accessToken);
-		      console.log('userID:', response.authResponse.userID);
-		      console.log('accessToken:', response.authResponse.accessToken);
-		      userTokenLogin(response.authResponse.userID, response.authResponse.accessToken);
-
-		    } else {
-		      // The person is not logged into your app or we are unable to tell.
-		      document.getElementById('status').innerHTML = 'Please log ' +
-		        'into this app.';
-		    }
-	  	}
-
-	  	// This function is called when someone finishes with the Login
-	  	// Button.  See the onlogin handler attached to it in the sample
-	  	// code below.
-	  	function checkLoginState() {
-		    FB.getLoginStatus(function(response) {
-		      statusChangeCallback(response);
-		    });
-	  	}
-
-		window.fbAsyncInit = function() {
-		  FB.init({
-		    appId      : '256928438051566',
-		    cookie     : true,  // enable cookies to allow the server to access 
-		                        // the session
-		    xfbml      : true,  // parse social plugins on this page
-		    version    : 'v2.8' // use graph api version 2.8
-		});
-
-		// Now that we've initialized the JavaScript SDK, we call 
-		// FB.getLoginStatus().  This function gets the state of the
-		// person visiting this page and can return one of three states to
-		// the callback you provide.  They can be:
-		//
-		// 1. Logged into your app ('connected')
-		// 2. Logged into Facebook, but not your app ('not_authorized')
-		// 3. Not logged into Facebook and can't tell if they are logged into
-		//    your app or not.
-		//
-		// These three cases are handled in the callback function.
-
-		FB.getLoginStatus(function(response) {
-			statusChangeCallback(response);
-		});
-
-	};
-
-	  	// Load the SDK asynchronously
-	  	(function(d, s, id) {
-		    var js, fjs = d.getElementsByTagName(s)[0];
-		    if (d.getElementById(id)) return;
-		    js = d.createElement(s); js.id = id;
-		    js.src = "//connect.facebook.net/en_US/sdk.js";
-		    fjs.parentNode.insertBefore(js, fjs);
-	  	}(document, 'script', 'facebook-jssdk'));
-
-		// Here we run a very simple test of the Graph API after login is
-		// successful.  See statusChangeCallback() for when this call is made.
-		function testAPI() {
-		    console.log('Welcome!  Fetching your information.... ');
-		    FB.api('/me', function(response) {
-		      console.log('Successful login for: ' + response.name);
-		      document.getElementById('status').innerHTML =
-		        'Thanks for logging in, ' + response.name + '!';
-		    });
-		}
-
-	    function userTokenLogin(passedUserID, passedToken) {
-		    $.ajax({
-			    method: "POST",
-			    url: "/fb/userIDToken",
-			    data: {
-			    // Value taken from title input
-			      userID: passedUserID,
-			      token: passedToken
-			    // Value taken from note textarea
-			    }
-		    })
-		    // With that done
-		    .done(function(data) {
-		        // Log the response
-		        console.log("stuff posted", data);
-		        upsertUser();
-	    	});
-	
-	  	}
-
-	  	function upsertUser() {
-	  		$.ajax({
-				method: "POST",
-				url: "/db/userInsert"
-			}).done(function(data) {
-			    console.log("upserted user", data);
-			})
-	  	}
-
-	</script>
-
-    
+      Unlike "/favicon.ico" or "favicon.ico", "%PUBLIC_URL%/favicon.ico" will
+      work correctly both with client-side routing and a non-root public URL.
+      Learn how to configure a non-root public URL by running `npm run build`.
+    -->
+	<!-- Here we include bootstrap. This will be made available to all of the generated HTML/JS that React generates-->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"
+		  integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+	<title>Perfect Roomie</title>
 </head>
 <body>
-	<div class ="ui container">
-		<div class = "ui grid">
-			<div id = "maindiv" class="eighteen wide column">
+<div id="root"></div>
+<!--
+  This HTML file is a template.
+  If you open it directly in the browser, you will see an empty page.
 
-				<br>
-				<br>
+  You can add webfonts, meta tags, or analytics to this file.
+  The build step will place the bundled scripts into the <body> tag.
 
-					<div id="h1h2div" class="twelve wide column">
-
-						<h1> Perfect Roomie </h1>
-						<h2> Looking for a compatible roommate ? Look no further. Find your ideal roommate now !<h2> <br>
-					</div>
-
-				<br>
-
-				<div id = "buttondiv" class="twelve wide column">
-
-					<!-- <div class=" eight wide field"> -->
-					<br>
-
-					<div  id = "withinbuttondiv" class="ui action input">
-
-						<!-- <div class=" ten wide field"> -->
-						*
-					<div id = "zipdiv" class="four wide column">
-							 <!-- <input  id ="zipinput" type="text" placeholder="Enter Your Zip Code..."><br><br> -->
-
-						<select id = "locationdiv" class="ui fluid search dropdown" multiple="">
-							<option style="font-size:29px;" value="">Regions</option> <br>
-							<option style="font-size:20px;" value="AF">Angeles Forest</option>
-							<option style="font-size:20px;" value="AV">Antelope Valley</option>
-							<option style="font-size:20px;" value="CL">Central LA</option>
-							<option style="font-size:20px;" value="ELA">East LA</option>
-							<option style="font-size:20px;" value="HA">Harbor </option>
-							<option style="font-size:20px;" value="NELA">Northeast LA</option>
-							<option style="font-size:20px;" value="NWLA">Northwest LA</option>
-							<option style="font-size:20px;" value="PV">Pomona Valley</option>
-							<option style="font-size:19px;" value="SFV">San Fernando Valley</option>
-							<option style="font-size:20px;" value="SGV">San Gabriel Valley</option>
-							<option style="font-size:19px;" value="SM">Santa Monica Mountains</option>
-							<option style="font-size:20px;" value="SB">South Bay</option>
-							<option style="font-size:20px;" value="SELA">Southeast LA</option>
-							<option style="font-size:20px;" value="SLA">South LA</option>
-							<option style="font-size:20px;" value="VER">Verdugos</option>
-							<option style="font-size:20px;" value="WEST">Westside</option>
-
-						</select>
-		
-
-					</div>
-
- 					<div id = "findmatchdiv1" class="four wide column"></div>
-
-					<div id = "findmatchdiv2" class="four wide column">
-						<button id="zipbutton" class="ui primary button">Find Matches</button>
-					</div>
-					
-				</div>
-
-				<br>
-				<br>
-
-				<div id="fbsigndiv" class="eighteen wide column">
-
-					<div id="status"></div>
-
-					<fb:login-button scope="public_profile,email" onlogin="checkLoginState();" autologoutlink="true"></fb:login-button>
-					<!-- test button. remove when you're done -->
-					<form action="fb/friends/" method="get">
-  						<button type="submit">friends</button><br>
-					</form>
-					
-					<form action="db/userInsert/" method="post">
-  						<button type="submit">Post to db</button><br>
-					</form>
-
-				</div>
-			</div>
-
-			<br>
-			<br>
-        
-            <div id = "teamdiv" class="sixteen wide column">
-                <h2 class="section-heading">
-                	Brought to you by Team DAN!
-                </h2>
-
-            </div>
-		</div>
-
-	</body>
+  To begin the development, run `npm start`.
+  To create a production bundle, use `npm run build`.
+-->
+</body>
 </html>
