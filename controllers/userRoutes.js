@@ -9,6 +9,10 @@ module.exports = function(router) {
   var fb = new FB.Facebook({version: 'v2.8'});
 
 
+router.get("/", function(req, res) {
+  res.send(index.html)
+});
+
   //test function. Don't call this unless you need to see derp
   router.get("/derp", function(req, res) {
     fblocal.printDerp();
@@ -20,7 +24,7 @@ module.exports = function(router) {
           console.log(!res ? 'error occurred' : res.error);
           return;
         }
-        
+
         console.log(res.friends.data);
       });
       res.sendStatus(200);
@@ -30,7 +34,7 @@ module.exports = function(router) {
       fblocal.updateUserID(req.body.userID);
       fblocal.updateToken(req.body.token);
       res.sendStatus(200);
-     
+
   });
 
 
@@ -41,22 +45,22 @@ module.exports = function(router) {
             console.log(!res ? 'error occurred' : res.error);
             return;
           }
-          
+
           var stringDOB = moment(res.birthday);
           var age = moment().diff(stringDOB, 'years');
 
           User.findOneAndUpdate(
-            { FBid: res.id  }, 
+            { FBid: res.id  },
             {
               FBName: res.name,
               photolink: res.picture.data.url,
               FBEmail: res.email,
               friendList: res.friends.data,
               age: age
-            }, 
+            },
             {
               upsert: true
-            }, 
+            },
             function(err, doc) {
               if(err) {
                 console.log(!res ? 'error occurred' : res.error);

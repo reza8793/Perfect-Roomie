@@ -19,11 +19,11 @@ class Home extends Component {
 
 	render() {
 		return <div className="roomieDiv">
-			<h1>Perfect Roomie</h1> 
+			<h1>Perfect Roomie</h1>
 			<h4> Looking for a compatible roommate through mutual friends ? Look no further </h4>
 			<h4> Find your ideal roommate now !</h4>
 			<div className="page-header">
-				
+
 			</div>
 
 			{/*{this.state.text}*/}
@@ -37,13 +37,13 @@ class Home extends Component {
 			</div>
 
 			<p>
-		
+
 				<button type="button" className="btn btn-lg btn-primary" onClick={ (e) => {this.clicked();}}> Enter Your location</button>
 			</p>
 
 			</div>;
 
-		
+
 	}
 }
 
