@@ -26,7 +26,7 @@ class Home extends Component {
 
 			</div>
 
-			{/*{this.state.text}*/}
+			{this.state.text}
 
 			<div className="formDiv">
 

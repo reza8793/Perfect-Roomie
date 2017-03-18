@@ -1,7 +1,6 @@
 import React from 'react';
-import logo from './logo.svg';
 import './Header.css';
-import { Link } from 'react-router';
+
 
 export default function() {
 	return <nav className="navbar navbar-default">
