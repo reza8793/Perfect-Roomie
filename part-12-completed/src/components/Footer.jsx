@@ -15,7 +15,8 @@ export default function() {
 			<li>
 				<a href="/portfolio">portfolio</a>
 			</li>
-			<li className="Footer-link-triforce">
+			{ /*
+				<li className="Footer-link-triforce">
 				<img src={linkRun} alt="link running"/>
 				<ul>
 					<li> Using the power of <strong>Link</strong>, go to the:</li>
@@ -24,6 +25,9 @@ export default function() {
 					<li><Link to="/portfolio">portfolio page</Link>!</li>
 				</ul>
 			</li>
+
+			*/}
+
 		</ul>
 		<p className="Footer-copyright">&copy; 2017 The internet</p>
 	</footer>;

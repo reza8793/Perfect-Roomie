@@ -1,6 +1,6 @@
 import React, { PropTypes, Component } from 'react';
 import './App.css';
-import bgImage from './ignasi_pattern_s.png';
+import laImage from './la_wallpaper.jpg';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 
@@ -13,17 +13,13 @@ function getNiceName(routes) {
 class App extends Component {
 	render() {
 		return (
-			<div className="App" style={{backgroundImage: `url(${bgImage})`}}>
+			<div className="App" >
 				<Header />
-				<div className="page-header">
-					<h1>{getNiceName(this.props.routes)}{' '}
-						<small>page</small>
-					</h1>
-				</div>
+				
 				<div className="container App-content">
 					{this.props.children}
 				</div>
-				<Footer />
+				{/*<Footer />*/}
 			</div>
 		);
 	}

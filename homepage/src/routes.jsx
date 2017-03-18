@@ -6,7 +6,7 @@ import App from './containers/App';
 import App from './containers/Home';
 
 export default()=> {
-	return <Route path="/" component= {App}>
+	return <Route path="/" component={App}>
 
 	<IndexRoute component={Home} />
 	</Route>;

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
+import './Home.css';
 
 class Home extends Component {
-
 
 	constructor(){
 		super();
@@ -18,21 +18,27 @@ class Home extends Component {
 
 
 	render() {
-		return <div>
-			<h1>Perfect Roomie</h1>
+		return <div className="roomieDiv">
+			<h1>Perfect Roomie</h1> 
+			<h4> Looking for a compatible roommate through mutual friends ? Look no further </h4>
+			<h4> Find your ideal roommate now !</h4>
 			<div className="page-header">
 				
 			</div>
 
-			{this.state.text}
+			{/*{this.state.text}*/}
+
+			<div className="formDiv">
 
 			<input ref="textBox" type="text" />
 
-			<button onClick={ (e) => {this.clicked();}}> Enter Your location </button>
+			<p></p>
+
+			</div>
 
 			<p>
 		
-				<button type="button" className="btn btn-lg btn-primary">Primary</button>
+				<button type="button" className="btn btn-lg btn-primary" onClick={ (e) => {this.clicked();}}> Enter Your location</button>
 			</p>
 
 			</div>;

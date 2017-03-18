@@ -7,7 +7,7 @@ class Home extends Component {
     return (
       <div className="container">
         <div className="columns">
-          <div className="col-md-9 centered">
+          <div className="col-md-9">
             <FormContainer />
           </div>
         </div>
