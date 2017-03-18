@@ -3,7 +3,6 @@ var express = require("express");
 var bodyParser = require("body-parser");
 var logger = require("morgan");
 var mongoose = require("mongoose");
-var Promise = require("bluebird");
 var FB = require('fb');
 var PORT = process.env.PORT || 3000;
 
@@ -14,11 +13,9 @@ var app = express();
 
 var router = express.Router();
 require("./controllers/userRoutes")(router);
-app.use(router);
+app.use(bodyParser.json());
 
-
-//require("./app/userRoutes")(router);
-
+app.use(bodyParser.urlencoded( {extended: false }));
 // If deployed, use the deployed database. Otherwise use the local mongoHeadlines database
 var db = process.env.MONGODB_URI || "mongodb://localhost/roomie_db";
 
@@ -44,7 +41,6 @@ app.use(bodyParser.urlencoded( {extended: false }));
 app.use(express.static("public"));
 app.use(router);
 
-// app.use(userRoutes);
 // Listen on port 3000
 app.listen(PORT, function() {
   console.log("App listening on PORT " + PORT);
