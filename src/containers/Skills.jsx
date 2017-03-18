@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import FormContainer from './FormContainer';
+import FormContainer from './FormContainer.jsx';
 
 
-class Home extends Component {  
+class Home extends Component {
   render() {
     return (
       <div className="container">
@@ -16,4 +16,4 @@ class Home extends Component {
   }
 }
 
-export default Home; 
+export default Home;
