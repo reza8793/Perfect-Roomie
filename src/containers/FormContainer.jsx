@@ -3,6 +3,8 @@ import CheckboxOrRadioGroup from '../components/CheckboxOrRadioGroup';
 import SingleInput from '../components/SingleInput';
 import Select from '../components/Select';
 import './Survey.css';
+import helper from '../components/utils/helper.js'
+
 
 class FormContainer extends Component {
   constructor(props) {
@@ -172,8 +174,16 @@ class FormContainer extends Component {
 
     };
 
+    var surveyArray = [this.state.answerSelection1,this.state.answerSelection2,
+                          this.state.answerSelection3,this.state.answerSelection4,
+                          this.state.answerSelection5,this.state.answerSelection6,
+                          this.state.answerSelection7,this.state.answerSelection8,
+                          this.state.answerSelection9,this.state.answerSelection10];
     console.log('Send this in a POST request:', formPayload);
-    this.handleClearForm(e);
+    helper.postSurvey(surveyArray).then(function() {
+      console.log('submitted to DB');
+      this.handleClearForm(e);
+    });
 
           //   $.ajax({
           //   type: 'POST',
