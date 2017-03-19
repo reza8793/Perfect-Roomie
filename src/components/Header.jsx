@@ -20,6 +20,7 @@ export default function() {
 						
 						<li><Link to="/survey">Survey</Link></li>
 						<li><Link to="/">Contact Us</Link></li>
+
 					</ul>
 				</div>
 			</div>
