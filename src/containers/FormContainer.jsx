@@ -57,7 +57,7 @@ class FormContainer extends Component {
     this.handleAnswersSelection8 = this.handleAnswersSelection8.bind(this);
     this.handleAnswersSelection9 = this.handleAnswersSelection9.bind(this);
     this.handleAnswersSelection10 = this.handleAnswersSelection10.bind(this);
-    
+
   }
   componentDidMount() {
     fetch('./fake_db.json')
@@ -98,7 +98,7 @@ class FormContainer extends Component {
           answerOptions10: data.answerOptions10,
           answerSelection10: data.answerSelection10
 
-          
+
 
         });
       });
@@ -109,7 +109,7 @@ class FormContainer extends Component {
   handleAgeRangeSelect(e) {
     this.setState({ AgeRangeSelection: e.target.value }, () => console.log('age range', this.state.AgeRangeSelection));
   }
-  
+
   handleAnswersSelection1(e) {
     this.setState({ answerSelection1: [e.target.value] }, () => console.log('q1', this.state.answerSelection1));
   }
@@ -169,7 +169,7 @@ class FormContainer extends Component {
                           this.state.answerSelection5,this.state.answerSelection6,
                           this.state.answerSelection7,this.state.answerSelection8,
                           this.state.answerSelection9,this.state.answerSelection10]
-      
+
     };
 
     console.log('Send this in a POST request:', formPayload);
@@ -197,24 +197,9 @@ class FormContainer extends Component {
 
 
       <form className="container" onSubmit={this.handleFormSubmit}>
-        
-        <SingleInput
-          inputType={'text'}
-          title={'Full Name'}
-          name={'name'}
-          controlFunc={this.handleFullNameChange}
-          content={this.state.Name}
-          placeholder={'Type first and last name here'} />
-        <Select
-          title={'Full name'}
-          name={'ageRange'}
-          placeholder={'Choose your age range'}
-          controlFunc={this.handleAgeRangeSelect}
-          options={this.state.Age}
-          selectedOption={this.state.AgeRangeSelection} />
-       
+
         <CheckboxOrRadioGroup
-          title={'1. You consider yourself a morning person and you like to go to sleep earlyy'}
+          title={"1. I'm a morning person and you like to go to sleep early"}
           // setName={'siblings'}
           controlFunc={this.handleAnswersSelection1}
           type={'radio'}
@@ -222,7 +207,7 @@ class FormContainer extends Component {
           selectedOptions={this.state.answerSelection1} />
 
         <CheckboxOrRadioGroup
-          title={'2. You consider yourself clean and organized'}
+          title={"2. I'm a pretty clean person"}
           // setName={'siblings'}
           controlFunc={this.handleAnswersSelection2}
           type={'radio'}
@@ -230,7 +215,7 @@ class FormContainer extends Component {
           selectedOptions={this.state.answerSelection2} />
 
           <CheckboxOrRadioGroup
-          title={'3. Generally speaking, you like coming home to a house with people.'}
+          title={'3. I like coming home to a house with people.'}
           // setName={'siblings'}
           controlFunc={this.handleAnswersSelection3}
           type={'radio'}
@@ -238,7 +223,7 @@ class FormContainer extends Component {
           selectedOptions={this.state.answerSelection3} />
 
           <CheckboxOrRadioGroup
-          title={'4. You consider yourself persnickety.'}
+          title={"4. I'm kind of picky about the way things should be"}
           // setName={'siblings'}
           controlFunc={this.handleAnswersSelection4}
           type={'radio'}
@@ -246,7 +231,7 @@ class FormContainer extends Component {
           selectedOptions={this.state.answerSelection4} />
 
           <CheckboxOrRadioGroup
-          title={'5. You consider yourself night-owl/vampire/bat(wo)man.'}
+          title={"5. I'm a night-owl/vampire/bat(wo)man."}
           // setName={'siblings'}
           controlFunc={this.handleAnswersSelection5}
           type={'radio'}
@@ -254,7 +239,7 @@ class FormContainer extends Component {
           selectedOptions={this.state.answerSelection5} />
 
           <CheckboxOrRadioGroup
-          title={'6. You love playing music out loud'}
+          title={'6. I love playing music out loud'}
           // setName={'siblings'}
           controlFunc={this.handleAnswersSelection6}
           type={'radio'}
@@ -262,7 +247,7 @@ class FormContainer extends Component {
           selectedOptions={this.state.answerSelection6} />
 
           <CheckboxOrRadioGroup
-          title={"7.  You're a believer of 'Live fast, die young'"}
+          title={"7.  I'm a believer of 'Live fast, die young'"}
           // setName={'siblings'}
           controlFunc={this.handleAnswersSelection7}
           type={'radio'}
@@ -270,7 +255,7 @@ class FormContainer extends Component {
           selectedOptions={this.state.answerSelection7} />
 
           <CheckboxOrRadioGroup
-          title={'8. You like pets'}
+          title={'8. I like pets'}
           // setName={'siblings'}
           controlFunc={this.handleAnswersSelection8}
           type={'radio'}
@@ -278,7 +263,7 @@ class FormContainer extends Component {
           selectedOptions={this.state.answerSelection8} />
 
           <CheckboxOrRadioGroup
-          title={'9.  You need personal space to be happy'}
+          title={'9.  I need personal space to be happy'}
           // setName={'siblings'}
           controlFunc={this.handleAnswersSelection9}
           type={'radio'}
@@ -286,16 +271,16 @@ class FormContainer extends Component {
           selectedOptions={this.state.answerSelection9} />
 
           <CheckboxOrRadioGroup
-          title={'10. You consider yourself a pretty social individual'}
+          title={"10. I'm a pretty social individual"}
           // setName={'siblings'}
           controlFunc={this.handleAnswersSelection10}
           type={'radio'}
           options={this.state.answerOptions9}
           selectedOptions={this.state.answerSelection10} />
 
-        
-        
-        
+
+
+
         <input
           type="submit"
           className="btn btn-primary float-right"

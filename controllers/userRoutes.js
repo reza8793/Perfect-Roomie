@@ -8,7 +8,7 @@ module.exports = function(router) {
   var FB = require('fb');
   var fb = new FB.Facebook({version: 'v2.8'});
 
-
+homepage: function()
 router.get("/", function(req, res) {
   res.send(index.html)
 });
@@ -81,7 +81,7 @@ router.get("/", function(req, res) {
 
     for (var i = 0; i < 10; i ++) {
       seedArray.push( Math.floor( Math.random() * 5 ) + 1 );
-    } 
+    }
 
     User.findOneAndUpdate(
       { FBid: fblocal.userID },
