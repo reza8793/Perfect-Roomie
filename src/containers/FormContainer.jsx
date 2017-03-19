@@ -175,17 +175,17 @@ class FormContainer extends Component {
     console.log('Send this in a POST request:', formPayload);
     this.handleClearForm(e);
 
-          //   $.ajax({
-          //   type: 'POST',
-          //   url: '/responses',
-          //   data: formPayload
-          // })
-          // .done(function(data) {
-          //   console.log("post successful");
-          // })
-          // .fail(function(jqXhr) {
-          //   console.log('failed to register');
-          // });
+            $.ajax({
+            type: 'POST',
+            url: '/responses',
+            data: formPayload
+          })
+          .done(function(data) {
+            console.log("post successful");
+          })
+          .fail(function(jqXhr) {
+            console.log('failed to register');
+          });
 
 
 
