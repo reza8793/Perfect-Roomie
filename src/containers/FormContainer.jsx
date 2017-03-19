@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import CheckboxOrRadioGroup from '../components/CheckboxOrRadioGroup';
 import SingleInput from '../components/SingleInput';
 import Select from '../components/Select';
-import './Skills.css';
+import './Survey.css';
 
 class FormContainer extends Component {
   constructor(props) {
