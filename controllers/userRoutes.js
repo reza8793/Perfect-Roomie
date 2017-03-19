@@ -100,6 +100,29 @@ router.get("/", function(req, res) {
   });
 
 
+  router.post("/db/userSurvey", function(req, res){
+
+    var seedArray = req.body.surveyResult;
+
+
+    User.findOneAndUpdate(
+      { FBid: fblocal.userID },
+      { livingStyle: seedArray }
+    ).exec(function(error, doc) {
+      // Send any errors to the browser
+      if (error) {
+        res.send(error);
+      }
+      // Or send the doc to the browser
+      else {
+        res.send(doc);
+      }
+    });
+
+  });
+
+
+
   router.put('db/user/destination', function(req, res) {
 
     var regionDestination = req.body.zipValue;
