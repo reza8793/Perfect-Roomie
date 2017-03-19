@@ -12,7 +12,7 @@ class Home extends Component {
 
 	clicked() {
 		this.setState ({ text:this.refs.textBox.value});
-		window.location.assign("/skills");
+		window.location = '/#/survey';
 	}
 
 
@@ -26,7 +26,7 @@ class Home extends Component {
 
 			</div>
 
-			{/*{this.state.text}*/}
+			{this.state.text}
 
 			<div className="formDiv">
 

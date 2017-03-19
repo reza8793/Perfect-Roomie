@@ -75,6 +75,31 @@ router.get("/", function(req, res) {
 
   });
 
+  router.post("/db/userSurveyRandom", function(req, res){
+
+    var seedArray = new Array();
+
+    for (var i = 0; i < 10; i ++) {
+      seedArray.push( Math.floor( Math.random() * 5 ) + 1 );
+    } 
+
+    User.findOneAndUpdate(
+      { FBid: fblocal.userID },
+      { livingStyle: seedArray }
+    ).exec(function(error, doc) {
+      // Send any errors to the browser
+      if (error) {
+        res.send(error);
+      }
+      // Or send the doc to the browser
+      else {
+        res.send(doc);
+      }
+    });
+
+  });
+
+
   router.put('db/user/destination', function(req, res) {
 
     var regionDestination = req.body.zipValue;
