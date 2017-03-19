@@ -4,6 +4,7 @@ import './index.css';
 import { Router, hashHistory,browserHistory } from 'react-router';
 import makeRoutes from './routes.jsx';
 
+
 const appEntry = <Router history={hashHistory}>{makeRoutes()}</Router>;
 ReactDOM.render(
 	appEntry,

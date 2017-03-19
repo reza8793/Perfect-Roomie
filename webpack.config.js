@@ -1,4 +1,9 @@
+var ExtractTextPlugin = require('extract-text-webpack-plugin');
+var combineLoaders = require('webpack-combine-loaders');
+
 module.exports = {
+
+   devtool: 'eval',
 
   // This is the entry point or start of our react applicaton
   entry: "./src/index.js",
@@ -23,13 +28,25 @@ module.exports = {
           presets: ["react", "es2015"]
         }
       },
+
       {
-        test: /\.css$/,
-        loader: 'css-loader'
+   test: /\.css$/,
+      loader: combineLoaders([
+        {
+          loader: 'style-loader'
+        }, {
+          loader: 'css-loader',
+          query: {
+            modules: true,
+            localIdentName: '[name]__[local]___[hash:base64:5]'
       }
-    ]
-  },
+    }
+  ])
+      }
+]
+
+  }
   // This lets us debug our react code in chrome dev tools. Errors will have lines and file names
   // Without this the console says all errors are coming from just coming from bundle.js
-  devtool: "eval-source-map"
+  
 };

@@ -27,7 +27,9 @@
   "devDependencies": {
     "concurrently": "^3.4.0",
     "css-loader": "^0.27.3",
-    "react-scripts": "0.9.0"
+    "extract-text-webpack-plugin": "^2.1.0",
+    "react-scripts": "0.9.0",
+    "style-loader": "^0.14.1"
   },
   "dependencies": {
     "babel-core": "^6.24.0",
@@ -37,7 +39,9 @@
     "babel-preset-react": "^6.23.0",
     "bluebird": "^3.5.0",
     "body-parser": "^1.17.0",
+    "css-loader": "^0.27.3",
     "express": "^4.15.0",
+    "extract-text-webpack-plugin": "^2.1.0",
     "fb": "^1.1.1",
     "logger": "0.0.1",
     "moment": "^2.17.1",
@@ -46,6 +50,8 @@
     "react": "^15.4.2",
     "react-dom": "^15.4.2",
     "react-router": "^3.0.2",
-    "webpack": "^2.2.1"
+    "style-loader": "^0.14.1",
+    "webpack": "^2.2.1",
+    "webpack-combine-loaders": "^2.0.3"
   }
 }
