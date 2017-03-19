@@ -12,7 +12,7 @@ class Home extends Component {
 
 	clicked() {
 		this.setState ({ text:this.refs.textBox.value});
-		window.location = '/skills';
+		window.location.assign("/skills");
 	}
 
 
