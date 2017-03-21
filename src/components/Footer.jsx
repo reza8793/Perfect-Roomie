@@ -1,5 +1,4 @@
 import React from 'react';
-import linkRun from './link-run.gif';
 import { Link } from 'react-router';
 import './Footer.css';
 

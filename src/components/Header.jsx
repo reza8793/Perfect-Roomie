@@ -1,7 +1,7 @@
 import React from 'react';
-import logo from './logo.svg';
 import './Header.css';
 import { Link } from 'react-router';
+
 
 export default function() {
 	return <nav className="navbar navbar-default">
@@ -10,7 +10,7 @@ export default function() {
 				<div className="navbar-header">
 					<div className="col-xs-12">
 						<Link className="navbar-brand" to="/" id="logo">Perfect Roomie</Link>
-						<img src={logo} className="Header-logo" alt="logo"/>
+						
 					</div>
 				</div>
 
@@ -18,13 +18,26 @@ export default function() {
 					<ul className="nav navbar-nav navbar-right navbar-right-custom">
 						<li><Link to="/">Home</Link></li>
 						
-						<li><Link to="/portfolio">Portfolio</Link></li>
-						
-						<li><Link to="/about">About</Link></li>
-						<li><Link to="/skills">Skills</Link></li>
+						<li><Link to="/survey">Survey</Link></li>
 						<li><Link to="/">Contact Us</Link></li>
+
 					</ul>
 				</div>
+
+				<form action="fb/friends/" method="get">
+  					<button type="submit">friends</button>
+				</form>
+				
+				<form action="db/userInsert/" method="post">
+						<button type="submit">Post to db</button>
+				</form>
+
+				<form action="db/userSurveyRandom" method="post">
+						<button type="submit">Seed Random Scores</button>
+				</form>
+
+
+
 			</div>
 		</div>
 	</nav>;
