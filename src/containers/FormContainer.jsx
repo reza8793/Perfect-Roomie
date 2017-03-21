@@ -59,7 +59,7 @@ class FormContainer extends Component {
     this.handleAnswersSelection8 = this.handleAnswersSelection8.bind(this);
     this.handleAnswersSelection9 = this.handleAnswersSelection9.bind(this);
     this.handleAnswersSelection10 = this.handleAnswersSelection10.bind(this);
-    
+
   }
   componentDidMount() {
     fetch('./fake_db.json')
@@ -100,7 +100,7 @@ class FormContainer extends Component {
           answerOptions10: data.answerOptions10,
           answerSelection10: data.answerSelection10
 
-          
+
 
         });
       });
@@ -111,7 +111,7 @@ class FormContainer extends Component {
   handleAgeRangeSelect(e) {
     this.setState({ AgeRangeSelection: e.target.value }, () => console.log('age range', this.state.AgeRangeSelection));
   }
-  
+
   handleAnswersSelection1(e) {
     this.setState({ answerSelection1: [e.target.value] }, () => console.log('q1', this.state.answerSelection1));
   }
@@ -171,7 +171,7 @@ class FormContainer extends Component {
                           this.state.answerSelection5,this.state.answerSelection6,
                           this.state.answerSelection7,this.state.answerSelection8,
                           this.state.answerSelection9,this.state.answerSelection10]
-      
+
     };
 
     var surveyArray = [this.state.answerSelection1,this.state.answerSelection2,
@@ -183,6 +183,7 @@ class FormContainer extends Component {
     helper.postSurvey(surveyArray).then(function() {
       console.log('submitted to DB');
       this.handleClearForm(e);
+
     });
 
           //   $.ajax({
@@ -207,7 +208,7 @@ class FormContainer extends Component {
 
 
       <form className="container" onSubmit={this.handleFormSubmit}>
-        
+
         <SingleInput
           inputType={'text'}
           title={'Full Name'}
@@ -222,7 +223,7 @@ class FormContainer extends Component {
           controlFunc={this.handleAgeRangeSelect}
           options={this.state.Age}
           selectedOption={this.state.AgeRangeSelection} />
-       
+
         <CheckboxOrRadioGroup
           title={'1. You consider yourself a morning person and you like to go to sleep earlyy'}
           // setName={'siblings'}
@@ -303,9 +304,9 @@ class FormContainer extends Component {
           options={this.state.answerOptions9}
           selectedOptions={this.state.answerSelection10} />
 
-        
-        
-        
+
+
+
         <input
           type="submit"
           className="btn btn-primary float-right"

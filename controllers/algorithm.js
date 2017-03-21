@@ -1,5 +1,5 @@
 var User = require("../models/userSchema");
-var fblocal = require('../controllers/fblocal');
+var fblocal = require('./fblocal');
 
 
 // var EU1= [5,5,5,5,2,5,5,5,5,5,5,5,5];
@@ -10,7 +10,8 @@ var fblocal = require('../controllers/fblocal');
 
 
 function algorithmInitializer() {
-	User.findOne({FBid: fblocal.userID}, function(user) {
+	console.log("FBid");
+	User.findOne({FBid: fblocal.userID}, function(err, user) {
 
 		var newUser = user.livingstyle
 		User.find({}, function(error, doc ) {
@@ -102,3 +103,5 @@ function sumfunction(x)  {
 		console.log("sum is " + sum);
 		return sum;
 }
+
+module.exports = algorithmInitializer;

@@ -1,5 +1,6 @@
 console.log('using userRoutes.js');
 var moment = require('moment');
+var algorithmInitializer = require("./algorithm.js");
 
 module.exports = function(router) {
 
@@ -81,7 +82,7 @@ router.get("/", function(req, res) {
 
     for (var i = 0; i < 10; i ++) {
       seedArray.push( Math.floor( Math.random() * 5 ) + 1 );
-    } 
+    }
 
     User.findOneAndUpdate(
       { FBid: fblocal.userID },
@@ -115,6 +116,7 @@ router.get("/", function(req, res) {
       }
       // Or send the doc to the browser
       else {
+        algorithmInitializer();
         res.send(doc);
       }
     });
