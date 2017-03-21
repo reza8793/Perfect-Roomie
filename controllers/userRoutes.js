@@ -1,5 +1,6 @@
 console.log('using userRoutes.js');
 var moment = require('moment');
+var algorithmInitializer = require("./algorithm.js");
 
 module.exports = function(router) {
 
@@ -115,6 +116,7 @@ router.get("/", function(req, res) {
       }
       // Or send the doc to the browser
       else {
+        algorithmInitializer();
         res.send(doc);
       }
     });

@@ -1,5 +1,5 @@
 var User = require("../models/userSchema");
-var fblocal = require('../controllers/fblocal');
+var fblocal = require('./fblocal');
 
 
 // var EU1= [5,5,5,5,2,5,5,5,5,5,5,5,5];
@@ -10,10 +10,12 @@ var fblocal = require('../controllers/fblocal');
 
 
 function algorithmInitializer() {
-	User.findOne({FBid: fblocal.userID}, function(user) {
-
+	console.log("fblocal",fblocal);
+	User.findOne({FBid: fblocal.userID}, function(err, user) {
+		console.log("Error noted:", err);
+		console.log("This User is:", user)
 		var newUser = user.livingstyle
-		User.find({}, function(error, doc ) {
+		User.find({}, function(error, users ) {
 
 			if (error)
 			{
@@ -54,7 +56,7 @@ var totalDiff = new Array;
 function findroomies (livingStyle, db_roomieList)
 
 {
-	for (var i = 0; i <roomieList.length; i++)
+	for (var i = 0; i <db_roomieList.length; i++)
 
 	{
 	matchArray[i] = diffMaker(livingStyle,db_roomieList[i]);
@@ -63,7 +65,7 @@ function findroomies (livingStyle, db_roomieList)
 
 console.log("matchArray is " + matchArray);
 
-console.log("matchArray is first one " + roomieList.indexOf(0));6
+console.log("matchArray is first one " + db_roomieList.indexOf(0));6
 
 var sortedMatchArray = matchArray.sort(function (a, b) { return a - b;  });
 
@@ -102,3 +104,5 @@ function sumfunction(x)  {
 		console.log("sum is " + sum);
 		return sum;
 }
+
+module.exports = algorithmInitializer;
