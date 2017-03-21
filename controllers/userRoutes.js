@@ -9,7 +9,6 @@ module.exports = function(router) {
   var FB = require('fb');
   var fb = new FB.Facebook({version: 'v2.8'});
 
-homepage: function()
 router.get("/", function(req, res) {
   res.send(index.html)
 });

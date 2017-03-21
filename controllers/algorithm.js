@@ -15,7 +15,7 @@ function algorithmInitializer() {
 		console.log("Error noted:", err);
 		console.log("This User is:", user)
 		var newUser = user.livingstyle
-		User.find({}, function(error, users ) {
+		User.find({}, function(error, cohort ) {
 
 			if (error)
 			{
@@ -23,12 +23,14 @@ function algorithmInitializer() {
 			}
 			else {
 				var db_roomieList = new Array;
-				for (var i = 0; i <users.length; i++)
+				console.log(cohort.length)
+				for (var i = 0; i <cohort.length; i++)
 					{
-						db_roomieList[i] = users[i].livingStyle;
+						db_roomieList[i] = cohort[i].livingStyle;
 					}
 
 				}
+				console.log("newUser now is: ", newUser);
 				findroomies(newUser, db_roomieList);
 			});
 	});
