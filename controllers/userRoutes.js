@@ -1,6 +1,4 @@
 console.log('using userRoutes.js');
-var moment = require('moment');
-var algorithmInitializer = require("./algorithm.js");
 
 module.exports = function(router) {
 
@@ -8,11 +6,12 @@ module.exports = function(router) {
   var fblocal = require('../controllers/fblocal');
   var FB = require('fb');
   var fb = new FB.Facebook({version: 'v2.8'});
+  var moment = require('moment');
+  var algorithmInitializer = require("./algorithm.js");
 
-
-router.get("/", function(req, res) {
-  res.send(index.html)
-});
+  router.get("/", function(req, res) {
+    res.send(index.html)
+  });
 
   //test function. Don't call this unless you need to see derp
   router.get("/derp", function(req, res) {
@@ -122,7 +121,6 @@ router.get("/", function(req, res) {
     });
 
   });
-
 
 
   router.put('db/user/destination', function(req, res) {
