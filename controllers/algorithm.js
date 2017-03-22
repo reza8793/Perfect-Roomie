@@ -10,16 +10,17 @@ var fblocal = require('./fblocal');
 
 
 function algorithmInitializer() {
-	console.log("fblocal",fblocal);
+	// console.log("fblocal",fblocal);
 	User.findOne({FBid: fblocal.userID}, function(err, user) {
-		console.log("Error noted:", err);
-		console.log("This User is:", user)
-		var newUser = user.livingstyle
+		console.log("Null OK, Otherwise Error noted:", err);
+		console.log("This User is:", user.FBName);
+		newUser = user.livingStyle;
+		console.log("The newUser is: " + newUser);
 		User.find({}, function(error, users ) {
 
 			if (error)
 			{
-				console.log(error);
+				console.log("algorithmInitializer is having the issue: " +error);
 			}
 			else {
 				var db_roomieList = new Array;
@@ -64,8 +65,6 @@ function findroomies (livingStyle, db_roomieList)
 	}
 
 console.log("matchArray is " + matchArray);
-
-console.log("matchArray is first one " + db_roomieList.indexOf(0));6
 
 var sortedMatchArray = matchArray.sort(function (a, b) { return a - b;  });
 
