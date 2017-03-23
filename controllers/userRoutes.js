@@ -1,5 +1,4 @@
 console.log('using userRoutes.js');
-var moment = require('moment');
 
 module.exports = function(router) {
 
@@ -7,11 +6,12 @@ module.exports = function(router) {
   var fblocal = require('../controllers/fblocal');
   var FB = require('fb');
   var fb = new FB.Facebook({version: 'v2.8'});
+  var moment = require('moment');
+  var algorithmInitializer = require("./algorithm.js");
 
-
-router.get("/", function(req, res) {
-  res.send(index.html)
-});
+  router.get("/", function(req, res) {
+    res.send(index.html)
+  });
 
   //test function. Don't call this unless you need to see derp
   router.get("/derp", function(req, res) {
@@ -81,7 +81,7 @@ router.get("/", function(req, res) {
 
     for (var i = 0; i < 10; i ++) {
       seedArray.push( Math.floor( Math.random() * 5 ) + 1 );
-    } 
+    }
 
     User.findOneAndUpdate(
       { FBid: fblocal.userID },
@@ -93,6 +93,52 @@ router.get("/", function(req, res) {
       }
       // Or send the doc to the browser
       else {
+        res.send(doc);
+      }
+    });
+
+  });
+
+
+  router.post("/db/userSurvey", function(req, res){
+
+    var seedArray = req.body.surveyResult;
+
+
+    User.findOneAndUpdate(
+      { FBid: fblocal.userID },
+      { livingStyle: seedArray }
+    ).exec(function(error, doc) {
+      // Send any errors to the browser
+      if (error) {
+        res.send(error);
+      }
+      // Or send the doc to the browser
+      else {
+        algorithmInitializer();
+        res.send(doc);
+      }
+    });
+
+  });
+
+
+  router.get("/db/roomieMatch", function(req, res){
+    var query = User.find({FBid: fblocal.userID }).select("roommateMatches");//.sort({"roommateMatches.diffScore" : "desc"});
+
+    query.exec(function(error, doc) {
+      // Send any errors to the browser
+      if (error) {
+        res.send(error);
+      }
+      // Or send the doc to the browser
+      else {
+        //having issue sorting an array of objects via mongoose. Extract to array, sort it there.
+        for (var i = 0; i < doc.length; i++) {
+          console.log('fbname:', doc.roommateMatches[i].FBname);
+          console.log('diffscore:', doc.roommateMatches[i].diffScore);
+        }
+
         res.send(doc);
       }
     });

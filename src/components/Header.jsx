@@ -24,8 +24,27 @@ export default function() {
 						
 						<li><Link to="/survey">Survey</Link></li>
 						<li><Link to="/">Contact Us</Link></li>
+
 					</ul>
 				</div>
+
+				<form action="fb/friends/" method="get">
+  					<button type="submit">friends</button>
+				</form>
+				
+				<form action="db/userInsert/" method="post">
+						<button type="submit">Post to db</button>
+				</form>
+
+				<form action="db/userSurveyRandom" method="post">
+						<button type="submit">Seed Random Scores</button>
+				</form>
+
+				<form action="db/roomieMatch" method="get">
+						<button type="submit">pull roomie match</button>
+				</form>
+
+
 			</div>
 		</div>
 	</nav>;
