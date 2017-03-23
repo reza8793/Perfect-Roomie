@@ -123,6 +123,29 @@ module.exports = function(router) {
   });
 
 
+  router.get("/db/roomieMatch", function(req, res){
+    var query = User.find({FBid: fblocal.userID }).select("roommateMatches");//.sort({"roommateMatches.diffScore" : "desc"});
+
+    query.exec(function(error, doc) {
+      // Send any errors to the browser
+      if (error) {
+        res.send(error);
+      }
+      // Or send the doc to the browser
+      else {
+        //having issue sorting an array of objects via mongoose. Extract to array, sort it there.
+        for (var i = 0; i < doc.length; i++) {
+          console.log('fbname:', doc.roommateMatches[i].FBname);
+          console.log('diffscore:', doc.roommateMatches[i].diffScore);
+        }
+
+        res.send(doc);
+      }
+    });
+
+  });
+
+
   router.put('db/user/destination', function(req, res) {
 
     var regionDestination = req.body.zipValue;
