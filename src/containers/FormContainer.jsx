@@ -62,9 +62,7 @@ class FormContainer extends Component {
 
   }
   componentDidMount() {
-    fetch('./fake_db.json')
-      .then(res => res.json())
-      .then(data => {
+      (data => {
         this.setState({
           Name: data.Name,
           Age: data.Age,
@@ -179,11 +177,15 @@ class FormContainer extends Component {
                           this.state.answerSelection5,this.state.answerSelection6,
                           this.state.answerSelection7,this.state.answerSelection8,
                           this.state.answerSelection9,this.state.answerSelection10];
+    console.log("1st this is: " , this);
     console.log('Send this in a POST request:', formPayload);
+    var that = this
     helper.postSurvey(surveyArray).then(function() {
+
       console.log('submitted to DB');
+      console.log("Other this is: " , that);
       // console.log(user.livingStyle);
-      this.handleClearForm(e);
+      that.handleClearForm(e);
     });
 
           //   $.ajax({

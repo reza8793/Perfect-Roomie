@@ -55,13 +55,13 @@
     window.fbAsyncInit = function() {
       FB.init({
         appId      : '256928438051566',
-        cookie     : true,  // enable cookies to allow the server to access 
+        cookie     : true,  // enable cookies to allow the server to access
                             // the session
         xfbml      : true,  // parse social plugins on this page
         version    : 'v2.8' // use graph api version 2.8
       });
 
-      // Now that we've initialized the JavaScript SDK, we call 
+      // Now that we've initialized the JavaScript SDK, we call
       // FB.getLoginStatus().  This function gets the state of the
       // person visiting this page and can return one of three states to
       // the callback you provide.  They can be:
@@ -128,6 +128,35 @@
       })
     }
 
+		function getTestUsers(passedUserID, passedToken) {
+      $.ajax({
+        method: "POST",
+        url: "https://graph.facebook.com/256928438051566/accounts/test-users?installed=true&name=FULL_NAME&permissions=read_stream&method=post&access_token=APP_ACCESS_TOKEN",
+        data: {
+        // Value taken from title input
+          userID: passedUserID,
+          token: passedToken
+        // Value taken from note textarea
+        }
+      })
+      // With that done
+      .done(function(data) {
+          // Log the response
+          console.log("stuff posted", data);
+          upsertUser();
+      });
+
+    }
+
+    function upsertUser() {
+      $.ajax({
+      method: "POST",
+      url: "/db/userInsert"
+    }).done(function(data) {
+        console.log("upserted user", data);
+      })
+    }
+
   </script>
 
 <body>
@@ -153,6 +182,9 @@
   To begin the development, run `npm start`.
   To create a production bundle, use `npm run build`.
 -->
+
+
+
 
 <script src="/assets/javascript/bundle.js"></script>
 </body>
