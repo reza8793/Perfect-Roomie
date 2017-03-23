@@ -7,6 +7,7 @@ var helper = {
   postSurvey: function(surveyResult) {
     return axios.post("/db/userSurvey", {surveyResult: surveyResult} );
   }
+
 /*
   // This function serves our purpose of running the query to geolocate.
   runQuery: function(location) {

@@ -180,9 +180,9 @@ class FormContainer extends Component {
     console.log("1st this is: " , this);
     console.log('Send this in a POST request:', formPayload);
     var that = this
-    helper.postSurvey(surveyArray).then(function() {
+    helper.postSurvey(surveyArray).then(function(res) {
 
-      console.log('submitted to DB');
+      
       console.log("Other this is: " , that);
       // console.log(user.livingStyle);
       that.handleClearForm(e);

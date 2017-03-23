@@ -40,7 +40,7 @@ var UserSchema = new Schema({
 //    set: 2
   },
   roommateMatches: {
-    any: Object
+    type: Array
   }
 
 });
