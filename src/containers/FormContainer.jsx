@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import CheckboxOrRadioGroup from '../components/CheckboxOrRadioGroup';
 import SingleInput from '../components/SingleInput';
 import Select from '../components/Select';
-import './Survey.css';
+import styles from "./Survey.css";
 
 class FormContainer extends Component {
   constructor(props) {
@@ -194,24 +194,28 @@ class FormContainer extends Component {
   render() {
     return (
 
+      <form className={`container ${styles.formContent}`}onSubmit={this.handleFormSubmit}>
 
 
-      <form className="container" onSubmit={this.handleFormSubmit}>
+       <h1 className= {styles.titleDiv}> Survey Page </h1> <br/>
         
-        <SingleInput
+     
+
+       {/* <SingleInput className= {styles.nameDiv} >
           inputType={'text'}
           title={'Full Name'}
           name={'name'}
           controlFunc={this.handleFullNameChange}
           content={this.state.Name}
-          placeholder={'Type first and last name here'} />
-        <Select
-          title={'Full name'}
-          name={'ageRange'}
-          placeholder={'Choose your age range'}
-          controlFunc={this.handleAgeRangeSelect}
-          options={this.state.Age}
-          selectedOption={this.state.AgeRangeSelection} />
+          placeholder={'Type first and last name here'} </SingleInput> 
+
+        // <Select //className= {styles.nameDiv}
+        //   title={'Full name'}
+        //   name={'ageRange'}
+        //   placeholder={'Choose your age range'}
+        //   controlFunc={this.handleAgeRangeSelect}
+        //   options={this.state.Age}
+        //   selectedOption={this.state.AgeRangeSelection} />  */}
        
         <CheckboxOrRadioGroup
           title={'1. You consider yourself a morning person and you like to go to sleep earlyy'}
@@ -298,10 +302,15 @@ class FormContainer extends Component {
         
         <input
           type="submit"
-          className="btn btn-primary float-right"
+          // className="btn btn-primary float-right"
+          className = {styles.submitButton}
           value="Submit"/>
+          <br/>
+          <br/>
+
         <button
           className="btn btn-link float-left"
+          className = {styles.clearButton}
           onClick={this.handleClearForm}>Clear form</button>
       </form>
     );

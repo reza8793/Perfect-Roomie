@@ -1,5 +1,7 @@
 import React, { PropTypes, Component } from 'react';
-import './App.css';
+
+import styles from "./App.css";
+//import style-loader from 'style-loader';
 // import laImage from './la_wallpaper.jpg';
 import Header from '../components/Header.jsx';
 import Footer from '../components/Footer.jsx';
@@ -13,10 +15,11 @@ function getNiceName(routes) {
 class App extends Component {
 	render() {
 		return (
-			<div className="App" >
+			<div  className={styles.app} >
+
 				<Header />
 				
-				<div className="container App-content">
+				<div className={`container ${styles.appContent}`}>
 					{this.props.children}
 				</div>
 				{/*<Footer />*/}

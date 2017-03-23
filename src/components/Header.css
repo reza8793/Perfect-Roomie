@@ -1,4 +1,4 @@
-.navbar-custom {
+.navbarCustom {
   background-color: rgb(105,93,71);
 }
 
@@ -7,10 +7,10 @@
   height: 60px;
 }
 
-@keyframes Header-logo-spin {
+/*@keyframes Header-logo-spin {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
-}
+}*/
 
 #logo {
   /* Positioning */
@@ -45,6 +45,6 @@
 
 }
 
-.navbar-default .navbar-nav > li > a:hover {
+.navbarDefault .navbar-nav > li > a:hover {
   color: orange;
 }

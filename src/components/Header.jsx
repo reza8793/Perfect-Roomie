@@ -1,11 +1,15 @@
 import React from 'react';
-import './Header.css';
+import styles from './Header.css';
 import { Link } from 'react-router';
 
 
+
 export default function() {
-	return <nav className="navbar navbar-default">
-		<div className="container-fluid navbar-custom">
+	return <nav className="navbarDefault">
+		{/*<div className="container-fluid navbar-custom"> */}
+		<div className={`container-fluid ${styles.navbarCustom}`}>
+
+
 			<div className="row">
 				<div className="navbar-header">
 					<div className="col-xs-12">

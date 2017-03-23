@@ -1,10 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router';
-import './Footer.css';
+import styles from './Footer.css';
+
+
 
 export default function() {
-	return <footer className="Footer">
-		<ul className="Footer-links">
+	return <footer className ={ style.Footer}>
+		<ul className={ style.footerLinks}>
 			<li>
 				<a href="/">home</a>
 			</li>

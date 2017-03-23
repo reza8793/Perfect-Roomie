@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
-import './Home.css';
+import styles from "./Home.css";
+import DuckImage from "./roomie.jpg";
+
 
 class Home extends Component {
 
@@ -16,9 +18,19 @@ class Home extends Component {
 	}
 
 
-
 	render() {
-		return <div className="roomieDiv">
+
+
+		// var imgStyle = {
+  //         backgroundImage: "url(" + { DuckImage } + ")"
+  //       			}
+
+  
+
+		return <div className= {styles.roomieDiv}>
+		
+
+				
 			<h1>Perfect Roomie</h1>
 			<h4> Looking for a compatible roommate through mutual friends ? Look no further </h4>
 			<h4> Find your ideal roommate now !</h4>
@@ -28,7 +40,7 @@ class Home extends Component {
 
 			{this.state.text}
 
-			<div className="formDiv">
+			<div className={styles.formDiv}>
 
 			<input ref="textBox" type="text" />
 

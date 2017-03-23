@@ -1,7 +1,9 @@
 import React from 'react';
+import styles from "../containers/Survey.css";
+
 
 const Select = (props) => (
-	<div className="form-group">
+	<div className={styles.selectDiv}>
 		<select
 			name={props.name}
 			value={props.selectedOption}
