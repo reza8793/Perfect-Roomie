@@ -40,11 +40,6 @@ function algorithmInitializer() {
 
 						db_roomieList.push(roomieListObj);
 
-						//console.log('fbid:', users[i].FBid);
-
-						//db_roomieList[i].FBid = users[i].FBid;
-						//db_roomieList[i].FBName = users[i].FBName;
-						//db_roomieList[i].livingStyle = users[i].livingStyle;
 					}
 
 				}
@@ -86,6 +81,20 @@ function findroomies (livingStyle, db_roomieList)
 		matchArray.push(matchArrayObj);
 
 	}
+
+	matchArray.sort(function(a, b) {
+      // {"roommateMatches.diffScore" : "desc"}
+      if (a.diffScore < b.diffScore) {
+        return -1;
+      }
+      if (a.diffScore > b.diffScore) {
+        return 1;
+      }
+
+      return 0;
+    });
+
+
 
 	console.log(matchArray);
 	console.log('userid', fblocal.userID)

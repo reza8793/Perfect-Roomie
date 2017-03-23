@@ -115,12 +115,18 @@ module.exports = function(router) {
       }
       // Or send the doc to the browser
       else {
-        algorithmInitializer();
+        //algorithmInitializer();
         res.send(doc);
       }
     });
 
   });
+
+  router.post("/db/roomieMatch", function(req, res){
+    algorithmInitializer();
+    res.send(200);
+  });
+
 
 
   router.get("/db/roomieMatch", function(req, res){

@@ -180,11 +180,12 @@ class FormContainer extends Component {
                           this.state.answerSelection7,this.state.answerSelection8,
                           this.state.answerSelection9,this.state.answerSelection10];
     console.log('Send this in a POST request:', formPayload);
+    var that = this;
     helper.postSurvey(surveyArray).then(function(res) {
       console.log('submitted to DB:', res);
       
       // console.log(user.livingStyle);
-      this.handleClearForm(e);
+      that.handleClearForm(e);
     });
 
           //   $.ajax({
