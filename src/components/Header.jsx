@@ -4,6 +4,7 @@ import { Link } from 'react-router';
 
 
 
+
 export default function() {
 	return <nav className="navbarDefault">
 		{/*<div className="container-fluid navbar-custom"> */}
@@ -12,15 +13,20 @@ export default function() {
 
 			<div className="row">
 				<div className="navbar-header">
+				
 					<div className="col-xs-12">
 						<Link className="navbar-brand" to="/" id="logo">Perfect Roomie</Link>
 						
 					</div>
 				</div>
 
-				<div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+				{/*<div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">*/}
+
+				<div className= {styles.baalDiv} id="bs-example-navbar-collapse-1">
 					<ul className="nav navbar-nav navbar-right navbar-right-custom">
-						<li><Link to="/">Home</Link></li>
+				
+
+						<li><Link to="/"> Home</Link></li>
 						
 						<li><Link to="/survey">Survey</Link></li>
 						<li><Link to="/">Contact Us</Link></li>
@@ -28,6 +34,7 @@ export default function() {
 					</ul>
 				</div>
 
+				{/*
 				<form action="fb/friends/" method="get">
   					<button type="submit">friends</button>
 				</form>
@@ -43,6 +50,8 @@ export default function() {
 				<form action="db/roomieMatch" method="get">
 						<button type="submit">pull roomie match</button>
 				</form>
+
+			*/}
 
 
 			</div>

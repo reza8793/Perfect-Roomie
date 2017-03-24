@@ -1,7 +1,7 @@
-/*.container {
+.mainContainer {
 
-	margin-left: 20px;
-}*/
+	background-color: red;
+}
 
 .formContent {
 
@@ -34,9 +34,20 @@
 
 
 
-.title {
+.titleDiv {
 
-	color : red;
+	color : white;
+	text-align: center;
+
+	background-color: teal;
+}
+
+.agreeDiv {
+
+	color : white;
+	text-align: center;
+
+	background-color: teal;
 }
 
 

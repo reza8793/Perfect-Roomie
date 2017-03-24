@@ -1,7 +1,12 @@
 import React, { Component } from 'react';
+<<<<<<< HEAD
 import styles from "./Home.css";
 import DuckImage from "./roomie.jpg";
 
+=======
+import './Home.css';
+// import Matching from "../../controllers/algorithm.js"
+>>>>>>> 7772e5ae9d97c3194880dc8fd9d9d96d222a8959
 
 class Home extends Component {
 
@@ -38,7 +43,7 @@ class Home extends Component {
 
 			</div>
 
-			
+			{this.state.text}
 
 			<div className={styles.formDiv}>
 
@@ -52,8 +57,6 @@ class Home extends Component {
 
 				<button type="button" className="btn btn-lg btn-primary" onClick={ (e) => {this.clicked();}}> Enter Your location</button>
 			</p>
-
-		{/*<button type="button" className={styles.btnlocation} onClick={ (e) => {this.clicked();}}> Enter Your location</button>*/}
 
 			</div>;
 
