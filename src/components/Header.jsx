@@ -47,7 +47,11 @@ export default function() {
 						<button type="submit">Seed Random Scores</button>
 				</form>
 
-				<form action="db/roomieMatch" method="get">
+				<form action="db/updateRoomieMatch" method="post">
+						<button type="submit">score roomie matches</button>
+				</form>
+
+				<form action="db/getRoomieMatch" method="get">
 						<button type="submit">pull roomie match</button>
 				</form>
 

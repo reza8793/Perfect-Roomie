@@ -3,7 +3,9 @@ import CheckboxOrRadioGroup from '../components/CheckboxOrRadioGroup';
 import SingleInput from '../components/SingleInput';
 import Select from '../components/Select';
 import styles from "./Survey.css";
-import helper from '../components/utils/helper.js'
+import helper from '../components/utils/helper.js';
+import { hashHistory} from 'react-router';
+import { browserHistory } from 'react-router';
 
 
 class FormContainer extends Component {
@@ -180,25 +182,29 @@ class FormContainer extends Component {
                           this.state.answerSelection7,this.state.answerSelection8,
                           this.state.answerSelection9,this.state.answerSelection10];
     console.log('Send this in a POST request:', formPayload);
+<<<<<<< HEAD
+    helper.postSurvey(surveyArray).then((res) => {
+      console.log('submitted to DB:', res);
+      
+      // console.log(user.livingStyle);
+     // this.handleClearForm(e);
+
+  //   hashHistory.push('/matchPage')
+  // debugger;
+=======
+    var that = this;
     helper.postSurvey(surveyArray).then(function(res) {
       console.log('submitted to DB:', res);
       
       // console.log(user.livingStyle);
-      this.handleClearForm(e);
+      that.handleClearForm(e);
     });
+>>>>>>> 64e89364cb1f25c2f1e418c6ec66ca8f075a0ff9
 
-            $.ajax({
-            type: 'POST',
-            url: '/responses',
-            data: formPayload
-          })
-          .done(function(data) {
-            console.log("post successful");
-          })
-          .fail(function(jqXhr) {
-            console.log('failed to register');
-          });
+    hashHistory.push('/matchPage');
 
+
+    });
 
 
 
@@ -206,17 +212,20 @@ class FormContainer extends Component {
   render() {
     return (
 
+      <div className = {styles.containerMain}>
+
       <form className={`container ${styles.formContent}`}onSubmit={this.handleFormSubmit}>
 
 
-       <h1 className= {styles.titleDiv}> Survey Page </h1> <br/>
+       <div className= {styles.titleDiv}>
+       <h1 > Roomie Survey </h1> 
 
-     
+       <h3 className= {styles.agreeDiv}> 1 = Strongly Disagree, 5 = Strongly Agree </h3> <br/>
 
-       {/* <SingleInput className= {styles.nameDiv} >
-        //   selectedOption={this.state.AgeRangeSelection} />  */}
+      </div>
+
         <CheckboxOrRadioGroup
-          title={"1. I'm a morning person and you like to go to sleep early"}
+          title={"1. I'm a morning person and I like to go to sleep early"}
           // setName={'siblings'}
           controlFunc={this.handleAnswersSelection1}
           type={'radio'}
@@ -311,6 +320,8 @@ class FormContainer extends Component {
           className = {styles.clearButton}
           onClick={this.handleClearForm}>Clear form</button>
       </form>
+
+      </div>
     );
   }
 }

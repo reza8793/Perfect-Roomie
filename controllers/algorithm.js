@@ -19,8 +19,9 @@ function algorithmInitializer() {
 	User.findOne({FBid: fblocal.userID}, function(err, user) {
 		console.log("Null OK, Otherwise Error noted:", err);
 		console.log("This User is:", user.FBName);
-		newUser = user.livingStyle;
-		console.log("The newUser is: " + newUser);
+		currentUserLivingStyle = user.livingStyle;
+		currentUserFriendList = user.friendList;
+		console.log("The newUser is: " + currentUserLivingStyle);
 		User.find({ FBid: { $ne: fblocal.userID } }, function(error, users ) {
 
 			if (error)
@@ -35,20 +36,20 @@ function algorithmInitializer() {
 						var roomieListObj = {
 							FBid: users[i].FBid,
 							FBName: users[i].FBName,
-							livingStyle: users[i].livingStyle
+							FBEmail: users[i].FBEmail,
+							age: users[i].age,
+							livingStyle: users[i].livingStyle,
+							photolink: users[i].photolink
+							
 						}
 
 						db_roomieList.push(roomieListObj);
 
-						//console.log('fbid:', users[i].FBid);
-
-						//db_roomieList[i].FBid = users[i].FBid;
-						//db_roomieList[i].FBName = users[i].FBName;
-						//db_roomieList[i].livingStyle = users[i].livingStyle;
 					}
 
 				}
-				findroomies(newUser, db_roomieList);
+				findroomies(currentUserLivingStyle, db_roomieList);
+
 			});
 	});
 };
@@ -80,12 +81,29 @@ function findroomies (livingStyle, db_roomieList)
 		var matchArrayObj = {
 			userID: db_roomieList[i].FBid,
 			FBName: db_roomieList[i].FBName,
-			diffScore: diffMaker(livingStyle,db_roomieList[i].livingStyle)
+			FBEmail: db_roomieList[i].FBEmail,
+			age: db_roomieList[i].age,
+			diffScore: diffMaker(livingStyle,db_roomieList[i].livingStyle),
+			photolink: db_roomieList[i].photolink
 		}
 
 		matchArray.push(matchArrayObj);
 
 	}
+
+	matchArray.sort(function(a, b) {
+      // {"roommateMatches.diffScore" : "desc"}
+      if (a.diffScore < b.diffScore) {
+        return -1;
+      }
+      if (a.diffScore > b.diffScore) {
+        return 1;
+      }
+
+      return 0;
+    });
+
+
 
 	console.log(matchArray);
 	console.log('userid', fblocal.userID)
@@ -144,6 +162,11 @@ function sumfunction(x)  {
 		}
 		console.log("sum is " + sum);
 		return sum;
+}
+
+
+function getMutuals(array1, array2) {
+	//do nothing
 }
 
 module.exports = algorithmInitializer;

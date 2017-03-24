@@ -131,7 +131,13 @@ module.exports = function(router) {
 
   router.get("/db/getRoomieMatch", function(req, res){
 
+<<<<<<< HEAD
+  router.get("/db/roomieMatch", function(req, res){
+    console.log("i'm at router.get roomieMatch");
+    var query = User.find({FBid: fblocal.userID }).select("roommateMatches");//.sort({"roommateMatches.diffScore" : "desc"});
+=======
     var query = User.find({FBid: fblocal.userID }).select("roommateMatches");
+>>>>>>> 64e89364cb1f25c2f1e418c6ec66ca8f075a0ff9
 
     query.exec(function(error, doc) {
 
@@ -143,6 +149,9 @@ module.exports = function(router) {
       }
       // Or send the doc to the browser
       else {
+<<<<<<< HEAD
+      
+=======
        //console.log("doc", doc);
        //console.log("roommateMatches", doc[0]._id);
 
@@ -151,6 +160,8 @@ module.exports = function(router) {
           console.log('FBName:', doc[0].roommateMatches[i].FBName);
           console.log('diffScore:', doc[0].roommateMatches[i].diffScore);
           console.log('photolink:', doc[0].roommateMatches[i].photolink);
+        }
+>>>>>>> 64e89364cb1f25c2f1e418c6ec66ca8f075a0ff9
 
         res.send(doc);
         
@@ -161,6 +172,28 @@ module.exports = function(router) {
   });
 
 
+<<<<<<< HEAD
+  // router.get("/db/roomieMatch1", function(req, res){
+  //   console.log("i'm at router.get roomieMatch");
+  //   var query = User.find({FBid: fblocal.userID });
+
+  //   query.exec(function(error, doc) {
+
+  //       console.log("doc in roomieMatch1 is " , doc);
+  //     // Send any errors to the browser
+  //     if (error) {
+  //       res.send(error);
+  //     }
+  //     // Or send the doc to the browser
+  //     else {
+      
+
+  //       res.send(doc);
+  //     }
+  //   });
+
+  // });
+=======
   router.get("/db/friendsInCommon", function(req, res){
     //do nothing
     res.send(200);
@@ -203,27 +236,7 @@ module.exports = function(router) {
 
   });
 */
-
-  // router.get("/db/roomieMatch1", function(req, res){
-  //   console.log("i'm at router.get roomieMatch");
-  //   var query = User.find({FBid: fblocal.userID });
-
-  //   query.exec(function(error, doc) {
-
-  //       console.log("doc in roomieMatch1 is " , doc);
-  //     // Send any errors to the browser
-  //     if (error) {
-  //       res.send(error);
-  //     }
-  //     // Or send the doc to the browser
-  //     else {
-      
-
-  //       res.send(doc);
-  //     }
-  //   });
-
-  // });
+>>>>>>> 64e89364cb1f25c2f1e418c6ec66ca8f075a0ff9
 
 
   router.put('db/user/destination', function(req, res) {
