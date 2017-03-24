@@ -6,6 +6,9 @@ var helper = {
 
   postSurvey: function(surveyResult) {
     return axios.post("/db/userSurvey", {surveyResult: surveyResult} );
+  },
+  getRoomies: function(results) {
+    return axios.get("/db/roomieMatch", results)
   }
 
 /*

@@ -17,7 +17,6 @@ var totalDiff = new Array;
 function algorithmInitializer() {
 	// console.log("fblocal",fblocal);
 	User.findOne({FBid: fblocal.userID}, function(err, user) {
-		console.log("Null OK, Otherwise Error noted:", err);
 		console.log("This User is:", user.FBName);
 		newUser = user.livingStyle;
 		console.log("The newUser is: " + newUser);
@@ -65,20 +64,19 @@ function algorithmInitializer() {
 
 
 
-function findroomies (livingStyle, db_roomieList)
-{
+function findroomies (livingStyle, db_roomieList) {
 
 	var matchArray = new Array;
 
-	for (var i = 0; i <db_roomieList.length; i++)
-	{
+	for (var i = 0; i <db_roomieList.length; i++) {
 		var matchArrayObj = {
 			userID: db_roomieList[i].FBid,
 			FBName: db_roomieList[i].FBName,
 			diffScore: diffMaker(livingStyle,db_roomieList[i].livingStyle)
 		}
-
-		matchArray.push(matchArrayObj);
+		if (matcArrayObj.diffScore <= 15) {
+			matchArray.push(matchArrayObj);
+		}
 
 	}
 
@@ -113,22 +111,16 @@ function findroomies (livingStyle, db_roomieList)
       }
     });
 
-  
-
-
-/*
-	console.log("matchArray is " + matchArray);
-
-	var sortedMatchArray = matchArray.diffScore.sort(function (a, b) { return a - b;  });
-
-
-	for (var i = 0; i <db_roomieList.length; i++ )
-	{
-		var bestMatch = sortedMatchArray[i];
-		console.log("best Roommate match is " + bestMatch);
-
+function getMutuals(user, matches) {
+	var mutuals = [];
+	for (var i = 0; i < user.length; i++) {
+		for (var j = 0; matches.length; j++) {
+			if (user[i] === matches[j]) {
+				mutuals.push(user[i]);
+			}
+		}
 	}
-*/
+}
 
 }
 
