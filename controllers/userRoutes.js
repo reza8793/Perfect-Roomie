@@ -134,7 +134,6 @@ module.exports = function(router) {
     var query = User.find({FBid: fblocal.userID }).select("roommateMatches");
 
     query.exec(function(error, doc) {
-
         console.log("doc is " , doc);
       // Send any errors to the browser
       
@@ -143,9 +142,8 @@ module.exports = function(router) {
       }
       // Or send the doc to the browser
       else {
-       //console.log("doc", doc);
-       //console.log("roommateMatches", doc[0]._id);
-
+       console.log("doc", doc);
+       console.log("roommateMatches", doc[0]._id);
         for (var i = 0; i < doc[0].roommateMatches.length; i++) {
 
           console.log('FBName:', doc[0].roommateMatches[i].FBName);
@@ -154,12 +152,12 @@ module.exports = function(router) {
 
         res.send(doc);
         
-      }
+        }
       
+    }
+
     });
-
-  });
-
+ });
 
   router.get("/db/friendsInCommon", function(req, res){
     //do nothing

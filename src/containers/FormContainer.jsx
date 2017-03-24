@@ -183,22 +183,20 @@ class FormContainer extends Component {
                           this.state.answerSelection9,this.state.answerSelection10];
     console.log('Send this in a POST request:', formPayload);
     var that = this;
-      console.log('submitted to DB:', res);
+      //console.log('submitted to DB:', res);
       
       // console.log(user.livingStyle);
       that.handleClearForm(e);
 
-  //   hashHistory.push('/matchPage')
-  // debugger;
 
     hashHistory.push('/matchPage');
 
 
-    });
+    }
 
 
 
-  }
+  
   render() {
     return (
 

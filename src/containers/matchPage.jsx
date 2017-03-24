@@ -11,11 +11,13 @@ class Home extends Component {
 }
 
  componentDidMount() {
-    axios.get("/db/roomieMatch")
+    axios.get("/db/getRoomieMatch")
       .then((data) => {
         console.log("data from roomiematch is  " , data);
         console.log("data", data.data[0].roommateMatches);
-        console.log("data", data.data[0].roommateMatches[0].FBName);
+        console.log("data name is ", data.data[0].roommateMatches[0].FBName);
+        console.log("age is ", data.data[0].roommateMatches[0].age);
+        console.log("photo link ", data.data[0].roommateMatches[0].photolink);
         this.setState({users: data.data[0]._id})
         this.setState({userName: data.data[0].roommateMatches[0].FBName})
         this.setState({userScore: data.data[0].roommateMatches[0].diffScore})
