@@ -2,18 +2,6 @@ var User = require("../models/userSchema");
 var fblocal = require('./fblocal');
 
 
-// var EU1= [5,5,5,5,2,5,5,5,5,5,5,5,5];
-
-// var EU2 = [2,2,2,2,2,2,2,2,2,2,2,2,2];
-
-// var EU3 = [3,3,3,3,3,3,3,2,2,2,2,2,2];
-
-//declare globals here
-//var matchArray= new Array;
-var totalDiff = new Array;
-
-
-
 function algorithmInitializer() {
 	// console.log("fblocal",fblocal);
 	User.findOne({FBid: fblocal.userID}, function(err, user) {
@@ -144,6 +132,9 @@ function findroomies (livingStyle, db_roomieList)
 
 function diffMaker(x,y)
 {
+
+	var totalDiff = new Array;
+
 	for (var k =0; k<x.length; k++)
 	{
 		totalDiff[k] = Math.abs(x[k] - y[k]);
@@ -168,5 +159,22 @@ function sumfunction(x)  {
 function getMutuals(array1, array2) {
 	//do nothing
 }
+
+function getInfoByID(userID) {
+	var query = User.find({ FBid: userID }).select("FBid, FBName, FBEmail, age, diffScore, photolink");
+
+	query.exec(function(error, doc) {
+		if (error) {
+			console.log('error in getInfoByID:', error);
+			return null;
+		}
+
+		else {
+			return doc;
+		}
+	});
+
+}
+
 
 module.exports = algorithmInitializer;
