@@ -122,34 +122,86 @@ module.exports = function(router) {
 
   });
 
-  router.post("/db/roomieMatch", function(req, res){
+  router.post("/db/updateRoomieMatch", function(req, res){
     algorithmInitializer();
     res.send(200);
   });
 
 
 
-  router.get("/db/roomieMatch", function(req, res){
-    var query = User.find({FBid: fblocal.userID }).select("roommateMatches");//.sort({"roommateMatches.diffScore" : "desc"});
+  router.get("/db/getRoomieMatch", function(req, res){
+
+    var query = User.find({FBid: fblocal.userID }).select("roommateMatches");
 
     query.exec(function(error, doc) {
       // Send any errors to the browser
+      
       if (error) {
         res.send(error);
       }
       // Or send the doc to the browser
       else {
-        //having issue sorting an array of objects via mongoose. Extract to array, sort it there.
-        for (var i = 0; i < doc.length; i++) {
-          console.log('fbname:', doc.roommateMatches[i].FBname);
-          console.log('diffscore:', doc.roommateMatches[i].diffScore);
+       //console.log("doc", doc);
+       //console.log("roommateMatches", doc[0]._id);
+
+        for (var i = 0; i < doc[0].roommateMatches.length; i++) {
+
+          console.log('FBName:', doc[0].roommateMatches[i].FBName);
+          console.log('diffScore:', doc[0].roommateMatches[i].diffScore);
+          console.log('photolink:', doc[0].roommateMatches[i].photolink);
         }
 
         res.send(doc);
+        
       }
+      
     });
 
   });
+
+
+  router.get("/db/friendsInCommon", function(req, res){
+    //do nothing
+    res.send(200);
+  });
+/*
+    //get friends list of your targeted user
+    var query = User.find({FBid: req.body.userID }).select("friendsList.id");
+
+    query.exec(function(error1, doc1) {
+      if (error1) {
+        res.send(error1);
+      }
+      else {
+        var matchFriendArray = new Array;
+
+        for (var i = 0; i < doc1.length; i++) {
+          matchFriendArray.push(doc1.friendsList[i].id);
+        }
+
+        var userQuery = User.find({FBid: fblocal.userID}).select("friendsList.id");
+
+        query.exec(function(error2, doc2) {
+          if (error2) {
+            res.send(error2);
+          }
+
+          else {
+            var userFriendArray = new Array;
+
+            for (var i = 0; i < doc.length; i++) {
+              userFriendArray.push(doc2.friendsList[i].id);
+            }
+
+            getMutuals(userFriendArray, matchFriendArray);
+          }
+        });
+      });
+
+    })
+
+  });
+*/
 
 
   router.put('db/user/destination', function(req, res) {
