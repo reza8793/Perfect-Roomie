@@ -127,6 +127,12 @@ module.exports = function(router) {
     res.send(200);
   });
 
+  router.get("/db/getUserInfo", function(req, res){
+    //getInfoByID(fblocal.userID);
+    sayHi();
+    res.send(200);
+  });
+
 
 
   router.get("/db/getRoomieMatch", function(req, res){

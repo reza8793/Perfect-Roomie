@@ -10,9 +10,11 @@ var fblocal = require('./fblocal');
 
 //declare globals here
 //var matchArray= new Array;
-var totalDiff = new Array;
+//var totalDiff = new Array;
 
-
+function sayHi() {
+	console.log('hi')
+}
 
 function algorithmInitializer() {
 	// console.log("fblocal",fblocal);
@@ -144,6 +146,8 @@ function findroomies (livingStyle, db_roomieList)
 
 function diffMaker(x,y)
 {
+	var totalDiff = new Array;
+
 	for (var k =0; k<x.length; k++)
 	{
 		totalDiff[k] = Math.abs(x[k] - y[k]);
@@ -164,9 +168,25 @@ function sumfunction(x)  {
 		return sum;
 }
 
-
 function getMutuals(array1, array2) {
 	//do nothing
-}
+};
+
+function getInfoByID(inputUserID) {
+/*	var query = User.find({FBid: inputUserID }).select("FBid, FBName, FBEmail, photolink");
+
+	query.exec(function(error, doc) {
+      
+	    if (error) {
+	        console.log(error);
+	    }
+	      // Or send the doc to the browser
+	    else {
+	    	console.log(doc);   	
+	   	}
+	});
+*/
+console.log('getinfobyid', inputUserID)
+};
 
 module.exports = algorithmInitializer;

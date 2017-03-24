@@ -10,7 +10,7 @@ class Home extends Component {
     return (
       <div className={`container`}>
         <div className="columns">
-          <div className="col-md-9">
+          <div className="col-md-12">
             <div className= {styles.formDiv}>
               <FormContainer />
             </div>
