@@ -49,7 +49,16 @@ class FormContainer extends Component {
       answerSelection9: [],
 
       answerOptions10: ["1","2","3","4","5"],
-      answerSelection10: []
+      answerSelection10: [],
+
+      answerOptions11: ["1","2","3","4","5"],
+      answerSelection11: [],
+
+      answerOptions12: ["1","2","3","4","5"],
+      answerSelection12: [],
+
+      answerOptions13: ["1","2","3","4","5"],
+      answerSelection13: []
 
 
     };
@@ -67,6 +76,9 @@ class FormContainer extends Component {
     this.handleAnswersSelection8 = this.handleAnswersSelection8.bind(this);
     this.handleAnswersSelection9 = this.handleAnswersSelection9.bind(this);
     this.handleAnswersSelection10 = this.handleAnswersSelection10.bind(this);
+    this.handleAnswersSelection11 = this.handleAnswersSelection11.bind(this);
+    this.handleAnswersSelection12 = this.handleAnswersSelection12.bind(this);
+    this.handleAnswersSelection13 = this.handleAnswersSelection13.bind(this);
 
   }
   componentDidMount() {
@@ -104,7 +116,16 @@ class FormContainer extends Component {
           answerSelection9: data.answerSelection9,
 
           answerOptions10: data.answerOptions10,
-          answerSelection10: data.answerSelection10
+          answerSelection10: data.answerSelection10,
+
+          answerOptions11: data.answerOptions11,
+          answerSelection11: data.answerSelection11,
+
+          answerOptions12: data.answerOptions12,
+          answerSelection12: data.answerSelection12,
+
+          answerOptions13: data.answerOptions13,
+          answerSelection13: data.answerSelection13
 
 
 
@@ -158,6 +179,18 @@ class FormContainer extends Component {
     this.setState({ answerSelection10: [e.target.value] }, () => console.log('q10', this.state.answerSelection10));
   }
 
+  handleAnswersSelection11(e) {
+    this.setState({ answerSelection11: [e.target.value] }, () => console.log('q11', this.state.answerSelection11));
+  }
+
+  handleAnswersSelection12(e) {
+    this.setState({ answerSelection12: [e.target.value] }, () => console.log('q12', this.state.answerSelection12));
+  }
+
+  handleAnswersSelection13(e) {
+    this.setState({ answerSelection13: [e.target.value] }, () => console.log('q13', this.state.answerSelection13));
+  }
+
   handleClearForm(e) {
     e.preventDefault();
     this.setState({
@@ -176,7 +209,11 @@ class FormContainer extends Component {
                           this.state.answerSelection3,this.state.answerSelection4,
                           this.state.answerSelection5,this.state.answerSelection6,
                           this.state.answerSelection7,this.state.answerSelection8,
-                          this.state.answerSelection9,this.state.answerSelection10]
+                          this.state.answerSelection9,this.state.answerSelection10,
+                          this.state.answerSelection11,this.state.answerSelection12,
+                          this.state.answerSelection13]
+
+                                                        
 
     };
 
@@ -184,7 +221,14 @@ class FormContainer extends Component {
                           this.state.answerSelection3,this.state.answerSelection4,
                           this.state.answerSelection5,this.state.answerSelection6,
                           this.state.answerSelection7,this.state.answerSelection8,
-                          this.state.answerSelection9,this.state.answerSelection10];
+                          this.state.answerSelection9,this.state.answerSelection10,
+                          this.state.answerSelection11,this.state.answerSelection12,
+                          this.state.answerSelection13
+
+                          ];
+
+
+
     console.log("1st this is: " , this);
     console.log('Send this in a POST request:', formPayload);
     var that = this
@@ -296,8 +340,38 @@ class FormContainer extends Component {
           // setName={'siblings'}
           controlFunc={this.handleAnswersSelection10}
           type={'radio'}
-          options={this.state.answerOptions9}
+          options={this.state.answerOptions10}
           selectedOptions={this.state.answerSelection10} />
+
+          <CheckboxOrRadioGroup
+          title={"11. I spend a lot of time in the house"}
+          // setName={'siblings'}
+          controlFunc={this.handleAnswersSelection11}
+          type={'radio'}
+          options={this.state.answerOptions11}
+          selectedOptions={this.state.answerSelection11} />
+
+
+          <CheckboxOrRadioGroup
+          title={"12. I tend to eat home-cooked meals"}
+          // setName={'siblings'}
+          controlFunc={this.handleAnswersSelection12}
+          type={'radio'}
+          options={this.state.answerOptions12}
+          selectedOptions={this.state.answerSelection12} />
+
+
+          <CheckboxOrRadioGroup
+          title={"13. I like for roommates to share with each other freely"}
+          // setName={'siblings'}
+          controlFunc={this.handleAnswersSelection13}
+          type={'radio'}
+          options={this.state.answerOptions13}
+          selectedOptions={this.state.answerSelection13} />
+
+
+
+
 
 
           <div className = {styles.button1Divs} >
