@@ -1,25 +1,17 @@
 var User = require("../models/userSchema");
-var fblocal = require('./fblocal');
-
-
-// var EU1= [5,5,5,5,2,5,5,5,5,5,5,5,5];
-
-// var EU2 = [2,2,2,2,2,2,2,2,2,2,2,2,2];
-
-// var EU3 = [3,3,3,3,3,3,3,2,2,2,2,2,2];
-
-//declare globals here
-//var matchArray= new Array;
-var totalDiff = new Array;
-
+var fblocal = require("./fblocal");
+var userRoutes = require("./userRoutes"); //circular referencing. Probably not a good idea.
 
 
 function algorithmInitializer() {
 	// console.log("fblocal",fblocal);
 	User.findOne({FBid: fblocal.userID}, function(err, user) {
 		console.log("This User is:", user.FBName);
-		newUser = user.livingStyle;
-		console.log("The newUser is: " + newUser);
+		var currentUserLivingStyle = user.livingStyle;
+		var currentUserFriendListArray = arrayifyFriendList(user.friendList);
+
+		console.log("The newUser is: " + currentUserLivingStyle);
+		//console.log("currentUserFriendListArray: " + currentUserFriendListArray);
 		User.find({ FBid: { $ne: fblocal.userID } }, function(error, users ) {
 
 			if (error)
@@ -28,39 +20,33 @@ function algorithmInitializer() {
 			}
 			else {
 				var db_roomieList = new Array;
-				for (var i = 0; i < users.length; i++)
-					{
+				for (var i = 0; i < users.length; i++) {
 
-						var roomieListObj = {
-							FBid: users[i].FBid,
-							FBName: users[i].FBName,
-							livingStyle: users[i].livingStyle
-						}
+					var targetUserFriendListArray = arrayifyFriendList(users[i].friendList);
+					var mutualFriendsArray = currentUserFriendListArray.mutual(targetUserFriendListArray);
 
-						db_roomieList.push(roomieListObj);
+					console.log('mutual friends:', mutualFriendsArray);
 
+					var roomieListObj = {
+						FBid: users[i].FBid,
+						FBName: users[i].FBName,
+						FBEmail: users[i].FBEmail,
+						age: users[i].age,
+						livingStyle: users[i].livingStyle,
+						photolink: users[i].photolink,
+						mutualFriends: mutualFriendsArray
 					}
 
+					db_roomieList.push(roomieListObj);
+
 				}
-				findroomies(newUser, db_roomieList);
-			});
+
+			}
+			findroomies(currentUserLivingStyle, db_roomieList);
+
+		});
 	});
 };
-
-
-// module.exports = function (app) {
-
-
-	//  when clicked the "find roomie" button,
-
-	// take the new user survey response and match with all existing
-
-	// users and lifestyle's responses, find the best match
-
-	// and provide the best match
-
-
-//var roomieList // find all the existing users in database and access their response list
 
 
 
@@ -72,7 +58,12 @@ function findroomies (livingStyle, db_roomieList) {
 		var matchArrayObj = {
 			userID: db_roomieList[i].FBid,
 			FBName: db_roomieList[i].FBName,
-			diffScore: diffMaker(livingStyle,db_roomieList[i].livingStyle)
+			FBEmail: db_roomieList[i].FBEmail,
+			age: db_roomieList[i].age,
+			diffScore: diffMaker(livingStyle,db_roomieList[i].livingStyle),
+			photolink: db_roomieList[i].photolink,
+			mutualFriends: mutualFriendsExpander(db_roomieList[i].mutualFriends)
+
 		}
 		if (matcArrayObj.diffScore <= 15) {
 			matchArray.push(matchArrayObj);
@@ -80,6 +71,7 @@ function findroomies (livingStyle, db_roomieList) {
 
 	}
 
+	//sort your matcharray by scores ascending
 	matchArray.sort(function(a, b) {
       // {"roommateMatches.diffScore" : "desc"}
       if (a.diffScore < b.diffScore) {
@@ -91,8 +83,6 @@ function findroomies (livingStyle, db_roomieList) {
 
       return 0;
     });
-
-
 
 	console.log(matchArray);
 	console.log('userid', fblocal.userID)
@@ -111,22 +101,13 @@ function findroomies (livingStyle, db_roomieList) {
       }
     });
 
-function getMutuals(user, matches) {
-	var mutuals = [];
-	for (var i = 0; i < user.length; i++) {
-		for (var j = 0; matches.length; j++) {
-			if (user[i] === matches[j]) {
-				mutuals.push(user[i]);
-			}
-		}
-	}
-}
 
 }
 
 
-function diffMaker(x,y)
-{
+function diffMaker(x,y) {
+	var totalDiff = new Array;
+
 	for (var k =0; k<x.length; k++)
 	{
 		totalDiff[k] = Math.abs(x[k] - y[k]);
@@ -140,11 +121,72 @@ function diffMaker(x,y)
 
 function sumfunction(x)  {
 	var sum = x.reduce(add, 0);
-		function add(a, b) {
+	
+	function add(a, b) {
 	    return a + b;
-		}
-		console.log("sum is " + sum);
-		return sum;
+	}
+	
+	console.log("sum is " + sum);
+	return sum;
 }
+
+
+function getMutuals(array1, array2) {
+	array1.mutual(array2);
+}
+
+function arrayifyFriendList(friendList) {
+	var returnArray = new Array;
+
+	for (var i = 0; i < friendList.length; i++) {
+		returnArray.push(friendList[i].id);
+	}
+
+	return returnArray;
+}
+
+function mutualFriendsExpander(mutualFriendsArray) {
+
+	console.log("mutualFriendsArray", mutualFriendsArray)
+
+	var expandedArray = new Array;
+
+	for (i = 0; i < mutualFriendsArray.length; i++) {
+		expandedArray.push(getFBInfoByID(mutualFriendsArray[i]));
+	}
+
+	console.log("expandedArray:", expandedArray);
+
+	return expandedArray;
+}
+
+/*
+//moved to userRoutes. Needs FB
+function getFBInfoByID(id) {
+	var query = id + "?fields=id,name,friends,picture{url},email,birthday";
+
+    FB.api(query, { access_token: fblocal.appAccessToken}, function (res) {
+        if(!res || res.error) {
+          console.log(!res ? 'error occurred' : res.error);
+          return;
+        }
+
+        console.log("getFBInfoByID", res);
+    	return res;
+    });
+
+}
+*/
+
+Array.prototype.mutual = function(arr2) {
+	var ret = new Array;
+	for (var i in this) {
+		if(arr2.indexOf( this[i]) > -1) {
+			ret.push( this[i] );
+		}
+	}
+	return ret;
+};
+
 
 module.exports = algorithmInitializer;
