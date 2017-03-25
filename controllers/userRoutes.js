@@ -8,6 +8,9 @@ module.exports = function(router) {
   var fb = new FB.Facebook({version: 'v2.8'});
   var moment = require('moment');
   var algorithmInitializer = require("./algorithm.js");
+  var async = require('async');
+
+
 
   router.get("/", function(req, res) {
     res.send(index.html)
