@@ -7,7 +7,10 @@ import imgUrl from './roomie.jpg';
 
 
 const fbButtonStyle = {
-  margin: "auto"
+  margin: "0 auto",
+  float: "none",
+  height: "50"
+
 };
 
 //"url(" + Background + ")"
@@ -24,8 +27,7 @@ const roomieDiv = {
 const formDiv = {
   color: 'black',
   backgroundImage: "url(" + {imgUrl} + ")",
-  fontSize: "20",
-  //width: "40",
+  fontSize: "15",
   //display: "inline-block",
   margin: "auto",
 
@@ -197,7 +199,7 @@ handleClick() {
 
 				<input ref="textBox" type="text" />
 
-				<p></p>
+				
 
 				</div>
 
@@ -208,19 +210,14 @@ handleClick() {
 
 		{/*<button type="button"  //fb-login-button   className={styles.btnlocation} onClick={ (e) => {this.clicked();}}> Enter Your location</button>*/}
 
-
-
-
 				{/* FB login button area */}
 
-					<div className="row">
-					<div className="col-offset-2 col-lg-8">
-						<div  style={fbButtonStyle} className="fb-login-button" data-size="xlarge" data-auto-logout-link="true"></div> 
+				
+				<div  style={fbButtonStyle} className="fb-login-button" data-size="xlarge" data-auto-logout-link="true"></div> 
 
 						 
 						
-					</div>
-				</div>
+					
 
 
 			</div>

@@ -1,14 +1,9 @@
-.mainContainer {
-
-	background-color: red;
-}
-
 .formContent {
 
 
 	background-color: white;
 	text-align: left;
-	margin: auto;
+	margin-right: auto; margin-left: auto; width: 800px; 
 }
 
 .nameDiv {
@@ -39,7 +34,7 @@
 	color : white;
 	text-align: center;
 
-	background-color: teal;
+	background-color: #44c767;
 }
 
 .agreeDiv {
@@ -47,7 +42,7 @@
 	color : white;
 	text-align: center;
 
-	background-color: teal;
+	background-color: #44c767;
 }
 
 
@@ -91,6 +86,19 @@
 	height: 100px;
 	widows: 100px;
 }*/
+
+.button1Divs {
+
+	margin-right: auto; margin-left: auto;
+	text-align: center;
+}
+
+.button2Divs {
+
+	margin-right: auto; margin-left: auto;
+	text-align: center;
+}
+
 .submitDiv{
 
 	margin:auto;
@@ -112,7 +120,7 @@
 	text-decoration:none;
 	text-shadow:0px 1px 0px #2f6627;
 	text-align: center;
-	margin-left: 400px;
+	margin-right: auto; margin-left: auto; width: 200px; 
 }
 .submitButton:hover {
 	background-color:#5cbf2a;
@@ -138,7 +146,7 @@
 	padding:16px 31px;
 	text-decoration:none;
 	text-shadow:0px 1px 0px #2f6627;
-	margin-left: 395px;
+	margin-right: auto; margin-left: auto; width: 200px; 
 }
 .clearButton:hover {
 	background-color:#5cbf2a;

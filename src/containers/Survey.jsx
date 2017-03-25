@@ -3,17 +3,18 @@ import FormContainer from './FormContainer.jsx';
 import styles from "./Survey.css";
 
 
-//<div className={`container ${styles.appContent}`}>
+const containerDiv = {
+  width: "800px"
+
+};
 
 class Home extends Component {
   render() {
     return (
-      <div className={`container`}>
+      <div style = {containerDiv}  className={`container`}>
         <div className="columns">
-          <div className="col-md-9">
-            <div className= {styles.formDiv}>
+          <div className="col-md-6">
               <FormContainer />
-            </div>
           </div>
         </div>
       </div>

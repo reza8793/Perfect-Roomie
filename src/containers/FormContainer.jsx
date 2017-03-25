@@ -7,7 +7,12 @@ import helper from '../components/utils/helper.js';
 import { hashHistory} from 'react-router';
 import { browserHistory } from 'react-router';
 
+const roomieDiv = {
+  margin: "0 auto",
+  float: "none",
+  backgroundColor: "red"
 
+};
 
 class FormContainer extends Component {
   constructor(props) {
@@ -202,7 +207,7 @@ class FormContainer extends Component {
   render() {
     return (
 
-      <div className = {styles.containerMain}>
+     
 
       <form className={`container ${styles.formContent}`}onSubmit={this.handleFormSubmit}>
 
@@ -295,7 +300,7 @@ class FormContainer extends Component {
           selectedOptions={this.state.answerSelection10} />
 
 
-
+          <div className = {styles.button1Divs} >
 
         <input
           type="submit"
@@ -305,13 +310,20 @@ class FormContainer extends Component {
           <br/>
           <br/>
 
+           </div>
+
+           <div className = {styles.button2Divs} >
+
         <button
           className="btn btn-link float-left"
           className = {styles.clearButton}
           onClick={this.handleClearForm}>Clear form</button>
+
+         </div>
+
       </form>
 
-      </div>
+    
     );
   }
 }
