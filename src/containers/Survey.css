@@ -4,6 +4,10 @@
 	background-color: white;
 	text-align: left;
 	margin-right: auto; margin-left: auto; width: 800px; 
+	border-radius: 5px;
+  border-width: 1px;
+  padding: 5px;
+
 }
 
 .nameDiv {
@@ -35,6 +39,7 @@
 	text-align: center;
 
 	background-color: #44c767;
+	font-family: "Georgia, Times, Times New Roman, serif";
 }
 
 .agreeDiv {
@@ -43,6 +48,8 @@
 	text-align: center;
 
 	background-color: #44c767;
+
+	font-family: "Georgia, Times, Times New Roman, serif";
 }
 
 
@@ -54,6 +61,7 @@
 	height: 30px;
 
 	font-size: 17px;
+	font-family: "Georgia, Times, Times New Roman, serif";
 }
 
 
@@ -63,6 +71,7 @@
 	height: 200px;*/
 	background-color: none;
 	height: 50px;
+	font-family: "Georgia, Times, Times New Roman, serif";
 }
 
 .radioDiv2 {
@@ -70,6 +79,7 @@
 	margin-left: 80px;
 	height: auto;
 	background-color: none;
+	font-family: "Georgia, Times, Times New Roman, serif";
 }
 
 
@@ -78,6 +88,7 @@
 	margin-left: 80px;
 	height: auto;
 	background-color: red;
+	font-family: "Georgia, Times, Times New Roman, serif";
 }
 
 /*.submitButton{
@@ -121,6 +132,8 @@
 	text-shadow:0px 1px 0px #2f6627;
 	text-align: center;
 	margin-right: auto; margin-left: auto; width: 200px; 
+	font-family: "Georgia, Times, Times New Roman, serif";
+
 }
 .submitButton:hover {
 	background-color:#5cbf2a;
@@ -147,6 +160,7 @@
 	text-decoration:none;
 	text-shadow:0px 1px 0px #2f6627;
 	margin-right: auto; margin-left: auto; width: 200px; 
+	font-family: "Georgia, Times, Times New Roman, serif";
 }
 .clearButton:hover {
 	background-color:#5cbf2a;

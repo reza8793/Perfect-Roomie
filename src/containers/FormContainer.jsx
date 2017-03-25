@@ -7,12 +7,19 @@ import helper from '../components/utils/helper.js';
 import { hashHistory} from 'react-router';
 import { browserHistory } from 'react-router';
 
-const roomieDiv = {
-  margin: "0 auto",
-  float: "none",
-  backgroundColor: "red"
 
-};
+const surveyDiv = {
+
+  color : "white",
+  textAlign: "center",
+  backgroundColor: "#44c767",
+  borderRadius:  8,
+  borderWidth: 1,
+  padding: 5,
+  width:"790px",
+  margin:"auto"
+  
+}
 
 class FormContainer extends Component {
   constructor(props) {
@@ -256,12 +263,15 @@ class FormContainer extends Component {
       <form className={`container ${styles.formContent}`}onSubmit={this.handleFormSubmit}>
 
 
-       <div className= {styles.titleDiv}>
+       <div style= {surveyDiv}>
+
        <h1 > Roomie Survey </h1> 
 
-       <h3 className= {styles.agreeDiv}> 1 = Strongly Disagree, 5 = Strongly Agree </h3> <br/>
+       <h3> 1 = Strongly Disagree, 5 = Strongly Agree </h3> 
 
       </div>
+
+      <br/>
 
         <CheckboxOrRadioGroup
           title={"1. I'm a morning person and I like to go to sleep early"}
