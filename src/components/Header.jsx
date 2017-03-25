@@ -8,7 +8,7 @@ const logodivStyle = {
   backgroundColor: "#F2552C",
   fontSize: "28",
   display: "inline-block",
-  fontFamily: "Georgia, Times, Times New Roman, serif"
+  fontFamily: "Helvetica"
 };
 
 
@@ -23,7 +23,7 @@ const divStyle1 = {
   fontSize: "28",
    //backgroundColor: "#F2552C",
   display: "inline-block",
-  fontFamily: "Georgia, Times, Times New Roman, serif"
+  fontFamily: "Helvetica"
 };
 
 export default function() {
