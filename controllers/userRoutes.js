@@ -30,6 +30,19 @@ module.exports = function(router) {
       res.sendStatus(200);
   });
 
+
+  router.get("/fb/getUserInfo", function(req, res) {
+      FB.api("me?fields=id, name", { access_token: fblocal.appAccessToken}, function (res) {
+        if(!res || res.error) {
+          console.log(!res ? 'error occurred' : res.error);
+          return;
+        }
+
+        console.log(res);
+      });
+      res.sendStatus(200);
+  });
+
   router.post("/fb/userIDToken", function(req, res) {
       fblocal.updateUserID(req.body.userID);
       fblocal.updateToken(req.body.token);
@@ -133,7 +146,7 @@ module.exports = function(router) {
     var query = User.find({FBid: fblocal.userID }).select("roommateMatches");
 
     query.exec(function(error, doc) {
-        console.log("doc is " , doc);
+      //  console.log("doc is " , doc);
       // Send any errors to the browser
       
       if (error) {
@@ -143,16 +156,16 @@ module.exports = function(router) {
       else {
        console.log("doc", doc);
        console.log("roommateMatches", doc[0]._id);
-        for (var i = 0; i < doc[0].roommateMatches.length; i++) {
+/*        for (var i = 0; i < doc[0].roommateMatches.length; i++) {
 
           console.log('FBName:', doc[0].roommateMatches[i].FBName);
           console.log('diffScore:', doc[0].roommateMatches[i].diffScore);
           console.log('photolink:', doc[0].roommateMatches[i].photolink);
 
-        res.send(doc);
         
-        }
-      
+        
+        }*/
+        res.send(doc);
     }
 
     });

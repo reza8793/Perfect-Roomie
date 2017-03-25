@@ -187,9 +187,11 @@ class FormContainer extends Component {
                           this.state.answerSelection9,this.state.answerSelection10];
     console.log("1st this is: " , this);
     console.log('Send this in a POST request:', formPayload);
-    var that = this
+    var that = this;
       //console.log('submitted to DB:', res);
-
+      helper.postSurvey(surveyArray).then(function(res) {
+        console.log('submitted to DB:', res);
+      });
       
       console.log("Other this is: " , that);
       // console.log(user.livingStyle);
