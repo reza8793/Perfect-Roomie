@@ -1,7 +1,7 @@
 var User = require("../models/userSchema");
 var fblocal = require("./fblocal");
 var userRoutes = require("./userRoutes"); //circular referencing. Probably not a good idea.
-
+var FB = require('fb');
 
 function algorithmInitializer() {
 	// console.log("fblocal",fblocal);
@@ -62,7 +62,8 @@ function findroomies (livingStyle, db_roomieList) {
 			age: db_roomieList[i].age,
 			diffScore: diffMaker(livingStyle,db_roomieList[i].livingStyle),
 			photolink: db_roomieList[i].photolink,
-			mutualFriends: mutualFriendsExpander(db_roomieList[i].mutualFriends)
+			mutualFriends: db_roomieList[i].mutualFriends
+			//mutualFriends: mutualFriendsExpander(db_roomieList[i].mutualFriends)
 
 		}
 		if (matcArrayObj.diffScore <= 15) {
@@ -160,7 +161,7 @@ function mutualFriendsExpander(mutualFriendsArray) {
 	return expandedArray;
 }
 
-/*
+
 //moved to userRoutes. Needs FB
 function getFBInfoByID(id) {
 	var query = id + "?fields=id,name,friends,picture{url},email,birthday";
@@ -176,7 +177,7 @@ function getFBInfoByID(id) {
     });
 
 }
-*/
+
 
 Array.prototype.mutual = function(arr2) {
 	var ret = new Array;
