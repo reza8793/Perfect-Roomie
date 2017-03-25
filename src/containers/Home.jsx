@@ -9,9 +9,16 @@ import imgUrl from './roomie.jpg';
 const fbButtonStyle = {
   margin: "0 auto",
   float: "none",
-  height: "50"
+  height: "50",
+  fontSize:"24",
+  fontFamily: 'Helvetica'
 
 };
+
+const buttonstyle = {
+	fontSize:"24",
+	fontFamily: 'Helvetica'
+}
 
 //"url(" + Background + ")"
 
@@ -19,19 +26,26 @@ const roomieDiv = {
   color: 'white',
   backgroundImage: "url(" + {imgUrl} + ")",
   fontSize: "48",
-  //display: "inline-block",
-  margin: "auto"
+  display: "inline-block",
+  margin: "auto",
+  fontFamily: 'Helvetica'
 };
 
 
 const formDiv = {
   color: 'black',
   backgroundImage: "url(" + {imgUrl} + ")",
-  fontSize: "15",
+  fontSize: "18",
   //display: "inline-block",
   margin: "auto",
 
   textAlign: "center" 
+};
+
+const h3style = {
+  color: 'white',
+  fontFamily: 'Helvetica'
+  
 };
 
 class Home extends Component {
@@ -188,8 +202,8 @@ handleClick() {
 			<div style={roomieDiv} className="roomieDiv">
 
 				<h1>Perfect Roomie</h1>
-				<h4> Looking for a compatible roommate through mutual friends ? Look no further </h4>
-				<h4> Find your ideal roommate now !</h4>
+				<h3 style={h3style}> Looking for a compatible roommate through mutual friends ? Look no further </h3>
+				<h3 style={h3style}> Find your ideal roommate now !</h3>
 				<div className="page-header">
 
 				</div>
@@ -205,7 +219,7 @@ handleClick() {
 
 				<p>
 
-					<button type="button" className="btn btn-lg btn-primary" onClick={ (e) => {this.clicked();}}> Enter Your location</button>
+					<button style={buttonstyle} type="button" className="btn btn-lg btn-primary" onClick={ (e) => {this.clicked();}}> Enter Your location</button>
 				</p>
 
 		{/*<button type="button"  //fb-login-button   className={styles.btnlocation} onClick={ (e) => {this.clicked();}}> Enter Your location</button>*/}

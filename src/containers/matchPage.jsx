@@ -6,7 +6,7 @@ import styles from './matchPage.css';
 const matchContainerDiv = {
   width: "700px",
   margin: "auto",
-  fontFamily: "Georgia, Times, Times New Roman, serif"
+  fontFamily: "Helvetica"
 
 };
 
@@ -18,13 +18,14 @@ const matchDiv = {
   padding: 5,
   backgroundColor: "white",
   textAlign: "left",
-  fontFamily: "Georgia, Times, Times New Roman, serif"
+  fontFamily: "Helvetica"
 
 };
 
 
 const h1style = {
-  color:"white"
+  color:"white",
+  fontFamily: "Helvetica"
 
 };
 

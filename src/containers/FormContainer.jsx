@@ -17,7 +17,8 @@ const surveyDiv = {
   borderWidth: 1,
   padding: 5,
   width:"790px",
-  margin:"auto"
+  margin:"auto",
+  fontFamily: "Helvetica"
   
 }
 
