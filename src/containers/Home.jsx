@@ -1,9 +1,41 @@
 import React, { Component } from 'react';
-import Homestyle from './Home.css';
+import styles from './Home.css';
 import axios from 'axios';
-import fbAPIhelper from '../components/utils/fbAPIhelper.js'
+import fbAPIhelper from '../components/utils/fbAPIhelper.js';
+import { Link } from 'react-router';
+import imgUrl from './roomie.jpg';
+
+
+const fbButtonStyle = {
+  margin: "auto"
+};
+
+//"url(" + Background + ")"
+
+const roomieDiv = {
+  color: 'white',
+  backgroundImage: "url(" + {imgUrl} + ")",
+  fontSize: "48",
+  //display: "inline-block",
+  margin: "auto"
+};
+
+
+const formDiv = {
+  color: 'black',
+  backgroundImage: "url(" + {imgUrl} + ")",
+  fontSize: "20",
+  //width: "40",
+  //display: "inline-block",
+  margin: "auto",
+
+  textAlign: "center" 
+};
 
 class Home extends Component {
+
+
+	
 
 	constructor(){
 		super();
@@ -140,22 +172,19 @@ checkLoginState() {
   }.bind(this));
 }
 
+
+
+
+
+
+
 handleClick() {
   FB.login(this.checkLoginState());
 }
 	render() {
 		return (
-			<div className="roomieDiv">
+			<div style={roomieDiv} className="roomieDiv">
 
-				{/* FB login button area */}
-				<div className="row">
-					<div className="col-offset-2 col-lg-8">
-						<div className="fb-login-button" data-size="xlarge" data-auto-logout-link="true"></div>
-					</div>
-				</div>
-
-
-				
 				<h1>Perfect Roomie</h1>
 				<h4> Looking for a compatible roommate through mutual friends ? Look no further </h4>
 				<h4> Find your ideal roommate now !</h4>
@@ -163,11 +192,8 @@ handleClick() {
 
 				</div>
 
-				{this.state.text}
-			
-				<div className="formDiv">
-
-			<div className={styles.formDiv}>
+				
+			<div style={formDiv} className="formDiv">
 
 				<input ref="textBox" type="text" />
 
@@ -180,7 +206,22 @@ handleClick() {
 					<button type="button" className="btn btn-lg btn-primary" onClick={ (e) => {this.clicked();}}> Enter Your location</button>
 				</p>
 
-		{/*<button type="button" className={styles.btnlocation} onClick={ (e) => {this.clicked();}}> Enter Your location</button>*/}
+		{/*<button type="button"  //fb-login-button   className={styles.btnlocation} onClick={ (e) => {this.clicked();}}> Enter Your location</button>*/}
+
+
+
+
+				{/* FB login button area */}
+
+					<div className="row">
+					<div className="col-offset-2 col-lg-8">
+						<div  style={fbButtonStyle} className="fb-login-button" data-size="xlarge" data-auto-logout-link="true"></div> 
+
+						 
+						
+					</div>
+				</div>
+
 
 			</div>
 		);

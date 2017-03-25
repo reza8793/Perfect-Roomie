@@ -3,7 +3,28 @@ import styles from './Header.css';
 import { Link } from 'react-router';
 
 
+const logodivStyle = {
+  color: "white",
+  backgroundColor: "#F2552C",
+  fontSize: "28",
+  display: "inline-block",
+  fontFamily: "Georgia, Times, Times New Roman, serif"
+};
 
+
+const divStyle = {
+  color: 'red',
+  fontSize: "28",
+  display: "inline-block"
+};
+
+const divStyle1 = {
+  color: 'white',
+  fontSize: "28",
+   //backgroundColor: "#F2552C",
+  display: "inline-block",
+  fontFamily: "Georgia, Times, Times New Roman, serif"
+};
 
 export default function() {
 	return <nav className="navbarDefault">
@@ -15,26 +36,24 @@ export default function() {
 				<div className="navbar-header">
 				
 					<div className="col-xs-12">
-						<Link className="navbar-brand" to="/" id="logo">Perfect Roomie</Link>
+						<Link style={logodivStyle} className="navbar-brand" to="/" id="logo">Perfect Roomie</Link>
 						
 					</div>
 				</div>
 
-				{/*<div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">*/}
-
-				<div className= {styles.baalDiv} id="bs-example-navbar-collapse-1">
-					<ul className="nav navbar-nav navbar-right navbar-right-custom">
+				<div  style={divStyle} className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+					<ul style={divStyle} className="nav navbar-nav navbar-right navbar-right-custom">
 				
 
-						<li><Link to="/"> Home</Link></li>
+						<li><Link style={divStyle1} to="/"> Home</Link></li>
 						
-						<li><Link to="/survey">Survey</Link></li>
-						<li><Link to="/">Contact Us</Link></li>
+						<li><Link style={divStyle1} to="/survey">Survey</Link></li>
+						<li><Link  style={divStyle1}to="/">Contact Us</Link></li>
 
 					</ul>
 				</div>
 
-				
+				{/*
 				<form action="fb/friends/" method="get">
   					<button type="submit">friends</button>
 				</form>
@@ -55,12 +74,10 @@ export default function() {
 						<button type="submit">pull roomie match</button>
 				</form>
 
-			
-
 				<form action="db/getUserInfo" method="get">
 						<button type="submit">Get User Info</button>
 				</form>
-
+				*/}
 
 			</div>
 		</div>

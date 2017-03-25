@@ -6,8 +6,7 @@ import styles from "./Survey.css";
 import helper from '../components/utils/helper.js';
 import { hashHistory} from 'react-router';
 import { browserHistory } from 'react-router';
-import './Survey.css';
-import helper from '../components/utils/helper.js'
+
 
 
 class FormContainer extends Component {
