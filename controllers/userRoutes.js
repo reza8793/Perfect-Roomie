@@ -7,7 +7,7 @@ module.exports = function(router) {
   var FB = require('fb');
   var fb = new FB.Facebook({version: 'v2.8'});
   var moment = require('moment');
-  var algorithmInitializer = require("./algorithm.js");
+//  var algorithmInitializer = require("./algorithm.js");
 
   router.get("/", function(req, res) {
     res.send(index.html)
@@ -104,7 +104,6 @@ module.exports = function(router) {
 
     var seedArray = req.body.surveyResult;
 
-
     User.findOneAndUpdate(
       { FBid: fblocal.userID },
       { livingStyle: seedArray }
@@ -164,44 +163,8 @@ module.exports = function(router) {
     //do nothing
     res.send(200);
   });
-/*
-    //get friends list of your targeted user
-    var query = User.find({FBid: req.body.userID }).select("friendsList.id");
 
-    query.exec(function(error1, doc1) {
-      if (error1) {
-        res.send(error1);
-      }
-      else {
-        var matchFriendArray = new Array;
 
-        for (var i = 0; i < doc1.length; i++) {
-          matchFriendArray.push(doc1.friendsList[i].id);
-        }
-
-        var userQuery = User.find({FBid: fblocal.userID}).select("friendsList.id");
-
-        query.exec(function(error2, doc2) {
-          if (error2) {
-            res.send(error2);
-          }
-
-          else {
-            var userFriendArray = new Array;
-
-            for (var i = 0; i < doc.length; i++) {
-              userFriendArray.push(doc2.friendsList[i].id);
-            }
-
-            getMutuals(userFriendArray, matchFriendArray);
-          }
-        });
-      });
-
-    })
-
-  });
-*/
 
 
   router.put('db/user/destination', function(req, res) {
@@ -224,7 +187,7 @@ module.exports = function(router) {
 
   });
 
-router.put("db/user/response", function(req, res) {
+  router.put("db/user/response", function(req, res) {
     var age = req.body.age;
     var livingStyle = req.body['livingStyle[]'];
 
@@ -246,5 +209,215 @@ router.put("db/user/response", function(req, res) {
     }
 
   });
+
+
+///ABSTRACT THIS BACK OUT TO ALGORITHM.JS
+
+  function algorithmInitializer() {
+    // console.log("fblocal",fblocal);
+    User.findOne({FBid: fblocal.userID}, function(err, user) {
+      console.log("Null OK, Otherwise Error noted:", err);
+      console.log("This User is:", user.FBName);
+      var currentUserLivingStyle = user.livingStyle;
+      var currentUserFriendListArray = arrayifyFriendList(user.friendList);
+
+      console.log("The newUser is: " + currentUserLivingStyle);
+      //console.log("currentUserFriendListArray: " + currentUserFriendListArray);
+      User.find({ FBid: { $ne: fblocal.userID } }, function(error, users ) {
+
+        if (error)
+        {
+          console.log("algorithmInitializer is having the issue: " +error);
+        }
+        else {
+          var db_roomieList = new Array;
+          for (var i = 0; i < users.length; i++) {
+
+            var targetUserFriendListArray = arrayifyFriendList(users[i].friendList);
+            var mutualFriendsArray = currentUserFriendListArray.mutual(targetUserFriendListArray);
+
+            //console.log('mutual friends:', mutualFriendsArray);
+
+            var roomieListObj = {
+              FBid: users[i].FBid,
+              FBName: users[i].FBName,
+              FBEmail: users[i].FBEmail,
+              age: users[i].age,
+              livingStyle: users[i].livingStyle,
+              photolink: users[i].photolink,
+              mutualFriends: mutualFriendsArray
+            }
+
+            db_roomieList.push(roomieListObj);
+
+          }
+
+        }
+        findroomies(currentUserLivingStyle, db_roomieList);
+
+      });
+    });
+  };
+
+
+
+  function findroomies (livingStyle, db_roomieList)
+  {
+    console.log('FINDROOMMIES:')
+    var matchArray = new Array;
+
+    for (var i = 0; i <db_roomieList.length; i++)
+    {
+
+      var expandedMutual = mutualFriendsExpander(db_roomieList[i].mutualFriends, function() {
+        console.log('expandedMutual', expandedMutual);  
+      });
+      
+
+      var matchArrayObj = {
+        userID: db_roomieList[i].FBid,
+        FBName: db_roomieList[i].FBName,
+        FBEmail: db_roomieList[i].FBEmail,
+        age: db_roomieList[i].age,
+        diffScore: diffMaker(livingStyle,db_roomieList[i].livingStyle),
+        photolink: db_roomieList[i].photolink,
+        mutualFriends: db_roomieList[i].mutualFriends
+        //mutualFriends: mutualFriendsExpander(db_roomieList[i].mutualFriends)
+
+      }
+
+      matchArray.push(matchArrayObj);
+
+    }
+
+    //sort your matcharray by scores ascending
+    matchArray.sort(function(a, b) {
+        // {"roommateMatches.diffScore" : "desc"}
+        if (a.diffScore < b.diffScore) {
+          return -1;
+        }
+        if (a.diffScore > b.diffScore) {
+          return 1;
+        }
+
+        return 0;
+      });
+
+    console.log(matchArray);
+    console.log('userid', fblocal.userID)
+
+    User.findOneAndUpdate(
+        { FBid: fblocal.userID },
+        { roommateMatches: matchArray }
+      ).exec(function(error, doc) {
+        // Send any errors to the browser
+        if (error) {
+          console.log(error);
+        }
+        // Or send the doc to the browser
+        else {
+          console.log(doc);
+        }
+      });
+
+
+  }
+
+
+  function diffMaker(x,y) {
+    var totalDiff = new Array;
+
+    for (var k =0; k<x.length; k++)
+    {
+      totalDiff[k] = Math.abs(x[k] - y[k]);
+    }
+    console.log("totalDiff is "+ totalDiff );
+    var result = sumfunction(totalDiff);
+    console.log("results is " + result);
+    return result;
+
+  }
+
+  function sumfunction(x)  {
+    var sum = x.reduce(add, 0);
+    
+    function add(a, b) {
+        return a + b;
+    }
+    
+    console.log("sum is " + sum);
+    return sum;
+  }
+
+
+  function getMutuals(array1, array2) {
+    array1.mutual(array2);
+  }
+
+  function arrayifyFriendList(friendList) {
+    var returnArray = new Array;
+
+    for (var i = 0; i < friendList.length; i++) {
+      returnArray.push(friendList[i].id);
+    }
+
+    return returnArray;
+  }
+
+  function mutualFriendsExpander(mutualFriendsArray) {
+
+    console.log("mutualFriendsArray", mutualFriendsArray)
+
+    var expandedArray = new Array;
+
+    for (i = 0; i < mutualFriendsArray.length; i++) {
+      var expandedValues = getFBInfoByID(mutualFriendsArray[i]);
+
+      console.log('expanded values', expandedValues);
+
+    /*  var expandedObject = {
+        FBid: expandedValues.id,
+        FBName: expandedValues.name,
+        photolink: expandedValues.picture.data.url,
+        FBEmail: expandedValues.email
+      }
+
+      expandedArray.push(expandedObject);*/
+    }
+
+    console.log("expandedArray:", expandedArray);
+
+    return expandedArray;
+  }
+
+  
+  //moved to userRoutes. Needs FB
+  function getFBInfoByID(id) {
+    var query = id + "?fields=id,name,picture{url},email";
+
+      FB.api(query, { access_token: fblocal.appAccessToken}, function (res) {
+          if(!res || res.error) {
+            console.log(!res ? 'error occurred' : res.error);
+            return;
+          }
+
+          console.log("getFBInfoByID", res);
+        return res;
+      });
+
+  }
+  
+
+  Array.prototype.mutual = function(arr2) {
+    var ret = new Array;
+    for (var i in this) {
+      if(arr2.indexOf( this[i]) > -1) {
+        ret.push( this[i] );
+      }
+    }
+    return ret;
+  };
+
+
 
 };
