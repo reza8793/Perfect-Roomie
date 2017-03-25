@@ -86,10 +86,12 @@ class Home extends Component {
 
         <div style= {matchDiv}>
 
-        <p> Photolink: {this.state.photolink}</p>
+        <img src={this.state.photolink} />
+
+{/*        <p> Photolink: {this.state.photolink}</p> */}
         <h2> Name: {this.state.userName}</h2>
         <h3> Age: {this.state.age} </h3>
-        <h3> Match %: {this.state.userScore} %</h3>>
+        <h3> Match %: {100 - this.state.userScore } %</h3>
         <h3> Mutual Friends : {this.state.mutualFriends}</h3>
 {/*        <p> Match User ID: {this.state.userID}</p> */ }
          
