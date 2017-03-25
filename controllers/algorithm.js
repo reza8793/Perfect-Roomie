@@ -127,8 +127,9 @@ function findroomies (livingStyle, db_roomieList)
 
 		}
 
-		matchArray.push(matchArrayObj);
-
+		if (matchArrayObj.diffScore <= 15) { 
+			matchArray.push(matchArrayObj);
+		}
 	}
 
 	//sort your matcharray by scores ascending
