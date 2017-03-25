@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico">
+	<link rel="shortcut icon" href="%PUBLIC_URL%/favicon.png">
 	<!--
       Notice the use of %PUBLIC_URL% in the tag above.
       It will be replaced with the URL of the `public` folder during the build.
@@ -19,95 +19,156 @@
 	<title>Perfect Roomie</title>
 </head>
 <body>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <!-- <script>
+
+    window.fbAsyncInit = function() {
+      FB.init({
+        appId      : '256928438051566',
+        cookie     : true,  // enable cookies to allow the server to access
+                            // the session
+        xfbml      : true,  // parse social plugins on this page
+        version    : 'v2.8' // use graph api version 2.8
+      });
+
+      // Now that we've initialized the JavaScript SDK, we call
+      // FB.getLoginStatus().  This function gets the state of the
+      // person visiting this page and can return one of three states to
+      // the callback you provide.  They can be:
+      //
+      // 1. Logged into your app ('connected')
+      // 2. Logged into Facebook, but not your app ('not_authorized')
+      // 3. Not logged into Facebook and can't tell if they are logged into
+      //    your app or not.
+      //
+      // These three cases are handled in the callback function.
+
+      FB.getLoginStatus(function(response) {
+        statusChangeCallback(response);
+      });
+
+    };
+
+    // Load the SDK asynchronously
+    (function(d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) return;
+      js = d.createElement(s); js.id = id;
+      js.src = "//connect.facebook.net/en_US/sdk.js";
+      fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+
+    // Here we run a very simple test of the Graph API after login is
+    // successful.  See statusChangeCallback() for when this call is made.
 <<<<<<< HEAD
-	<div class ="ui container">
-		<div class = "ui grid">
-			<div id = "maindiv" class="eighteen wide column">
+    function testAPI() {
+        console.log('Welcome!  Fetching your information.... ');
+        FB.api('/me', function(response) {
+          console.log('Successful login for: ' + response.name);
+          document.getElementById('status').innerHTML =
+            'Thanks for logging in, ' + response.name + '!';
+        });
+    }
 
-				<br>
-				<br>
+    function userTokenLogin(passedUserID, passedToken) {
+      $.ajax({
+        method: "POST",
+        url: "/fb/userIDToken",
+        data: {
+        // Value taken from title input
+          userID: passedUserID,
+          token: passedToken
+        // Value taken from note textarea
+        }
+      })
+      // With that done
+      .done(function(data) {
+          // Log the response
+          console.log("stuff posted", data);
+          upsertUser();
+      });
 
-					<div id="h1h2div" class="twelve wide column">
+    }
 
-						<h1> Perfect Roomie </h1>
-						<h2> Looking for a compatible roommate ? Look no further. Find your ideal roommate now !<h2> <br>
-					</div>
+    function upsertUser() {
+      $.ajax({
+      method: "POST",
+      url: "/db/userInsert"
+    }).done(function(data) {
+        console.log("upserted user", data);
+      })
+    }
 
-				<br>
+  </script>
 
-				<div id = "buttondiv" class="twelve wide column">
+  <fb:login-button scope="public_profile,email" data-size="xlarge" onLogin="checkLoginState();" autologoutlink="true"></fb:login-button>
 
-					<!-- <div class=" eight wide field"> -->
-					<br>
+  
+  
+  <div id="root">
 
-					<div  id = "withinbuttondiv" class="ui action input">
 
-						<!-- <div class=" ten wide field"> -->
-						*
-					<div id = "zipdiv" class="four wide column">
-							 <!-- <input  id ="zipinput" type="text" placeholder="Enter Your Zip Code..."><br><br> -->
 
-						<select id = "locationdiv" class="ui fluid search dropdown" multiple="">
-							<option style="font-size:29px;" value="">Regions</option> <br>
-							<option style="font-size:20px;" value="AF">Angeles Forest</option>
-							<option style="font-size:20px;" value="AV">Antelope Valley</option>
-							<option style="font-size:20px;" value="CL">Central LA</option>
-							<option style="font-size:20px;" value="ELA">East LA</option>
-							<option style="font-size:20px;" value="HA">Harbor </option>
-							<option style="font-size:20px;" value="NELA">Northeast LA</option>
-							<option style="font-size:20px;" value="NWLA">Northwest LA</option>
-							<option style="font-size:20px;" value="PV">Pomona Valley</option>
-							<option style="font-size:19px;" value="SFV">San Fernando Valley</option>
-							<option style="font-size:20px;" value="SGV">San Gabriel Valley</option>
-							<option style="font-size:19px;" value="SM">Santa Monica Mountains</option>
-							<option style="font-size:20px;" value="SB">South Bay</option>
-							<option style="font-size:20px;" value="SELA">Southeast LA</option>
-							<option style="font-size:20px;" value="SLA">South LA</option>
-							<option style="font-size:20px;" value="VER">Verdugos</option>
-							<option style="font-size:20px;" value="WEST">Westside</option>
+    
+ 
 
-						</select>
-		
 
-					</div>
 
- 					<div id = "findmatchdiv1" class="four wide column"></div>
+  </div>
+=======
+    // function testAPI() {
+    //     console.log('Welcome!  Fetching your information.... ');
+    //     FB.api('/me', function(response) {
+    //       console.log('Successful login for: ' + response.name);
+    //       document.getElementById('status').innerHTML =
+    //         'Thanks for logging in, ' + response.name + '!';
+    //     });
+    // }
+		//
+    // function userTokenLogin(passedUserID, passedToken) {
+    //   $.ajax({
+    //     method: "POST",
+    //     url: "/fb/userIDToken",
+    //     data: {
+    //     // Value taken from title input
+    //       userID: passedUserID,
+    //       token: passedToken
+    //     // Value taken from note textarea
+    //     }
+    //   })
+    //   // With that done
+    //   .done(function(data) {
+    //       // Log the response
+    //       console.log("stuff posted", data);
+    //       upsertUser();
+    //   });
+		//
+    // }
+		//
+    // function upsertUser() {
+    //   $.ajax({
+    //   method: "POST",
+    //   url: "/db/userInsert"
+    // }).done(function(data) {
+    //     console.log("upserted user", data);
+    //   })
+    // }
+		//
+		//
+  </script> -->
 
-					<div id = "findmatchdiv2" class="four wide column">
-						<button id="zipbutton" class="ui primary button">Find Matches</button>
-					</div>
-					
-				</div>
-
-				<br>
-				<br>
-
-				<div id="fbsigndiv" class="eighteen wide column">
-
-					<div id="status"></div>
-
-					<fb:login-button scope="public_profile,email" onlogin="checkLoginState();" autologoutlink="true"></fb:login-button>
-					<!-- test button. remove when you're done -->
-					<form action="fb/friends/" method="get">
-  						<button type="submit">friends</button><br>
-					</form>
-					
-					<form action="db/userInsert/" method="post">
-  						<button type="submit">Post to db</button><br>
-					</form>
-
+  <!-- <fb:login-button scope="public_profile,email" data-size="xlarge" onLogin="checkLoginState();" autologoutlink="true"></fb:login-button> -->
+<!-- Commented below because of doubted utility, may be need -->
+  <div id="root"></div>
+>>>>>>> 1d8b18f6b0295f71b8b53a83b0e21fe73535786b
+<!--
+  This HTML file is a template.
+  If you open it directly in the browser, you will see an empty page.
 					<form action="db/userSurveyRandom" method="post">
   						<button type="submit">Seed Random Scores</button><br>
 					</form>
 
-				</div>
-			</div>
-=======
-<div id="root"></div>
-<!--
-  This HTML file is a template.
-  If you open it directly in the browser, you will see an empty page.
->>>>>>> d5050f6731b1dec36c18cc37be8757e61fb75925
 
   You can add webfonts, meta tags, or analytics to this file.
   The build step will place the bundled scripts into the <body> tag.
@@ -116,6 +177,9 @@
   To create a production bundle, use `npm run build`.
 -->
 
-<script src="/assets/javascript/bundle.js"></script>
+
+
+
+  <script src="/assets/javascript/bundle.js"></script>
 </body>
 </html>

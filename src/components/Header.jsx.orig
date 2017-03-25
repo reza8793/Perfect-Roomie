@@ -55,11 +55,13 @@ export default function() {
 						<button type="submit">pull roomie match</button>
 				</form>
 
+<<<<<<< HEAD
 			
-
+=======
 				<form action="db/getUserInfo" method="get">
 						<button type="submit">Get User Info</button>
 				</form>
+>>>>>>> 1d8b18f6b0295f71b8b53a83b0e21fe73535786b
 
 
 			</div>

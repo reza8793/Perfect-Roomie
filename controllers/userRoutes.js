@@ -104,7 +104,6 @@ module.exports = function(router) {
 
     var seedArray = req.body.surveyResult;
 
-
     User.findOneAndUpdate(
       { FBid: fblocal.userID },
       { livingStyle: seedArray }
@@ -163,44 +162,8 @@ module.exports = function(router) {
     //do nothing
     res.send(200);
   });
-/*
-    //get friends list of your targeted user
-    var query = User.find({FBid: req.body.userID }).select("friendsList.id");
 
-    query.exec(function(error1, doc1) {
-      if (error1) {
-        res.send(error1);
-      }
-      else {
-        var matchFriendArray = new Array;
 
-        for (var i = 0; i < doc1.length; i++) {
-          matchFriendArray.push(doc1.friendsList[i].id);
-        }
-
-        var userQuery = User.find({FBid: fblocal.userID}).select("friendsList.id");
-
-        query.exec(function(error2, doc2) {
-          if (error2) {
-            res.send(error2);
-          }
-
-          else {
-            var userFriendArray = new Array;
-
-            for (var i = 0; i < doc.length; i++) {
-              userFriendArray.push(doc2.friendsList[i].id);
-            }
-
-            getMutuals(userFriendArray, matchFriendArray);
-          }
-        });
-      });
-
-    })
-
-  });
-*/
 
   // router.get("/db/roomieMatch1", function(req, res){
   //   console.log("i'm at router.get roomieMatch");
@@ -244,7 +207,7 @@ module.exports = function(router) {
 
   });
 
-router.put("db/user/response", function(req, res) {
+  router.put("db/user/response", function(req, res) {
     var age = req.body.age;
     var livingStyle = req.body['livingStyle[]'];
 
@@ -266,5 +229,6 @@ router.put("db/user/response", function(req, res) {
     }
 
   });
+
 
 };

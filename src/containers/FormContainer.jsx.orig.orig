@@ -6,8 +6,6 @@ import styles from "./Survey.css";
 import helper from '../components/utils/helper.js';
 import { hashHistory} from 'react-router';
 import { browserHistory } from 'react-router';
-import './Survey.css';
-import helper from '../components/utils/helper.js'
 
 
 class FormContainer extends Component {
@@ -183,9 +181,14 @@ class FormContainer extends Component {
                           this.state.answerSelection9,this.state.answerSelection10];
     console.log("1st this is: " , this);
     console.log('Send this in a POST request:', formPayload);
-    var that = this
+<<<<<<< HEAD
+    var that = this;
       //console.log('submitted to DB:', res);
+=======
+    var that = this
+    helper.postSurvey(surveyArray).then(function(res) {
 
+>>>>>>> 1d8b18f6b0295f71b8b53a83b0e21fe73535786b
       
       console.log("Other this is: " , that);
       // console.log(user.livingStyle);

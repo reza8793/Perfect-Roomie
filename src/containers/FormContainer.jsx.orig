@@ -99,10 +99,6 @@ class FormContainer extends Component {
           answerOptions9: data.answerOptions9,
           answerSelection9: data.answerSelection9,
 
-          answerOptions10: data.answerOptions10,
-          answerSelection10: data.answerSelection10
-
-
 
         });
       });
@@ -181,30 +177,36 @@ class FormContainer extends Component {
                           this.state.answerSelection5,this.state.answerSelection6,
                           this.state.answerSelection7,this.state.answerSelection8,
                           this.state.answerSelection9,this.state.answerSelection10];
+    console.log("1st this is: " , this);
     console.log('Send this in a POST request:', formPayload);
 <<<<<<< HEAD
-    helper.postSurvey(surveyArray).then((res) => {
-      console.log('submitted to DB:', res);
-      
-      // console.log(user.livingStyle);
-     // this.handleClearForm(e);
+    var that = this
+    helper.postSurvey(surveyArray).then(function() {
 
-  //   hashHistory.push('/matchPage')
-  // debugger;
+      console.log('submitted to DB');
+      console.log("Other this is: " , that);
 =======
     var that = this;
     helper.postSurvey(surveyArray).then(function(res) {
       console.log('submitted to DB:', res);
       
+>>>>>>> 3ae7cc2a9a139bd96c286f18668b6b8048f26eb9
       // console.log(user.livingStyle);
       that.handleClearForm(e);
     });
->>>>>>> 64e89364cb1f25c2f1e418c6ec66ca8f075a0ff9
 
-    hashHistory.push('/matchPage');
+          //   $.ajax({
+          //   type: 'POST',
+          //   url: '/responses',
+          //   data: formPayload
+          // })
+          // .done(function(data) {
+          //   console.log("post successful");
+          // })
+          // .fail(function(jqXhr) {
+          //   console.log('failed to register');
+          // });
 
-
-    });
 
 
 
@@ -212,20 +214,12 @@ class FormContainer extends Component {
   render() {
     return (
 
-      <div className = {styles.containerMain}>
-
-      <form className={`container ${styles.formContent}`}onSubmit={this.handleFormSubmit}>
 
 
-       <div className= {styles.titleDiv}>
-       <h1 > Roomie Survey </h1> 
-
-       <h3 className= {styles.agreeDiv}> 1 = Strongly Disagree, 5 = Strongly Agree </h3> <br/>
-
-      </div>
+      <form className="container" onSubmit={this.handleFormSubmit}>
 
         <CheckboxOrRadioGroup
-          title={"1. I'm a morning person and I like to go to sleep early"}
+          title={"1. I'm a morning person and you like to go to sleep early"}
           // setName={'siblings'}
           controlFunc={this.handleAnswersSelection1}
           type={'radio'}
@@ -309,11 +303,17 @@ class FormContainer extends Component {
 
         <input
           type="submit"
-          // className="btn btn-primary float-right"
-          className = {styles.submitButton}
+          className="btn btn-primary float-right"
           value="Submit"/>
-          <br/>
-          <br/>
+        <button
+          className="btn btn-link float-left"
+          onClick={this.handleClearForm}>Clear form</button>
+      </form>
+    );
+  }
+}
+
+export default FormContainer;
 
         <button
           className="btn btn-link float-left"
