@@ -1,4 +1,6 @@
 var fblocal = require("../../../controllers/fblocal.js");
+var axios = require("axios");
+
 var fbAPIhelper = {
     statusChangeCallback: function(response) {
         console.log('statusChangeCallback');
@@ -12,7 +14,7 @@ var fbAPIhelper = {
           //postStuff(response.authResponse.accessToken);
           console.log('userID:', response.authResponse.userID);
           console.log('accessToken:', response.authResponse.accessToken);
-          userTokenLogin(response.authResponse.userID, response.authResponse.accessToken);
+          fbAPIhelper.userTokenLogin(response.authResponse.userID, response.authResponse.accessToken);
 
         } else {
           // The person is not logged into your app or we are unable to tell.
@@ -42,7 +44,8 @@ var fbAPIhelper = {
     },
 
      userTokenLogin: function(passedUserID, passedToken) {
-      $.ajax({
+       console.log("axios being used");
+      axios({
         method: "POST",
         url: "/fb/userIDToken",
         data: {
@@ -52,49 +55,20 @@ var fbAPIhelper = {
         // Value taken from note textarea
         }
       })
-      // With that done
-      .done(function(data) {
+      // With that then
+      .then(function(data) {
           // Log the response
           console.log("stuff posted", data);
-          upsertUser();
+          fbAPIhelper.upsertUser();
       });
 
     },
 
      upsertUser: function() {
-      $.ajax({
+      axios({
       method: "POST",
       url: "/db/userInsert"
-    }).done(function(data) {
-        console.log("upserted user", data);
-      })
-    },
-
-     getTestUsers: function(passedUserID, passedToken) {
-      $.ajax({
-        method: "POST",
-        url: "https://graph.facebook.com/256928438051566/accounts/test-users?installed=true&name=FULL_NAME&permissions=read_stream&method=post&access_token="+APP_ACCESS_TOKEN,
-        data: {
-        // Value taken from title input
-          userID: passedUserID,
-          token: passedToken
-        // Value taken from note textarea
-        }
-      })
-      // With that done
-      .done(function(data) {
-          // Log the response
-          console.log("stuff posted", data);
-          upsertUser();
-      });
-
-    },
-
-     upsertUser: function() {
-      $.ajax({
-      method: "POST",
-      url: "/db/userInsert"
-    }).done(function(data) {
+    }).then(function(data) {
         console.log("upserted user", data);
       })
     }
