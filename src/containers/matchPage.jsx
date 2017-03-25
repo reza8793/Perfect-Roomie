@@ -14,14 +14,17 @@ class Home extends Component {
     axios.get("/db/getRoomieMatch")
       .then((data) => {
         console.log("data from roomiematch is  " , data);
-        console.log("data", data.data[0].roommateMatches);
-        console.log("data name is ", data.data[0].roommateMatches[0].FBName);
-        console.log("age is ", data.data[0].roommateMatches[0].age);
-        console.log("photo link ", data.data[0].roommateMatches[0].photolink);
-        this.setState({users: data.data[0]._id})
-        this.setState({userName: data.data[0].roommateMatches[0].FBName})
-        this.setState({userScore: data.data[0].roommateMatches[0].diffScore})
-        this.setState({userID: data.data[0].roommateMatches[0].userID})
+//        console.log("data", data.data[0].roommateMatches);
+//        console.log("data name is ", data.data[0].roommateMatches[0].FBName);
+//        console.log("age is ", data.data[0].roommateMatches[0].age);
+//        console.log("photo link ", data.data[0].roommateMatches[0].photolink);
+        this.setState({users: data.data[0]._id});
+        this.setState({userName: data.data[0].roommateMatches[0].FBName});
+        this.setState({userScore: data.data[0].roommateMatches[0].diffScore});
+        this.setState({userID: data.data[0].roommateMatches[0].userID});
+        this.setState({photolink: data.data[0].roommateMatches[0].photolink});
+        this.setState({age: data.data[0].roommateMatches[0].age});
+        this.setState({mutualFriends: data.data[0].roommateMatches[0].mutualFriends});
       })
 }
 
