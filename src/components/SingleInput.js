@@ -1,7 +1,10 @@
 import React from 'react';
+import styles from "../containers/Survey.css";
+
+// <div className="form-group">
 
 const SingleInput = (props) => (
-	<div className="form-group">
+	<div className= {styles.nameDiv}>
 		<label className="form-label">{props.title}</label>
 		<input
 			className="form-input"

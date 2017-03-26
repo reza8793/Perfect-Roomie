@@ -1,16 +1,20 @@
 import React, { Component } from 'react';
 import FormContainer from './FormContainer.jsx';
+import styles from "./Survey.css";
 
+
+const containerDiv = {
+  width: "800px"
+
+};
 
 class Home extends Component {
   render() {
     return (
-      <div className="container">
+      <div style = {containerDiv}  className={`container`}>
         <div className="columns">
-          <div className="col-md-9">
-            <span><strong>"1 = Strongly Disagree, 5 = Strongly Agree"</strong></span>
-            <br />
-            <FormContainer />
+          <div className="col-md-6">
+              <FormContainer />
           </div>
         </div>
       </div>

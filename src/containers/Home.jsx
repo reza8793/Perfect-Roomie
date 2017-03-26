@@ -1,9 +1,57 @@
 import React, { Component } from 'react';
-import Homestyle from './Home.css';
+import styles from './Home.css';
 import axios from 'axios';
-import fbAPIhelper from '../components/utils/fbAPIhelper.js'
+import fbAPIhelper from '../components/utils/fbAPIhelper.js';
+import { Link } from 'react-router';
+import imgUrl from './roomie.jpg';
+
+
+const fbButtonStyle = {
+  margin: "0 auto",
+  float: "none",
+  height: "50",
+  fontSize:"24",
+  fontFamily: 'Helvetica'
+
+};
+
+const buttonstyle = {
+	fontSize:"24",
+	fontFamily: 'Helvetica'
+}
+
+//"url(" + Background + ")"
+
+const roomieDiv = {
+  color: 'white',
+  backgroundImage: "url(" + {imgUrl} + ")",
+  fontSize: "48",
+  display: "inline-block",
+  margin: "auto",
+  fontFamily: 'Helvetica'
+};
+
+
+const formDiv = {
+  color: 'black',
+  backgroundImage: "url(" + {imgUrl} + ")",
+  fontSize: "18",
+  //display: "inline-block",
+  margin: "auto",
+
+  textAlign: "center" 
+};
+
+const h3style = {
+  color: 'white',
+  fontFamily: 'Helvetica'
+  
+};
 
 class Home extends Component {
+
+
+	
 
 	constructor(){
 		super();
@@ -140,42 +188,51 @@ checkLoginState() {
   }.bind(this));
 }
 
+
+
+
+
+
+
 handleClick() {
   FB.login(this.checkLoginState());
 }
-
 	render() {
 		return (
-			<div className="roomieDiv">
-
-				{/* FB login button area */}
-				<div className="row">
-					<div className="col-offset-2 col-lg-8">
-						<div className="fb-login-button" data-size="xlarge" data-auto-logout-link="true"></div>
-					</div>
-				</div>
+			<div style={roomieDiv} className="roomieDiv">
 
 				<h1>Perfect Roomie</h1>
-				<h4> Looking for a compatible roommate through mutual friends ? Look no further </h4>
-				<h4> Find your ideal roommate now !</h4>
+				<h3 style={h3style}> Looking for a compatible roommate through mutual friends ? Look no further </h3>
+				<h3 style={h3style}> Find your ideal roommate now !</h3>
 				<div className="page-header">
 
 				</div>
 
-				{this.state.text}
-
-				<div className="formDiv">
+				
+			<div style={formDiv} className="formDiv">
 
 				<input ref="textBox" type="text" />
 
-				<p></p>
+				
 
 				</div>
 
 				<p>
 
-					<button type="button" className="btn btn-lg btn-primary" onClick={ (e) => {this.clicked();}}> Enter Your location</button>
+					<button style={buttonstyle} type="button" className="btn btn-lg btn-primary" onClick={ (e) => {this.clicked();}}> Enter Your location</button>
 				</p>
+
+		{/*<button type="button"  //fb-login-button   className={styles.btnlocation} onClick={ (e) => {this.clicked();}}> Enter Your location</button>*/}
+
+				{/* FB login button area */}
+
+				
+				<div  style={fbButtonStyle} className="fb-login-button" data-size="xlarge" data-auto-logout-link="true"></div> 
+
+						 
+						
+					
+
 
 			</div>
 		);

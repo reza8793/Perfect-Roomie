@@ -1,4 +1,9 @@
+var ExtractTextPlugin = require('extract-text-webpack-plugin');
+var combineLoaders = require('webpack-combine-loaders');
+
 module.exports = {
+
+   devtool: 'eval',
 
   // This is the entry point or start of our react applicaton
   entry: "./src/index.js",
@@ -23,13 +28,61 @@ module.exports = {
           presets: ["react", "es2015"]
         }
       },
+
       {
-        test: /\.css$/,
-        loader: 'css-loader'
+   test: /\.css$/,
+      loader: combineLoaders([
+        {
+          loader: 'style-loader'
+        }, {
+          loader: 'css-loader',
+          query: {
+            modules: true,
+            localIdentName: '[name]__[local]___[hash:base64:5]'
+          }
+    }
+  ])
+      },
+
+
+       {
+        test: /\.(jpe?g|png|gif|svg)$/i,
+        /*loaders: [
+            'file-loader?hash=sha512&digest=hex&name=[hash].[ext]',
+            'image-webpack-loader?bypassOnDebug&optimizationLevel=7&interlaced=false'
+        ]*/
+        use: [
+    {
+      loader: 'file-loader',
+      options: {
+        query: {
+          name:'assets/[name].[ext]'
+        }
       }
-    ]
-  },
+    },
+    {
+      loader: 'image-webpack-loader',
+      options: {
+        query: {
+          mozjpeg: {
+            progressive: true,
+          },
+          gifsicle: {
+            interlaced: true,
+          },
+          optipng: {
+            optimizationLevel: 7,
+          }
+        }
+      }
+    }]
+        
+    }
+
+]
+
+  }
   // This lets us debug our react code in chrome dev tools. Errors will have lines and file names
   // Without this the console says all errors are coming from just coming from bundle.js
-  devtool: "eval-source-map"
+  
 };

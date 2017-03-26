@@ -2,8 +2,10 @@ import React, {Component} from 'react';
 import CheckboxOrRadioGroup from '../components/CheckboxOrRadioGroup';
 import SingleInput from '../components/SingleInput';
 import Select from '../components/Select';
-import './Survey.css';
-import helper from '../components/utils/helper.js'
+import styles from "./Survey.css";
+import helper from '../components/utils/helper.js';
+import { hashHistory} from 'react-router';
+import { browserHistory } from 'react-router';
 
 
 class FormContainer extends Component {
@@ -62,7 +64,9 @@ class FormContainer extends Component {
 
   }
   componentDidMount() {
-      (data => {
+    fetch('./fake_db.json')
+      .then(res => res.json())
+      .then(data => {
         this.setState({
           Name: data.Name,
           Age: data.Age,
@@ -94,10 +98,6 @@ class FormContainer extends Component {
 
           answerOptions9: data.answerOptions9,
           answerSelection9: data.answerSelection9,
-
-          answerOptions10: data.answerOptions10,
-          answerSelection10: data.answerSelection10
-
 
 
         });
@@ -309,6 +309,19 @@ class FormContainer extends Component {
           className="btn btn-link float-left"
           onClick={this.handleClearForm}>Clear form</button>
       </form>
+    );
+  }
+}
+
+export default FormContainer;
+
+        <button
+          className="btn btn-link float-left"
+          className = {styles.clearButton}
+          onClick={this.handleClearForm}>Clear form</button>
+      </form>
+
+      </div>
     );
   }
 }

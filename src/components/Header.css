@@ -1,50 +1,9 @@
-.navbar-custom {
-  background-color: rgb(105,93,71);
-}
-
-.Header-logo {
-  animation: Header-logo-spin infinite 20s linear;
-  height: 60px;
-}
-
-@keyframes Header-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
-}
-
-#logo {
-  /* Positioning */
-  margin-left: 70px;
-
-  /* Box-model */
-  height: 60px;
-  padding-top: 20px;
-  padding-bottom: 5px;
-
-  /* Typography */
-  font-size: 24px;
-  font-family: Georgia, Times, 'Times New Roman', serif;
-  font-weight: bold;
-  color: #fff;
-
-  /* Visual */
-  background: rgb(244,111,44);
+.navbarCustom {
+  /*background-color: rgb(105,93,71);*/
+  background-color: #79C753;
+  background-color: rgb(200,188,145);
+ /* background-color: orange;*/
 
 }
 
-.navbar-right-custom {
 
-  /* Box-model */
-  padding-top: 6px;
-  padding-right: 20px;
-
-  /* Typography */
-  font-family: Arial;
-  font-weight: lighter;
-  font-size: 18px;
-
-}
-
-.navbar-default .navbar-nav > li > a:hover {
-  color: orange;
-}

@@ -1,14 +1,15 @@
 import React from 'react';
+import styles from "../containers/Survey.css";
 
 const CheckboxOrRadioGroup = (props) => (
 	<div>
-		<label className="form-label">{props.title}</label>
-		<div className="checkbox-group">
+		<label className={styles.radioDiv0}>{props.title}</label>
+		<div className = {styles.radioDiv1}>
 			{props.options.map(option => {
 				return (
-					<label key={option} className="form-label capitalize">
+					<label key={option} className = {styles.radioDiv2}>
 						<input
-							className="form-checkbox"
+							className = {styles.radioDiv3}
 							name={props.setName}
 							onChange={props.controlFunc}
 							value={option}

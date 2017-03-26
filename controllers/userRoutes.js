@@ -30,6 +30,19 @@ module.exports = function(router) {
       res.sendStatus(200);
   });
 
+
+  router.get("/fb/getUserInfo", function(req, res) {
+      FB.api("me?fields=id, name", { access_token: fblocal.appAccessToken}, function (res) {
+        if(!res || res.error) {
+          console.log(!res ? 'error occurred' : res.error);
+          return;
+        }
+
+        console.log(res);
+      });
+      res.sendStatus(200);
+  });
+
   router.post("/fb/userIDToken", function(req, res) {
       fblocal.updateUserID(req.body.userID);
       fblocal.updateToken(req.body.token);
@@ -114,6 +127,7 @@ module.exports = function(router) {
       }
       // Or send the doc to the browser
       else {
+        //turn this off for demo
         //algorithmInitializer();
         res.send(doc);
       }
@@ -133,6 +147,7 @@ module.exports = function(router) {
     var query = User.find({FBid: fblocal.userID }).select("roommateMatches");
 
     query.exec(function(error, doc) {
+      //  console.log("doc is " , doc);
       // Send any errors to the browser
       
       if (error) {
@@ -140,24 +155,22 @@ module.exports = function(router) {
       }
       // Or send the doc to the browser
       else {
-       //console.log("doc", doc);
-       //console.log("roommateMatches", doc[0]._id);
-
-        for (var i = 0; i < doc[0].roommateMatches.length; i++) {
+       console.log("doc", doc);
+       console.log("roommateMatches", doc[0]._id);
+/*        for (var i = 0; i < doc[0].roommateMatches.length; i++) {
 
           console.log('FBName:', doc[0].roommateMatches[i].FBName);
           console.log('diffScore:', doc[0].roommateMatches[i].diffScore);
           console.log('photolink:', doc[0].roommateMatches[i].photolink);
-        }
 
-        res.send(doc);
         
-      }
-      
+        
+        }*/
+        res.send(doc);
+    }
+
     });
-
-  });
-
+ });
 
   router.get("/db/friendsInCommon", function(req, res){
     //do nothing
@@ -165,6 +178,27 @@ module.exports = function(router) {
   });
 
 
+
+  // router.get("/db/roomieMatch1", function(req, res){
+  //   console.log("i'm at router.get roomieMatch");
+  //   var query = User.find({FBid: fblocal.userID });
+
+  //   query.exec(function(error, doc) {
+
+  //       console.log("doc in roomieMatch1 is " , doc);
+  //     // Send any errors to the browser
+  //     if (error) {
+  //       res.send(error);
+  //     }
+  //     // Or send the doc to the browser
+  //     else {
+      
+
+  //       res.send(doc);
+  //     }
+  //   });
+
+  // });
 
 
   router.put('db/user/destination', function(req, res) {

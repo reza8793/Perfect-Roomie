@@ -3,14 +3,20 @@ var fblocal = require("./fblocal");
 var userRoutes = require("./userRoutes"); //circular referencing. Probably not a good idea.
 var FB = require('fb');
 
+var async = require('async');
+
 function algorithmInitializer() {
 	// console.log("fblocal",fblocal);
 	User.findOne({FBid: fblocal.userID}, function(err, user) {
+
 		console.log("This User is:", user.FBName);
+
+		//console.log("Null OK, Otherwise Error noted:", err);
+		//console.log("This User is:", user.FBName);
 		var currentUserLivingStyle = user.livingStyle;
 		var currentUserFriendListArray = arrayifyFriendList(user.friendList);
 
-		console.log("The newUser is: " + currentUserLivingStyle);
+		//console.log("The newUser is: " + currentUserLivingStyle);
 		//console.log("currentUserFriendListArray: " + currentUserFriendListArray);
 		User.find({ FBid: { $ne: fblocal.userID } }, function(error, users ) {
 
@@ -19,31 +25,87 @@ function algorithmInitializer() {
 				console.log("algorithmInitializer is having the issue: " +error);
 			}
 			else {
-				var db_roomieList = new Array;
-				for (var i = 0; i < users.length; i++) {
 
-					var targetUserFriendListArray = arrayifyFriendList(users[i].friendList);
+				//declaring objects
+				var expandedArray = new Array;
+				var endExpandedArray = new Array;
+				var db_roomieList = new Array;
+				var roomieListObj;
+
+				async.forEach(users, processUsersTasks, afterUsersTasks);
+				console.log('db_roomieList', db_roomieList);
+									
+				function processUsersTasks(usersTasks, usersCallback) {
+					console.log('process users task');
+					//console.log('usersTasks', usersTasks);
+					//console.log('usersTasks.friendList', usersTasks.friendList);
+					var targetUserFriendListArray = arrayifyFriendList(usersTasks.friendList);
 					var mutualFriendsArray = currentUserFriendListArray.mutual(targetUserFriendListArray);
 
-					console.log('mutual friends:', mutualFriendsArray);
+					async.forEach(mutualFriendsArray, processFriendsTasks, afterFriendsTasks);
+					
 
-					var roomieListObj = {
-						FBid: users[i].FBid,
-						FBName: users[i].FBName,
-						FBEmail: users[i].FBEmail,
-						age: users[i].age,
-						livingStyle: users[i].livingStyle,
-						photolink: users[i].photolink,
+					console.log('expandedArray', expandedArray);
+
+					roomieListObj = {
+						FBid: usersTasks.FBid,
+						FBName: usersTasks.FBName,
+						FBEmail: usersTasks.FBEmail,
+						age: usersTasks.age,
+						livingStyle: usersTasks.livingStyle,
+						photolink: usersTasks.photolink,
 						mutualFriends: mutualFriendsArray
+						//mutualFriends: expandedArray //couldn't get async working correctly
 					}
 
 					db_roomieList.push(roomieListObj);
+					usersCallback();
 
-				}
+				};
 
+				function processFriendsTasks(friendsTasks, friendsCallback) {
+					console.log('processFriendsTask')
+					var query = friendsTasks + "?fields=id,name,picture{url},email";
+
+					FB.api(query, { access_token: fblocal.appAccessToken}, function(res) {
+        					if(!res || res.error) {
+          						console.log(!res ? 'error occurred' : res.error);
+          						return;
+        					}
+
+        					else {
+        						var processObject = {
+        							FBid: res.id,
+        							FBName: res.name,
+        							photolink: res.picture.data.url
+        						}
+
+        						expandedArray.push(processObject);
+
+        					}
+        
+        					friendsCallback(res.error);
+    					});
+
+				};
+
+				function afterFriendsTasks(err) {
+					console.log('after friends tasks');
+					//console.log('afterFriendsTask', expandedArray);
+					//roomieListObj.mutualFriends = expandedArray;
+				};
+
+				function afterUsersTasks(err) {
+					console.log('after User Task');
+
+//					console.log('AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA');
+//					console.log('new db_roomieList', db_roomielist);
+					findroomies(currentUserLivingStyle, db_roomieList);
+//					console.log('currentUserLivingStyle', currentUserLivingStyle);
+//					console.log('db_roomielist', db_roomieList);
+				};
+				
 			}
-			findroomies(currentUserLivingStyle, db_roomieList);
-
 		});
 	});
 };
@@ -66,10 +128,11 @@ function findroomies (livingStyle, db_roomieList) {
 			//mutualFriends: mutualFriendsExpander(db_roomieList[i].mutualFriends)
 
 		}
-		if (matcArrayObj.diffScore <= 15) {
+
+
+		if (matchArrayObj.diffScore <= 15) { 
 			matchArray.push(matchArrayObj);
 		}
-
 	}
 
 	//sort your matcharray by scores ascending
@@ -140,7 +203,7 @@ function arrayifyFriendList(friendList) {
 	var returnArray = new Array;
 
 	for (var i = 0; i < friendList.length; i++) {
-		returnArray.push(friendList[i].id);
+		returnArray.push(friendList[i].name);
 	}
 
 	return returnArray;
@@ -188,6 +251,9 @@ Array.prototype.mutual = function(arr2) {
 	}
 	return ret;
 };
+
+
+
 
 
 module.exports = algorithmInitializer;
