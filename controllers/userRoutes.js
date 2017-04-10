@@ -128,7 +128,7 @@ module.exports = function(router) {
       // Or send the doc to the browser
       else {
         //turn this off for demo
-        //algorithmInitializer();
+        algorithmInitializer();
         res.send(doc);
       }
     });

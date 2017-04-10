@@ -53,7 +53,6 @@ export default function() {
 					</ul>
 				</div>
 
-{/*				
 				<form action="fb/friends/" method="get">
   					<button type="submit">friends</button>
 				</form>
@@ -77,7 +76,7 @@ export default function() {
 				<form action="fb/getUserInfo" method="get">
 						<button type="submit">Get User Info</button>
 				</form>
-*/}				
+				
 
 			</div>
 		</div>
